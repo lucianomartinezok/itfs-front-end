@@ -5,36 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guía para GitHub y GitHub Pages</title>
     <style>
+        /* Estilos generales */
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
             color: #333;
         }
+
         h1, h2, h3 {
-            color: #333;
+            color: #2c3e50;
         }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #34495e;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #2980b9;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2980b9;
+        }
+
+        /* Contenedor principal */
         .container {
             max-width: 800px;
-            margin: auto;
+            margin: 40px auto;
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
+
+        /* Estilos para listas */
+        ol {
+            padding-left: 20px;
+        }
+
+        ol li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Estilos para código */
         code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
+            background-color: #ecf0f1;
+            padding: 4px 8px;
             border-radius: 4px;
-            font-family: monospace;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #e74c3c;
         }
+
+        pre {
+            background-color: #2c3e50;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            color: #ecf0f1;
+            background-color: transparent;
+        }
+
+        /* Estilos para tips */
         .tip {
-            background-color: #e3f2fd;
-            padding: 10px;
-            border-left: 4px solid #2196F3;
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
             margin: 20px 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #2e7d32;
+        }
+
+        .tip strong {
+            color: #4caf50;
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -124,6 +241,7 @@
 
         <h2>¡Felicidades!</h2>
         <p>Has creado y publicado tu primera página web en GitHub Pages. 🎉</p>
+        <a href="https://github.com" class="btn" target="_blank">Ir a GitHub</a>
     </div>
 </body>
 </html>
