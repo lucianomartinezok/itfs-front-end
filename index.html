@@ -3,93 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page Atractiva</title>
+    <title>Guía para GitHub y GitHub Pages</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
             padding: 0;
             background-color: #f4f4f4;
+            color: #333;
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-            padding: 5px 10px;
-            transition: background-color 0.3s;
-        }
-        nav a:hover {
-            background-color: #444;
+        h1, h2, h3 {
+            color: #333;
         }
         .container {
-            text-align: center;
-            padding: 50px 20px;
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .hero {
-            background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
-            color: #fff;
-            padding: 100px 20px;
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: monospace;
         }
-        .hero h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-        .hero p {
-            font-size: 1.2em;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #e8491d;
-            color: #fff;
-            padding: 10px 25px;
-            margin-top: 20px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #d7370d;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            margin-top: 50px;
+        .tip {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-left: 4px solid #2196F3;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Tu Empresa</h1>
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#">Servicios</a>
-            <a href="#">Sobre Nosotros</a>
-            <a href="#">Contacto</a>
-        </nav>
-    </header>
-    <div class="hero">
-        <h1>Bienvenido a Tu Empresa</h1>
-        <p>Ofrecemos soluciones innovadoras para tus necesidades empresariales.</p>
-        <a href="#" class="btn">Conócenos</a>
-    </div>
     <div class="container">
-        <h2>Nuestros Servicios</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel mauris eget risus bibendum lobortis.</p>
+        <h1>Guía Paso a Paso para GitHub y GitHub Pages</h1>
+
+        <h2>1. Crear un Usuario en GitHub</h2>
+        <p>Para comenzar, necesitas una cuenta en GitHub. Sigue estos pasos:</p>
+        <ol>
+            <li>Ve a <a href="https://github.com" target="_blank">GitHub</a>.</li>
+            <li>Haz clic en "Sign up" (Registrarse).</li>
+            <li>Ingresa tu correo electrónico, elige un nombre de usuario y una contraseña.</li>
+            <li>Completa el proceso de verificación y listo, ¡ya tienes una cuenta en GitHub!</li>
+        </ol>
+
+        <div class="tip">
+            <strong>Tip:</strong> Si tienes dudas durante el registro, puedes pedirle ayuda a una IA como ChatGPT o Copilot.
+        </div>
+
+        <h2>2. Instalar GitHub Desktop</h2>
+        <p>GitHub Desktop es una aplicación que facilita el uso de Git. Para instalarlo:</p>
+        <ol>
+            <li>Ve a <a href="https://desktop.github.com" target="_blank">GitHub Desktop</a>.</li>
+            <li>Descarga la versión correspondiente a tu sistema operativo (Windows o macOS).</li>
+            <li>Instala la aplicación siguiendo las instrucciones del instalador.</li>
+            <li>Inicia sesión con tu cuenta de GitHub.</li>
+        </ol>
+
+        <h2>3. Crear un Repositorio Local en GitHub Desktop</h2>
+        <p>Un repositorio es donde almacenarás tus proyectos. Para crear uno:</p>
+        <ol>
+            <li>Abre GitHub Desktop.</li>
+            <li>Haz clic en "File" > "New Repository" (Nuevo Repositorio).</li>
+            <li>Asigna un nombre a tu repositorio y elige la ubicación en tu computadora.</li>
+            <li>Haz clic en "Create Repository" (Crear Repositorio).</li>
+        </ol>
+
+        <div class="tip">
+            <strong>Tip:</strong> Si no estás seguro de cómo nombrar tu repositorio, puedes pedirle sugerencias a una IA.
+        </div>
+
+        <h2>4. Crear una Página Web en el Repositorio</h2>
+        <p>Ahora, crea una página web básica en tu repositorio:</p>
+        <ol>
+            <li>Abre la carpeta del repositorio en tu computadora.</li>
+            <li>Crea un archivo llamado <code>index.html</code>.</li>
+            <li>Edita el archivo con el siguiente código HTML básico:</li>
+        </ol>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Mi Página Web&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;¡Hola, mundo!&lt;/h1&gt;
+    &lt;p&gt;Esta es mi primera página web en GitHub.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <h2>5. Subir el Repositorio a GitHub</h2>
+        <p>Para subir tu repositorio local a GitHub:</p>
+        <ol>
+            <li>Abre GitHub Desktop.</li>
+            <li>Selecciona tu repositorio en la lista.</li>
+            <li>Escribe un mensaje de commit (por ejemplo, "Primer commit").</li>
+            <li>Haz clic en "Commit to main" (Confirmar en main).</li>
+            <li>Luego, haz clic en "Push origin" (Subir a origin) para subir los cambios a GitHub.</li>
+        </ol>
+
+        <h2>6. Publicar el Repositorio en GitHub Pages</h2>
+        <p>GitHub Pages te permite publicar tu página web. Sigue estos pasos:</p>
+        <ol>
+            <li>Ve a tu repositorio en GitHub.</li>
+            <li>Haz clic en "Settings" (Configuración).</li>
+            <li>En el menú lateral, selecciona "Pages" (Páginas).</li>
+            <li>En "Source", selecciona la rama <code>main</code> y la carpeta <code>/ (root)</code>.</li>
+            <li>Haz clic en "Save" (Guardar).</li>
+            <li>Espera unos minutos y tu página estará disponible en <code>https://[tu-usuario].github.io/[nombre-repositorio]</code>.</li>
+        </ol>
+
+        <div class="tip">
+            <strong>Tip:</strong> Si tienes problemas para configurar GitHub Pages, puedes pedirle ayuda a una IA.
+        </div>
+
+        <h2>¡Felicidades!</h2>
+        <p>Has creado y publicado tu primera página web en GitHub Pages. 🎉</p>
     </div>
-    <footer>
-        <p>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
-    </footer>
 </body>
 </html>
