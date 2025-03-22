@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de HTML - Cards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #ffe5d9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #d77a61;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #6b705c;
+            font-size: 14px;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #d77a61;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .card a:hover {
+            background-color: #bc5a45;
+        }
+
+        .wide-card {
+            grid-column: span 3;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center; color:#6b705c;">Resumen de HTML - Aspectos Básicos</h1>
+    <p style="text-align:center; color:#6b705c;">Exploramos los conceptos esenciales para crear páginas web básicas.</p>
+
+    <div class="container">
+        <!-- Card 1 -->
+        <div class="card">
+            <h3>Preguntas Iniciales</h3>
+            <p>Introducción a los conceptos básicos antes de empezar con HTML.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <h3>Introducción a HTML</h3>
+            <p>HTML es el lenguaje estándar para estructurar páginas web.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <h3>Primera página web</h3>
+            <p>Aprende a crear tu primera página web con HTML básico.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+            <h3>Sintaxis y semántica</h3>
+            <p>Reglas de sintaxis y la importancia de la semántica en HTML.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card">
+            <h3>Estructura básica</h3>
+            <p>Componentes esenciales como DOCTYPE, head y body.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card">
+            <h3>Elementos y etiquetas</h3>
+            <p>Etiquetas básicas como encabezados, párrafos e imágenes.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="card">
+            <h3>DOCTYPE HTML5</h3>
+            <p>Declara el tipo de documento para garantizar compatibilidad.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Glossary/Doctype" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="card">
+            <h3>Etiquetas básicas</h3>
+            <p>Formatos como listas, enlaces y texto destacado.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Text_formatting" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="card">
+            <h3>Comentarios en HTML</h3>
+            <p>Agrega comentarios para documentar tu código.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started#comments" target="_blank">Ver más</a>
+        </div>
+
+        <!-- Wide Card for Item 10 -->
+        <div class="card wide-card">
+            <h3>Inspeccionar elemento</h3>
+            <p>Utiliza herramientas del navegador para depurar y analizar código HTML.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools" target="_blank">Ver más</a>
+        </div>
+    </div>
+
+    <footer style="text-align:center; margin-top:20px; color:#6b705c;">
+      Este resumen te ayudará a repasar los conceptos clave para construir páginas web básicas.
+    </footer>
+</body>
+</html>
