@@ -3,245 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía para GitHub y GitHub Pages</title>
+    <title>Desarrollo Front End</title>
     <style>
-        /* Estilos generales */
+        /* Estilo para centrar el contenido */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-            color: #333;
+            background-color: #a3a3a3; /* Fondo más auténtico de Windows 95 */
+            font-family: "Tahoma", sans-serif;
+            color: black;
         }
-
-        h1, h2, h3 {
-            color: #2c3e50;
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            padding: 20px;
+            width: 400px; /* Ancho ajustado */
+            box-shadow: 4px 4px 0 #808080;
         }
-
         h1 {
-            font-size: 2.5rem;
             margin-bottom: 20px;
+            font-size: 22px;
+        }
+        /* Diseño en dos columnas */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+            gap: 10px; /* Espaciado entre botones */
+        }
+        /* Estilo de los botones */
+        .button {
+            padding: 10px;
+            border: 2px solid #808080;
+            border-right-color: #ffffff;
+            border-bottom-color: #ffffff;
+            background-color: #dcdcdc;
+            color: black;
+            font-size: 16px;
             text-align: center;
-            color: #34495e;
+            cursor: pointer;
+            box-shadow: 2px 2px 0 #000000;
+            transition: transform 0.1s ease-in-out;
+            text-decoration: none; /* Elimina subrayados */
         }
-
-        h2 {
-            font-size: 2rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            color: #2980b9;
+        .button:hover {
+            transform: translate(-2px, -2px);
         }
-
-        p {
-            font-size: 1.1rem;
-            color: #555;
+        /* Botón publicado */
+        .published {
+            background-color: #008000;
+            color: white;
         }
-
-        a {
-            color: #3498db;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #2980b9;
-        }
-
-        /* Contenedor principal */
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Estilos para listas */
-        ol {
-            padding-left: 20px;
-        }
-
-        ol li {
-            margin-bottom: 10px;
-            font-size: 1rem;
-            color: #555;
-        }
-
-        /* Estilos para código */
-        code {
-            background-color: #ecf0f1;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            color: #e74c3c;
-        }
-
-        pre {
-            background-color: #2c3e50;
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
-        }
-
-        pre code {
-            color: #ecf0f1;
-            background-color: transparent;
-        }
-
-        /* Estilos para tips */
-        .tip {
-            background-color: #e8f5e9;
-            padding: 15px;
-            border-left: 4px solid #4caf50;
-            margin: 20px 0;
-            border-radius: 4px;
-            font-size: 0.95rem;
-            color: #2e7d32;
-        }
-
-        .tip strong {
-            color: #4caf50;
-        }
-
-        /* Botones */
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #fff;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background-color: #2980b9;
-        }
-
-        /* Animaciones */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .container {
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                margin: 20px;
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
+        /* Botón no publicado */
+        .not-published {
+            background-color: #808080;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Guía Paso a Paso para GitHub y GitHub Pages</h1>
-
-        <h2>1. Crear un Usuario en GitHub</h2>
-        <p>Para comenzar, necesitas una cuenta en GitHub. Sigue estos pasos:</p>
-        <ol>
-            <li>Ve a <a href="https://github.com" target="_blank">GitHub</a>.</li>
-            <li>Haz clic en "Sign up" (Registrarse).</li>
-            <li>Ingresa tu correo electrónico, elige un nombre de usuario y una contraseña.</li>
-            <li>Completa el proceso de verificación y listo, ¡ya tienes una cuenta en GitHub!</li>
-        </ol>
-
-        <div class="tip">
-            <strong>Tip:</strong> Si tienes dudas durante el registro, puedes pedirle ayuda a una IA como ChatGPT o Copilot.
+        <h1>Desarrollo Front End</h1>
+        <div class="grid">
+            <!-- Lista de botones con enlaces -->
+            <a href="m0.html" class="button published">M0</a>
+            <a href="#" class="button not-published">M1</a>
+            <a href="#" class="button not-published">M2</a>
+            <a href="#" class="button not-published">M3</a>
+            <a href="#" class="button not-published">M4</a>
+            <a href="#" class="button not-published">M5</a>
+            <a href="#" class="button not-published">M6</a>
+            <a href="#" class="button not-published">M7</a>
+            <a href="#" class="button not-published">M8</a>
+            <a href="#" class="button not-published">M9</a>
+            <a href="#l" class="button not-published">M10</a>
+            <a href="#l" class="button not-published">M11</a>
+            <a href="#l" class="button not-published">M12</a>
+            <a href="#l" class="button not-published">M13</a>
         </div>
-
-        <h2>2. Instalar GitHub Desktop</h2>
-        <p>GitHub Desktop es una aplicación que facilita el uso de Git. Para instalarlo:</p>
-        <ol>
-            <li>Ve a <a href="https://desktop.github.com" target="_blank">GitHub Desktop</a>.</li>
-            <li>Descarga la versión correspondiente a tu sistema operativo (Windows o macOS).</li>
-            <li>Instala la aplicación siguiendo las instrucciones del instalador.</li>
-            <li>Inicia sesión con tu cuenta de GitHub.</li>
-        </ol>
-
-        <h2>3. Crear un Repositorio Local en GitHub Desktop</h2>
-        <p>Un repositorio es donde almacenarás tus proyectos. Para crear uno:</p>
-        <ol>
-            <li>Abre GitHub Desktop.</li>
-            <li>Haz clic en "File" > "New Repository" (Nuevo Repositorio).</li>
-            <li>Asigna un nombre a tu repositorio y elige la ubicación en tu computadora.</li>
-            <li>Haz clic en "Create Repository" (Crear Repositorio).</li>
-        </ol>
-
-        <div class="tip">
-            <strong>Tip:</strong> Si no estás seguro de cómo nombrar tu repositorio, puedes pedirle sugerencias a una IA.
-        </div>
-
-        <h2>4. Crear una Página Web en el Repositorio</h2>
-        <p>Ahora, crea una página web básica en tu repositorio:</p>
-        <ol>
-            <li>Abre la carpeta del repositorio en tu computadora.</li>
-            <li>Crea un archivo llamado <code>index.html</code>.</li>
-            <li>Edita el archivo con el siguiente código HTML básico:</li>
-        </ol>
-        <pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="es"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Mi Página Web&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;¡Hola, mundo!&lt;/h1&gt;
-    &lt;p&gt;Esta es mi primera página web en GitHub.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-
-        <h2>5. Subir el Repositorio a GitHub</h2>
-        <p>Para subir tu repositorio local a GitHub:</p>
-        <ol>
-            <li>Abre GitHub Desktop.</li>
-            <li>Selecciona tu repositorio en la lista.</li>
-            <li>Escribe un mensaje de commit (por ejemplo, "Primer commit").</li>
-            <li>Haz clic en "Commit to main" (Confirmar en main).</li>
-            <li>Luego, haz clic en "Push origin" (Subir a origin) para subir los cambios a GitHub.</li>
-        </ol>
-
-        <h2>6. Publicar el Repositorio en GitHub Pages</h2>
-        <p>GitHub Pages te permite publicar tu página web. Sigue estos pasos:</p>
-        <ol>
-            <li>Ve a tu repositorio en GitHub.</li>
-            <li>Haz clic en "Settings" (Configuración).</li>
-            <li>En el menú lateral, selecciona "Pages" (Páginas).</li>
-            <li>En "Source", selecciona la rama <code>main</code> y la carpeta <code>/ (root)</code>.</li>
-            <li>Haz clic en "Save" (Guardar).</li>
-            <li>Espera unos minutos y tu página estará disponible en <code>https://[tu-usuario].github.io/[nombre-repositorio]</code>.</li>
-        </ol>
-
-        <div class="tip">
-            <strong>Tip:</strong> Si tienes problemas para configurar GitHub Pages, puedes pedirle ayuda a una IA.
-        </div>
-
-        <h2>¡Felicidades!</h2>
-        <p>Has creado y publicado tu primera página web en GitHub Pages. 🎉</p>
-        <a href="https://github.com" class="btn" target="_blank">Ir a GitHub</a>
     </div>
 </body>
 </html>
