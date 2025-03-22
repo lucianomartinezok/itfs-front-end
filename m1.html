@@ -15,7 +15,6 @@
 
         .container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
@@ -50,9 +49,27 @@
         .card a:hover {
             background-color: #bc5a45;
         }
+        
+        /* Mobile Styles (Up to 767px) */
+        @media (max-width: 767px) {
+            .container {
+                grid-template-columns: 1fr; /* Single column for mobile */
+            }
+        }
 
-        .wide-card {
-            grid-column: span 3;
+        /* Tablet Styles (768px to 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr); /* Two columns for tablets */
+            }
+        }
+
+        /* Desktop Styles (992px and above) */
+        @media (min-width: 992px) {
+            .container {
+                grid-template-columns: repeat(3, 1fr); /* Three columns for desktops */
+            }
+
         }
     </style>
 </head>
@@ -122,13 +139,6 @@
             <h3>Comentarios en HTML</h3>
             <p>Agrega comentarios para documentar tu código.</p>
             <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started#comments" target="_blank">Ver más</a>
-        </div>
-
-        <!-- Wide Card for Item 10 -->
-        <div class="card wide-card">
-            <h3>Inspeccionar elemento</h3>
-            <p>Utiliza herramientas del navegador para depurar y analizar código HTML.</p>
-            <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools" target="_blank">Ver más</a>
         </div>
     </div>
 
