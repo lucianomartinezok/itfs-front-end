@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PFO1 - Práctica Formativa Obligatoria 1</title>
+
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      background-color: #ffffff;
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+      margin-top: 0;
+    }
+    h1 {
+      border-bottom: 2px solid #dfe6e9;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    ol, ul {
+      margin-left: 20px;
+    }
+    p {
+      margin: 10px 0;
+    }
+    a {
+      color: #0984e3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Styles para el bloque de código (checklist) */
+    pre {
+      background-color: #dfe6e9;
+      color: #2d3436;
+      padding: 20px;
+      border-left: 5px solid #74b9ff;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+    }
+    p.note {
+      font-style: italic;
+      color: #636e72;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PFO1 - Práctica Formativa Obligatoria 1 - Individual</h1>
+    <p>Landing Page de Portafolio Personal (HTML y CSS)</p>
+
+    <div class="section">
+      <h2>Fechas Importantes</h2>
+      <p><strong>Lanzamiento:</strong> 25 de marzo<br>
+      <strong>Entrega Final:</strong> 14 de abril</p>
+    </div>
+
+    <div class="section">
+      <h2>Requerimientos Generales</h2>
+      <h3>Estructura del Proyecto</h3>
+      <ol>
+        <li>Archivo "index.html" ubicado en la raíz del proyecto.</li>
+        <li>Carpeta "css" que contenga el archivo "styles.css".</li>
+        <li>(Opcional) Carpeta "img" para los recursos gráficos.</li>
+        <li>Archivo "README.md" que contenga una breve descripción indicando que se trata de un Trabajo Práctico (TP) y un checklist (ver detalle más adelante).</li>
+      </ol>
+      <h3>Repositorio y Publicación</h3>
+      <ol>
+        <li>Crear un repositorio en GitHub y subir el proyecto.</li>
+        <li>Publicar el proyecto utilizando GitHub Pages.</li>
+      </ol>
+      <h3>Privacidad</h3>
+      <ol>
+        <li>Al tratarse de un enlace público, no es obligatorio publicar tu nombre y apellido completos ni utilizar una foto de perfil en la que se muestre tu rostro.</li>
+        <li>Puedes optar por usar avatares, imágenes generadas con IA o fotos de tus mascotas.</li>
+      </ol>
+      <h3>Uso Obligatorio de Google Fonts</h3>
+      <ol>
+        <li>Incorporar un enlace a Google Fonts en la sección "head" del documento HTML.</li>
+        <li>Se deberá incluir, por ejemplo, un enlace a la fuente Nunito (u otra de tu elección) para la tipografía del proyecto.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Requerimientos HTML</h2>
+      <h3>Declaración y Metaetiquetas</h3>
+      <ol>
+        <li>El documento debe iniciar con la declaración DOCTYPE.</li>
+        <li>Usar el atributo de idioma en la etiqueta HTML (lang="es").</li>
+        <li>En la sección "head" se deben incluir los siguientes elementos:
+          <ol type="a">
+            <li>Metaetiqueta de charset, por ejemplo: meta charset="UTF-8".</li>
+            <li>Metaetiqueta de viewport para la correcta visualización en distintos dispositivos.</li>
+            <li>Un título descriptivo (ej. "Mi Portafolio Personal").</li>
+            <li>Un vínculo al archivo CSS ubicado en "css/styles.css".</li>
+            <li>El vínculo a Google Fonts.</li>
+          </ol>
+        </li>
+      </ol>
+      
+      <h3>Estructura Semántica Obligatoria</h3>
+      <ol>
+        <li>Sección de Encabezado (Header): Debe contener el título principal o el logo del sitio.</li>
+        <li>Sección de Navegación (Nav): Debe incluir una barra de navegación con al menos tres enlaces (ej. "Sobre mí", "Proyectos" y "Contacto").</li>
+        <li>Sección Principal (Main): Dividida en las siguientes sub-secciones obligatorias:
+          <ol type="a">
+            <li>Presentación Personal (id "sobre-mi"):
+              <ul>
+                <li>Párrafo que describa quién eres, tus intereses y tu misión como desarrollador.</li>
+                <li>Imagen representativa o foto (con atributo alt).</li>
+              </ul>
+            </li>
+            <li>Tarjetas o Columnas (id "tarjetas"):
+              <ul>
+                <li>Al menos dos tarjetas, cada una con imagen y texto.</li>
+                <li>Organizadas en columnas utilizando Flexbox o Grid.</li>
+              </ul>
+            </li>
+            <li>Listado de Habilidades (id "habilidades"):
+              <ul>
+                <li>Listado o tabla que muestre: tecnologías que dominas, tecnologías que deseas aprender y/o tus hobbies.</li>
+              </ul>
+            </li>
+            <li>Formulario de Contacto (id "contacto"):
+              <ul>
+                <li>Formulario básico con campos: Nombre, Apellido, Email y Teléfono.</li>
+                <li>Botón de submit.</li>
+              </ul>
+            </li>
+            <li>Películas Favoritas (id "peliculas"):
+              <ul>
+                <li>Presentar las tres mejores películas de la historia según tu criterio.</li>
+                <li>Cada película con título, imagen y breve descripción o comentario.</li>
+              </ul>
+            </li>
+          </ol>
+        </li>
+        <li>Sección de Pie de Página (Footer): Incluir información adicional, como enlaces a redes sociales u otros datos relevantes.</li>
+      </ol>
+      
+      <h3>Comentarios en el Código</h3>
+      <ol>
+        <li>Insertar al menos cuatro comentarios en diferentes secciones del HTML explicando la función de cada bloque y señalando ideas de mejora a futuro.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Requerimientos CSS</h2>
+      <ol>
+        <li>Selectores y Personalización:
+          <ul>
+            <li>Utilizar selectores basados en clases e identificadores para estilizar secciones, encabezados, botones, etc.</li>
+            <li>Definir una tipografía utilizando el font importado desde Google Fonts.</li>
+          </ul>
+        </li>
+        <li>Layout y Organización:
+          <ul>
+            <li>Organizar los elementos usando Flexbox o Grid, especialmente la sección de tarjetas o columnas.</li>
+            <li>Asegurarse de que el diseño sea responsivo usando unidades relativas (%, rem, vh) en imágenes y contenedores.</li>
+          </ul>
+        </li>
+        <li>Estilización de Componentes:
+          <ul>
+            <li>Personalizar la apariencia de tablas, botones, enlaces y formularios.</li>
+            <li>Ajustar dimensiones de imágenes y contenedores según sea necesario.</li>
+          </ul>
+        </li>
+        <li>Animaciones y Transiciones:
+          <ul>
+            <li>Incluir al menos una animación o transición (por ejemplo, efecto hover en tarjetas o botones).</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    
+    <div class="section">
+      <h2>Archivo README.md y Checklist</h2>
+      <h3>Archivo README.md</h3>
+      <ol>
+        <li>Debe incluir una breve descripción del proyecto indicando de qué se trata este Trabajo Práctico.</li>
+        <li>Debe incluir un checklist de requerimientos (ver a continuación).</li>
+      </ol>
+      <h3>Checklist de Requerimientos</h3>
+      <p>El siguiente checklist está listo para copiar y pegar en tu archivo README.md:</p>
+      <pre id="checklist-code">
+Checklist - Práctica Formativa Obligatoria 1
+
+Estructura del Proyecto:
+[ ] Archivo "index.html" ubicado en la raíz.
+[ ] Carpeta "css" que contenga el archivo "styles.css".
+[ ] (Opcional) Carpeta "img" para recursos gráficos.
+[ ] Archivo "README.md" creado, que incluya una breve descripción del TP y este checklist.
+
+Repositorio y Publicación:
+[ ] Repositorio en GitHub creado.
+[ ] Proyecto subido al repositorio.
+[ ] Proyecto publicado utilizando GitHub Pages.
+[ ] En el "README.md" se indica la URL de GitHub Pages.
+
+Uso de Google Fonts:
+[ ] Enlace a Google Fonts incluido en la sección "head" del HTML.
+[ ] La tipografía importada se aplica en el sitio.
+[ ] Redacta brevemente tu decisión: ¿Por qué elegiste esa fuente?
+Respuesta: __________________________________________________________
+
+HTML:
+[ ] El documento inicia con la declaración DOCTYPE y usa el atributo lang="es".
+[ ] Se han incluido las metaetiquetas obligatorias: charset y viewport.
+[ ] Se ha definido un título descriptivo.
+[ ] Se han vinculado correctamente el archivo CSS y el enlace a Google Fonts.
+Secciones obligatorias en "main":
+   - Presentación Personal (id "sobre-mi"):
+     [ ] Incluye un párrafo descriptivo de quién eres, tus intereses y tu misión como desarrollador.
+     [ ] Incluye una imagen representativa o foto con el atributo alt.
+     [ ] Redacta: ¿Qué elementos consideraste imprescindibles para tu presentación personal y por qué?
+     Respuesta: ________________________________________________________
+   - Tarjetas/Columnas (id "tarjetas"):
+     [ ] Se han creado al menos dos tarjetas, cada una con imagen y texto.
+     [ ] Las tarjetas están organizadas en columnas utilizando Flexbox o Grid.
+     [ ] Redacta: ¿Qué opción (Flexbox o Grid) utilizaste para organizar las tarjetas y por qué?
+     Respuesta: ________________________________________________________
+   - Listado de Habilidades (id "habilidades"):
+     [ ] Se presenta un listado o tabla con:
+          • Tecnologías que dominas.
+          • Tecnologías que deseas aprender.
+          • Hobbies.
+     [ ] Redacta: ¿Qué formato elegiste (lista o tabla) y cuál fue tu criterio de elección?
+     Respuesta: ________________________________________________________
+   - Formulario de Contacto (id "contacto"):
+     [ ] Contiene los siguientes campos: Nombre, Apellido, Email y Teléfono.
+     [ ] Incluye un botón de submit.
+     [ ] Redacta: ¿Cómo estructuraste el formulario y qué mejoras consideras implementar en el futuro?
+     Respuesta: ________________________________________________________
+   - Películas Favoritas (id "peliculas"):
+     [ ] Se muestran las 3 mejores películas de la historia, según tu criterio.
+     [ ] Cada película se presenta con: Título, imagen y una breve descripción o comentario.
+     [ ] Redacta: ¿Qué criterios usaste para seleccionar estas películas?
+     Respuesta: ________________________________________________________
+[ ] Barra de navegación ("nav") presente y contiene al menos 3 enlaces.
+[ ] Se han insertado al menos 4 comentarios explicativos en el código HTML.
+
+CSS:
+[ ] Existe el archivo "styles.css" con estilos personalizados.
+[ ] Se utilizan selectores basados en clases e identificadores.
+[ ] La tipografía importada desde Google Fonts se aplica correctamente en todos los elementos.
+Layout y Organización:
+   [ ] Se ha organizado el layout (especialmente en la sección "tarjetas") utilizando Flexbox o Grid.
+   [ ] Redacta: ¿Qué ventajas encontraste al utilizar Flexbox o Grid en tu proyecto?
+   Respuesta: ________________________________________________________
+Estilización de Componentes:
+   [ ] Se han personalizado los estilos de tablas, botones, enlaces y formularios.
+   [ ] Se han ajustado las dimensiones de imágenes y contenedores utilizando unidades relativas (%, rem, vh).
+   [ ] Se ha implementado al menos una animación o transición (por ejemplo, efecto hover en tarjetas o botones).
+   [ ] Redacta: ¿Qué animación o transición implementaste y por qué consideraste que era adecuada para tu proyecto?
+   Respuesta: ________________________________________________________
+
+Consideraciones Adicionales:
+[ ] El diseño es responsivo y se visualiza correctamente en distintos dispositivos.
+[ ] Se aplicaron buenas prácticas de accesibilidad (uso adecuado de atributos alt en las imágenes).
+[ ] Se añadieron comentarios adicionales donde se describan decisiones de diseño o la lógica de implementación.
+      </pre>
+      <p class="note">El código de arriba está listo para copiar y pegar en tu archivo README.md.</p>
+    </div>
+    
+    <div class="section">
+      <h2>Resumen de Puntos a Cumplir</h2>
+      <p><strong>HTML Obligatorio:</strong></p>
+      <ul>
+        <li>Declaración DOCTYPE y uso de lang="es".</li>
+        <li>Inclusión en "head" de metaetiquetas (charset y viewport), título descriptivo, enlace al archivo CSS y a Google Fonts.</li>
+        <li>Secciones obligatorias en "main": Presentación Personal (id "sobre-mi"), Tarjetas/Columnas (id "tarjetas"), Listado de Habilidades (id "habilidades"), Formulario de Contacto (id "contacto"), Películas Favoritas (id "peliculas").</li>
+        <li>Barra de navegación con al menos 3 enlaces.</li>
+        <li>Al menos 4 comentarios explicativos distribuidos en el HTML.</li>
+      </ul>
+      <p><strong>CSS Obligatorio:</strong></p>
+      <ul>
+        <li>Archivo "styles.css" con estilos personalizados.</li>
+        <li>Utilización de selectores por clases e IDs y aplicación de la tipografía de Google Fonts.</li>
+        <li>Organización del layout con Flexbox o Grid en la sección de tarjetas/columnas.</li>
+        <li>Personalización de tablas, botones, enlaces y formularios.</li>
+        <li>Uso de unidades relativas (%, rem o vh) para lograr responsividad.</li>
+        <li>Al menos una animación o transición implementada.</li>
+      </ul>
+      <p><strong>Repositorio y Publicación:</strong></p>
+      <ul>
+        <li>Repositorio en GitHub creado, proyecto subido y publicado mediante GitHub Pages.</li>
+        <li>Archivo "README.md" incluido, conteniendo la descripción del proyecto y el checklist de requerimientos.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
