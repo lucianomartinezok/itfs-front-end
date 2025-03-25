@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Semántica</title>
+  <style>
+    /* Estilos base (mobile-first) */
+    :root {
+      --color-primary: #3498db;
+      --color-secondary: #2ecc71;
+      --color-accent: #e74c3c;
+      --color-light: #ecf0f1;
+      --color-dark: #2c3e50;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: var(--color-dark);
+      background-color: var(--color-light);
+    }
+
+    /* HEADER */
+    header {
+      background-color: var(--color-primary);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    /* NAV */
+    nav {
+      background-color: var(--color-dark);
+      padding: 1rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem;
+    }
+
+    nav a:hover {
+      background-color: var(--color-primary);
+    }
+
+    /* MAIN y ASIDE (layout básico) */
+    .container {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    main {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 5px;
+      flex: 2;
+    }
+
+    aside {
+      background-color: var(--color-secondary);
+      padding: 1rem;
+      border-radius: 5px;
+      flex: 1;
+    }
+
+    /* ARTICLES y SECTIONS */
+    article {
+      background-color: #f9f9f9;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-left: 4px solid var(--color-accent);
+    }
+
+    section {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* SPANS (para énfasis) */
+    .tag {
+      background-color: var(--color-dark);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--color-dark);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* Media Queries */
+    /* Tablet (768px) */
+    @media (min-width: 768px) {
+      .container {
+        flex-direction: row;
+      }
+
+      nav ul {
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      body {
+        font-size: 16px;
+      }
+    }
+
+    /* Desktop (1024px) */
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      article {
+        transition: transform 0.3s;
+      }
+
+      article:hover {
+        transform: translateY(-5px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cabecera de la página -->
+  <header>
+    <h1>Landing Page Semántica</h1>
+    <p>Prototipo con HTML5 semántico y estilos básicos</p>
+  </header>
+
+  <!-- Menú de navegación -->
+  <nav>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contenido principal + sidebar -->
+  <div class="container">
+    <!-- Contenido principal -->
+    <main>
+      <!-- Sección principal -->
+      <section id="inicio">
+        <h2><span class="tag">&lt;section&gt;</span> Sección Principal</h2>
+        <article>
+          <h3><span class="tag">&lt;article&gt;</span> Artículo destacado</h3>
+          <p>Este es un artículo dentro de una sección. Aquí iría contenido independiente.</p>
+          <p><span class="tag">&lt;span&gt;</span> se usa para <span style="color: var(--color-accent)">énfasis</span> en texto.</p>
+        </article>
+
+        <article>
+          <h3>Otro artículo</h3>
+          <p>Más contenido semántico organizado en artículos.</p>
+        </article>
+      </section>
+
+      <!-- Otra sección -->
+      <section id="servicios">
+        <h2>Sección de Servicios</h2>
+        <article>
+          <h3>Nuestros servicios</h3>
+          <p>Descripción de lo que ofrecemos.</p>
+        </article>
+      </section>
+    </main>
+
+    <!-- Barra lateral -->
+    <aside>
+      <h2><span class="tag">&lt;aside&gt;</span> Barra Lateral</h2>
+      <article>
+        <h3>Información adicional</h3>
+        <p>Contenido secundario relacionado con el main.</p>
+      </article>
+      <div>
+        <p>Otros elementos como banners o widgets irían aquí.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Pie de página -->
+  <footer>
+    <p><span class="tag">&lt;footer&gt;</span> Pie de página - Todos los derechos reservados</p>
+    <p>Prototipo creado para demostrar HTML semántico</p>
+  </footer>
+</body>
+</html>
