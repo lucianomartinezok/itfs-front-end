@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/favicon-32x32.png" type="image/x-icon">
+    <title>PFA 2: #Hacer con HTML - 2 </title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mini-site {
+            margin: 20px 0;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 70%;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        img {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 1200px) {
+            .mini-site {
+                width: 85%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .mini-site {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mini-site {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Consigna -->
+        <h1>PFA 2: #Hacer con HTML - 2 </h1>
+        <p>Enunciado:</p>
+        <ol>
+            <li>Crea una página web con una imagen de tu elección, la cual se llame <code>imagen.jpg</code> y esté descargada en tu computadora, en la misma ruta que el archivo <code>index.html</code>.</li>
+            <li>Añade un texto alternativo y comprueba que funciona si escribimos mal la URL de la imagen.</li>
+            <li>Establece las propiedades <code>width</code> y <code>height</code> de la imagen.</li>
+            <li>Establece un elemento <code>title</code> en la imagen.</li>
+        </ol>
+
+        <!-- Solución -->
+        <div class="mini-site">
+            <h2>Mini Sitio: Solución al Enunciado</h2>
+            <!-- Imagen con las propiedades solicitadas -->
+            <img src="https://placehold.co/600x400" alt="Esta es una imagen de ejemplo" width="300" height="200" title="Imagen de ejemplo">
+            <p>Si la URL de la imagen se escribe mal, el texto alternativo "Esta es una imagen de ejemplo" aparecerá en su lugar.</p>
+        </div>
+    </div>
+</body>
+</html>

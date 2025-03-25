@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/favicon-32x32.png" type="image/x-icon">
+    <title>PFA 2: #Hacer con HTML - 1 </title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .solution {
+            margin-top: 30px;
+            border-top: 2px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .mini-site {
+            margin: 20px 0;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .mini-site h2 {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .mini-site div {
+            padding: 15px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 1200px) {
+            .mini-site {
+                width: 85%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .mini-site {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mini-site {
+                width: 100%;
+            }
+        }
+
+        /* Contenedor global para ancho */
+        .mini-site {
+            width: 70%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Consigna -->
+        <h1>PFA 2: #Hacer con HTML - 1 </h1>
+        <p><strong>Propuesta A:</strong> Elige una página web que utilices habitualmente y analiza su estructura visualmente. Identifica y marca los diferentes elementos que la componen, como el encabezado (header), logo, contenido principal (main content), navegación (navigation), barra lateral (sidebar) y pie de página (footer).</p>
+
+        <!-- Solución a Propuesta A -->
+        <div class="mini-site">
+            <h2>Estructura Visual (Propuesta A)</h2>
+            <div>
+                <header>
+                    <h1>Mi Página Web</h1>
+                    <img src="https://placehold.co/300x300" alt="Logo" >
+                    <nav>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><a href="#">Inicio</a></li>
+                            <li><a href="#">Acerca</a></li>
+                            <li><a href="#">Servicios</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <main>
+                    <article>
+                        <h2>Bienvenido</h2>
+                        <p>Aquí está el contenido principal de la página.</p>
+                    </article>
+                    <aside>
+                        <h3>Enlaces destacados</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><a href="#">Enlace 1</a></li>
+                            <li><a href="#">Enlace 2</a></li>
+                        </ul>
+                    </aside>
+                </main>
+                <footer>
+                    <p>Derechos reservados 2025</p>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Consigna -->
+        <p><strong>Propuesta B:</strong> Elige una página web que utilices habitualmente y utiliza la herramienta "inspeccionar" del navegador para observar el código HTML. Anota las etiquetas HTML que vayas identificando y determina cuáles te resultan conocidas y cuáles no.</p>
+
+        <!-- Solución a Propuesta B -->
+        <div class="mini-site">
+            <h2>Análisis de Código HTML (Propuesta B)</h2>
+            <div>
+                <header>
+                    <h1>Ejemplo de Estructura</h1>
+                </header>
+                <main>
+                    <section>
+                        <h2>Etiquetas conocidas:</h2>
+                        <ul>
+                            <li>&lt;header&gt; - Encabezado</li>
+                            <li>&lt;nav&gt; - Navegación</li>
+                            <li>&lt;main&gt; - Contenido principal</li>
+                            <li>&lt;footer&gt; - Pie de página</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Etiquetas menos familiares:</h2>
+                        <ul>
+                            <li>&lt;article&gt; - Representa un contenido independiente</li>
+                            <li>&lt;aside&gt; - Información relacionada (barra lateral)</li>
+                            <li>&lt;section&gt; - Agrupación temática</li>
+                        </ul>
+                    </section>
+                </main>
+                <footer>
+                    <p>Análisis de etiquetas realizado con herramientas de inspección.</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
