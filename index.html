@@ -3,86 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desarrollo Front End</title>
+    <title>Dashboard Front End</title>
     <style>
-        /* Estilo para centrar el contenido */
+        /* Estilo para el cuerpo */
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #a3a3a3; /* Fondo más auténtico de Windows 95 */
-            font-family: "Tahoma", sans-serif;
+            background-color: #9ba7b6; /* Gris azulado estilo antiguo */
+            font-family: "Courier New", monospace; /* Tipografía retro de sistemas antiguos */
             color: black;
         }
+
         .container {
-            text-align: center;
-            background-color: #ffffff;
-            border: 2px solid #000000;
-            padding: 20px;
-            width: 400px; /* Ancho ajustado */
-            box-shadow: 4px 4px 0 #808080;
+            width: 95%;
+            max-width: 1000px;
+            background-color: #f2f2f2; /* Fondo clásico */
+            border: 3px solid #4b4b4b; /* Bordes más gruesos y oscuros */
+            padding: 25px;
+            box-shadow: 6px 6px 0 #808080; /* Sombra más destacada */
         }
+
         h1 {
+            text-align: center;
             margin-bottom: 20px;
-            font-size: 22px;
+            font-size: 24px;
+            color: #333333; /* Texto oscuro */
         }
-        /* Diseño en dos columnas */
+
+        /* Estilo de la rejilla */
         .grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-            gap: 10px; /* Espaciado entre botones */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
-        /* Estilo de los botones */
-        .button {
-            padding: 10px;
-            border: 2px solid #808080;
-            border-right-color: #ffffff;
-            border-bottom-color: #ffffff;
-            background-color: #dcdcdc;
-            color: black;
-            font-size: 16px;
+
+        /* Estilo para cada mosaico */
+        .tile {
+            background-color: #e0e0e0; /* Fondo claro y neutral */
+            border: 2px solid #6d6d6d;
+            border-right-color: #f9f9f9;
+            border-bottom-color: #f9f9f9;
+            padding: 15px;
             text-align: center;
+            box-shadow: 3px 3px 0 #4b4b4b;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        .tile:hover {
+            background-color: #cacaca; /* Efecto de resaltado en el mosaico */
+            box-shadow: 3px 3px 0 #2f2f2f; /* Sombra más profunda al hacer hover */
+        }
+
+        .tile h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #000000; /* Título más destacado */
+        }
+
+        /* Estilo de botones dentro de los mosaicos */
+        .tile .button {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 12px;
+            border: 2px solid #4b4b4b;
+            border-right-color: #f9f9f9;
+            border-bottom-color: #f9f9f9;
+            background-color: #d9d9d9;
+            color: black;
+            font-size: 14px;
+            text-decoration: none;
             cursor: pointer;
-            box-shadow: 2px 2px 0 #000000;
-            transition: transform 0.1s ease-in-out;
-            text-decoration: none; /* Elimina subrayados */
+            box-shadow: 2px 2px 0 #6d6d6d;
+            transition: transform 0.1s ease-in-out, background-color 0.2s;
         }
-        .button:hover {
+
+        .tile .button:hover {
             transform: translate(-2px, -2px);
+            background-color: #bfbfbf;
         }
-        /* Botón publicado */
-        .published {
-            background-color: #008000;
+
+        /* Botones activos */
+        .button.published {
+            background-color: #5c9e5c;
             color: white;
+            box-shadow: 2px 2px 0 #357a35;
         }
-        /* Botón no publicado */
-        .not-published {
-            background-color: #808080;
-            color: white;
+
+        /* Botones pendientes */
+        .button.not-published {
+            background-color: #9a9a9a;
+            color: #e4e4e4;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Desarrollo Front End</h1>
+        <h1>Dashboard de Desarrollo Front End</h1>
         <div class="grid">
-            <!-- Lista de botones con enlaces -->
-            <a href="m0.html" class="button published">M0</a>
-            <a href="m1.html" class="button not-published">M1</a>
-            <a href="#" class="button not-published">M2</a>
-            <a href="#" class="button not-published">M3</a>
-            <a href="#" class="button not-published">M4</a>
-            <a href="#" class="button not-published">M5</a>
-            <a href="#" class="button not-published">M6</a>
-            <a href="#" class="button not-published">M7</a>
-            <a href="#" class="button not-published">M8</a>
-            <a href="#" class="button not-published">M9</a>
-            <a href="#" class="button not-published">M10</a>
-            <a href="#" class="button not-published">M11</a>
-            <a href="#" class="button not-published">M12</a>
-            <a href="#" class="button not-published">M13</a>
+            <!-- Mosaicos con botones -->
+            <div class="tile">
+                <h2>M0</h2>
+                <a href="m0-materials.html" class="button published">Guía GitHub y GitHub Pages</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M1</h2>
+                <a href="m1.html" class="button published">Resumen - Mosaico 1</a>
+                <a href="https://roadmap.sh/frontend" class="button published" target="_blank">Roadmap Frontend Developer</a>
+            </div>
+            <div class="tile">
+                <h2>M2</h2>
+                <a href="m2.html" class="button published">Resumen - Mosaico 1</a>
+                <a href="m2-projects.html" class="button published">Proyectos</a>
+            </div>
+            <!-- Modulos pendientes -->
+            <div class="tile">
+                <h2>M3</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M4</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+          
+                
+            </div>
+            <div class="tile">
+                <h2>M5</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M6</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M7</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M8</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M9</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M10</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+               
+            </div>
+            <div class="tile">
+                <h2>M11</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M12</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
+            <div class="tile">
+                <h2>M13</h2>
+                <a href="#" class="button not-published">Pendiente</a>
+                
+            </div>
         </div>
     </div>
 </body>
