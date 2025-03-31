@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen - Mosaico 3</title>
+    <style>
+        /* Reset y estilos base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #F0F7FB;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #007B8F;
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li {
+            background: #FFFBEC;
+            margin: 8px 0;
+            padding: 10px;
+            border-left: 5px solid #007B8F;
+            border-radius: 4px;
+        }
+        a {
+            color: #007B8F;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .columns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .hint {
+            margin-top: 20px;
+            padding: 15px;
+            background: #E2F7E2;
+            border-left: 5px solid #007B8F;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        .volver-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 10px 15px;
+            text-align: center;
+            background-color: #007B8F;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .volver-btn:hover {
+            background-color: #005f6b;
+        }
+        .destacado {
+            color: #005f6b;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Resumen - Mosaico 3</h1>
+        
+        <div class="columns">
+            <div class="column">
+                <h2>📌 Conceptos Básicos</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/css/css_intro.asp" target="_blank">¿Qué es CSS?</a> - Hojas de estilo para diseño web</li>
+                    <li><a href="https://www.w3schools.com/css/css_syntax.asp" target="_blank">Sintaxis CSS</a> - Selectores { propiedad: valor; }</li>
+                    <li><a href="https://www.w3schools.com/css/css3_box-sizing.asp" target="_blank">Modelo de Caja</a> - Contenido, padding, borde y margin</li>
+                </ul>
+
+                <h2>🎯 Selectores Avanzados</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/css/css_combinators.asp" target="_blank">Combinadores</a> - Relaciones entre elementos</li>
+                    <li><a href="https://www.w3schools.com/css/css_pseudo_classes.asp" target="_blank">Pseudoclases</a> - Estados interactivos (:hover, :focus)</li>
+                </ul>
+
+                <h2>📏 Unidades y Medidas</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/css/css_units.asp" target="_blank">Unidades relativas</a> - %, em, rem, vw/vh</li>
+                    <li><a href="https://www.w3schools.com/css/css3_flexbox.asp" target="_blank">Flexbox</a> - Diseño unidimensional flexible</li>
+                    <li><a href="https://www.w3schools.com/css/css_grid.asp" target="_blank">CSS Grid</a> - Cuadrículas bidimensionales</li>
+                </ul>
+            </div>
+
+            <div class="column">
+                <h2>🎨 Estilos Visuales</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/css/css3_colors.asp" target="_blank">Colores</a> - HEX, RGB, HSL, transparencias</li>
+                    <li><a href="https://www.w3schools.com/css/css3_gradients.asp" target="_blank">Degradados</a> - Lineales, radiales y cónicos</li>
+                </ul>
+
+                <h2>📐 Maquetación Moderna</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/css/css_positioning.asp" target="_blank">Posicionamiento</a> - Relative, Absolute, Fixed</li>
+                    <li><a href="https://www.w3schools.com/css/css3_flexbox.asp" target="_blank">Flexbox</a> - Alineación y distribución flexible</li>
+                    <li><a href="https://www.w3schools.com/css/css_grid.asp" target="_blank">Grid</a> - Plantillas de columnas/filas</li>
+                </ul>
+
+                <div class="hint">
+                    💡 <strong>Flexbox vs Grid:</strong><br>
+                    <span class="destacado">Flexbox</span> - Ideal para diseños 1D (filas o columnas)<br>
+                    <span class="destacado">Grid</span> - Perfecto para layouts 2D complejos<br>
+                    <a href="https://www.w3schools.com/css/css3_flexbox.asp" target="_blank">Aprende Flexbox</a> | 
+                    <a href="https://www.w3schools.com/css/css_grid.asp" target="_blank">Domina Grid</a>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 20px; font-style: italic;">
+            🌟 Este resumen es solo el punto de partida. ¡Explora cada tema en profundidad usando los enlaces proporcionados!
+        </p>
+
+        <a href="./index.html" class="volver-btn">Volver</a>
+    </div>
+</body>
+</html>
