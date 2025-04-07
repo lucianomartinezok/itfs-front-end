@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Definición de una variable 'nombre' con el valor 'Pepe'.
+        let nombre = 'Pepe';
+
+        // Creación de un objeto 'persona' con varias propiedades y métodos.
+        const persona = {
+            nombre: 'Sacha',        // Propiedad 'nombre' con valor 'Sacha'.
+            apellido: 'Lifszyc',    // Propiedad 'apellido' con valor 'Lifszyc'.
+            edad: 28,               // Propiedad 'edad' con valor 28.
+          /**/
+            // Método 'saludar' que imprime un mensaje en la consola.
+            saludar: function () {
+                console.log(`Hola, me llamo ${this.nombre}`); // Accede a la propiedad 'nombre' del objeto usando 'this'.
+            },
+
+            // Método 'decirAdios' que imprime un mensaje de despedida en la consola.
+            decirAdios: function () {
+                console.log('Chau, me voy!');
+            }
+        };
+
+        // Creación de un nuevo objeto 'otraPersona' que copia todas las propiedades y métodos de 'persona',
+        // pero sobrescribe el valor de 'nombre' y 'edad' con nuevos valores.
+        const otraPersona = {
+            ...persona,            // Copia todas las propiedades y métodos de 'persona'.
+            nombre: 'Eric',        // Sobrescribe la propiedad 'nombre' con el valor 'Eric'.
+            edad: 24               // Sobrescribe la propiedad 'edad' con el valor 24.
+        };
+
+        // Cambio del valor de la variable 'nombre' a 'Lucas'.
+        nombre = 'Lucas';
+
+        // Llamada al método 'saludar' en el objeto 'otraPersona'.
+        // Esto imprimirá: "Hola, me llamo Eric" porque 'this.nombre' hace referencia a la propiedad 'nombre' del objeto 'otraPersona'.
+        otraPersona.saludar();
+        console.log(otraPersona.apellido)
+     
+       
+
+    </script>
+
+    <!-- Comentario -->
+</body>
+
+</html>

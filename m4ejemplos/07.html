@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificación de Restaurantes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .restaurant {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .restaurant h2 {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        .stars {
+            font-size: 24px;
+            color: #FFD700;
+            cursor: pointer;
+        }
+
+        .stars select {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Califica los Restaurantes</h1>
+
+    <!-- Restaurante 1 -->
+    <div class="restaurant" id="restaurante1">
+        <h2>Restaurante La Bella Italia</h2>
+        <div class="stars">
+            <label for="calificacion-italia">Calificación:</label>
+            <select id="calificacion-italia">
+                <option value="0">Selecciona</option>
+                <option value="1">1 estrella</option>
+                <option value="2">2 estrellas</option>
+                <option value="3">3 estrellas</option>
+                <option value="4">4 estrellas</option>
+                <option value="5">5 estrellas</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Restaurante 2 -->
+    <div class="restaurant" id="restaurante2">
+        <h2>Restaurante El Gourmet</h2>
+        <div class="stars">
+            <label for="calificacion-gourmet">Calificación:</label>
+            <select id="calificacion-gourmet">
+                <option value="0">Selecciona</option>
+                <option value="1">1 estrella</option>
+                <option value="2">2 estrellas</option>
+                <option value="3">3 estrellas</option>
+                <option value="4">4 estrellas</option>
+                <option value="5">5 estrellas</option>
+            </select>
+        </div>
+    </div>
+
+    <button onclick="mostrarCalificaciones()">Mostrar Calificaciones</button>
+
+    <div id="resultados" class="result"></div>
+
+    <script>
+        function mostrarCalificaciones() {
+            var resultados = "";
+
+            // Función para obtener la calificación de un restaurante dado su ID
+            function obtenerCalificacion(id) {
+                var select = document.getElementById(id);
+                return select ? select.value : "No calificado";
+            }
+
+            // Obtener calificaciones de cada restaurante
+            var restaurantes = ["calificacion-italia", "calificacion-gourmet"];
+            restaurantes.forEach(function(restaurante) {
+                var calificacion = obtenerCalificacion(restaurante);
+                var estrellas = "⭐".repeat(calificacion); // Genera las estrellas visualmente
+                resultados += `<p><strong>Restaurante ${restaurante.replace('calificacion-', '').replace(/^\w/, c => c.toUpperCase())}:</strong> ${estrellas}</p>`;
+            });
+
+            // Mostrar los resultados en el contenedor
+            document.getElementById("resultados").innerHTML = resultados;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo con varios botones</title>
+    <style>
+        .resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <form>
+        <input type="text" id="username" name="username" placeholder="Nombre de usuario" />
+        <input type="password" id="password" name="password" placeholder="Contraseña" />
+        <button type="button" id="btnUser">Mostrar Usuario</button>
+        <button type="button" id="btnPass">Mostrar Contraseña</button>
+        <button type="button" id="btnSubmit">Mostrar Mensaje de Envío</button>
+    </form>
+
+    <div id="resultado" class="resultado"></div>
+
+    <script>
+        // Obtener elementos con getElementById
+        const inputUser = document.getElementById('username');
+        const inputPass = document.getElementById('password');
+        const botonUser = document.getElementById('btnUser');
+        const botonPass = document.getElementById('btnPass');
+        const botonSubmit = document.getElementById('btnSubmit');
+        const resultadoDiv = document.getElementById('resultado');
+
+        // Función para mostrar el nombre de usuario
+        botonUser.addEventListener('click', function() {
+            resultadoDiv.textContent = `Nombre de usuario: ${inputUser.value}`;
+        });
+
+        // Función para mostrar la contraseña
+        botonPass.addEventListener('click', function() {
+            resultadoDiv.textContent = `Contraseña: ${inputPass.value}`;
+        });
+
+        // Función para mostrar un mensaje de envío
+        botonSubmit.addEventListener('click', function() {
+            resultadoDiv.textContent = 'Formulario listo para enviar';
+        });
+    </script>
+
+</body>
+</html>

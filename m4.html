@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen JavaScript - Fundamentos</title>
+    <style>
+        /* Reset y estilos base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #F0F7FB;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #007B8F;
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li {
+            background: #FFFBEC;
+            margin: 8px 0;
+            padding: 10px;
+            border-left: 5px solid #007B8F;
+            border-radius: 4px;
+        }
+        a {
+            color: #007B8F;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .columns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .hint {
+            margin-top: 20px;
+            padding: 15px;
+            background: #E2F7E2;
+            border-left: 5px solid #007B8F;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        .volver-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 10px 15px;
+            text-align: center;
+            background-color: #007B8F;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .volver-btn:hover {
+            background-color: #005f6b;
+        }
+        .destacado {
+            color: #005f6b;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Fundamentos JavaScript - Resumen Ejecutivo</h1>
+        
+        <div class="columns">
+            <div class="column">
+                <h2>📌 Conceptos Básicos</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/js/js_intro.asp" target="_blank">¿Qué es JavaScript?</a> - Lenguaje de programación para la web</li>
+                    <li><a href="https://www.w3schools.com/js/js_variables.asp" target="_blank">Variables</a> - var, let, const y tipos de datos</li>
+                    <li><a href="https://www.w3schools.com/js/js_arrays.asp" target="_blank">Arrays</a> - Colecciones ordenadas de datos</li>
+                </ul>
+
+                <h2>🎯 Estructuras de Control</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/js/js_if_else.asp" target="_blank">Condicionales</a> - if, else, switch</li>
+                    <li><a href="https://www.w3schools.com/js/js_loop_for.asp" target="_blank">Bucles</a> - for, while, do while</li>
+                    <li><a href="https://www.w3schools.com/js/js_comparisons.asp" target="_blank">Operadores</a> - Comparación, lógicos, ternario</li>
+                </ul>
+
+                <h2>📏 Funciones</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/js/js_functions.asp" target="_blank">Declaración</a> - function, parámetros, return</li>
+                    <li><a href="https://www.w3schools.com/js/js_function_definition.asp" target="_blank">Ámbito</a> - Scope global y local</li>
+                    <li><a href="https://www.w3schools.com/js/js_arrow_function.asp" target="_blank">Funciones flecha</a> - Sintaxis moderna</li>
+                </ul>
+            </div>
+
+            <div class="column">
+                <h2>🎨 Objetos y Métodos</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/js/js_objects.asp" target="_blank">Objetos</a> - Propiedades y métodos</li>
+                    <li><a href="https://www.w3schools.com/js/js_object_definition.asp" target="_blank">Constructores</a> - this, new, prototipos</li>
+                    <li><a href="https://www.w3schools.com/js/js_object_methods.asp" target="_blank">Métodos</a> - Funciones dentro de objetos</li>
+                </ul>
+
+                <h2>📐 DOM y Eventos</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank">DOM</a> - Acceso y manipulación de elementos</li>
+                    <li><a href="https://www.w3schools.com/js/js_events.asp" target="_blank">Eventos</a> - addEventListener, tipos de eventos</li>
+                    <li><a href="https://www.w3schools.com/js/js_htmldom_elements.asp" target="_blank">Elementos</a> - Creación y modificación</li>
+                </ul>
+
+                <div class="hint">
+                    💡 <strong>Conceptos Clave:</strong><br>
+                    <span class="destacado">Objetos Nativos:</span> String, Array, Date, Math<br>
+                    <span class="destacado">Métodos Útiles:</span> map(), filter(), forEach()<br>
+                    <span class="destacado">ES6+:</span> let/const, arrow functions, template literals<br>
+                    <a href="https://www.w3schools.com/js/js_es6.asp" target="_blank">Novedades ES6</a> | 
+                    <a href="https://www.w3schools.com/js/js_array_methods.asp" target="_blank">Métodos Array</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns" style="margin-top: 20px;">
+            <div class="column">
+                <h2>🔧 Depuración</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/js/js_debugging.asp" target="_blank">Consola</a> - console.log(), error, warn</li>
+                    <li><a href="https://www.w3schools.com/js/js_errors.asp" target="_blank">Manejo de errores</a> - try, catch, finally</li>
+                </ul>
+            </div>
+
+            <div class="column">
+                <h2>🔄 Métodos Comunes</h2>
+                <ul>
+                    <li><a href="https://www.w3schools.com/js/js_string_methods.asp" target="_blank">String</a> - toUpperCase(), split(), includes()</li>
+                    <li><a href="https://www.w3schools.com/js/js_array_methods.asp" target="_blank">Array</a> - push(), pop(), map(), filter()</li>
+                    <li><a href="https://www.w3schools.com/js/js_date_methods.asp" target="_blank">Date</a> - Métodos para manejar fechas</li>
+                </ul>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 20px; font-style: italic;">
+            🌟 JavaScript es el lenguaje de programación de la web. Este resumen cubre los fundamentos, pero hay mucho más por explorar.
+        </p>
+
+        <a href="#" class="volver-btn">Volver al Inicio</a>
+    </div>
+</body>
+</html>

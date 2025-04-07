@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonios</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e0e0;
+        }
+        .testimonial-box {
+            border: 2px solid #b0b0b0;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .testimonial {
+            display: none;
+        }
+        .testimonial.active {
+            display: block;
+        }
+        .date-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .date {
+            background-color: #b0b0b0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .date.active {
+            background-color: #4a4a4a;
+        }
+    </style>
+</head>
+<body>
+    <div class="testimonial-box">
+        <div class="testimonial active">
+            <p>"Este es el primer testimonio. ¡Me encantó el servicio!"</p>
+            <p>- Cliente 1</p>
+        </div>
+        <div class="testimonial">
+            <p>"El producto superó mis expectativas. ¡Altamente recomendado!"</p>
+            <p>- Cliente 2</p>
+        </div>
+        <div class="testimonial">
+            <p>"Un excelente servicio al cliente y un producto de calidad."</p>
+            <p>- Cliente 3</p>
+        </div>
+        <div class="date-indicator">
+            <span class="date active" data-index="0">01/01/2024</span>
+            <span class="date" data-index="1">02/01/2024</span>
+            <span class="date" data-index="2">03/01/2024</span>
+        </div>
+    </div>
+
+    <script>
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dates = document.querySelectorAll('.date');
+        let currentIndex = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.classList.toggle('active', i === index);
+            });
+            dates.forEach((date, i) => {
+                date.classList.toggle('active', i === index);
+            });
+        }
+
+        dates.forEach(date => {
+            date.addEventListener('click', () => {
+                const index = parseInt(date.getAttribute('data-index'), 10);
+                currentIndex = index;
+                showTestimonial(currentIndex);
+            });
+        });
+
+        // Inicialmente mostrar el primer testimonio
+        showTestimonial(currentIndex);
+    </script>
+</body>
+</html>

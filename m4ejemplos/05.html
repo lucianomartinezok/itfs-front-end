@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-up de Suscripción</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .boton-suscribirse {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Estilos del pop-up y su contenido */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .fondo {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+        .cerrar-popup {
+            cursor: pointer;
+            padding: 5px 10px;
+            background-color: #DC3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .input-email {
+            padding: 10px;
+            width: 80%;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bienvenido a Nuestra Landing Page</h1>
+    <p>Suscríbete a nuestro boletín para recibir las últimas novedades.</p>
+    <button class="boton-suscribirse" onclick="abrirPopup()">Suscribirse</button>
+
+    <!-- Contenedor del pop-up -->
+    <div class="fondo" id="fondo"></div>
+    <div class="popup" id="popup">
+        <h2>Suscríbete a Nuestro Boletín</h2>
+        <p>Recibe las últimas noticias y ofertas directamente en tu bandeja de entrada.</p>
+        <input type="email" class="input-email" placeholder="Ingresa tu correo">
+        <button class="boton-suscribirse">Enviar</button>
+        <button class="cerrar-popup" onclick="cerrarPopup()">Cerrar</button>
+    </div>
+
+    <script>
+        function abrirPopup() {
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("fondo").style.display = "block";
+        }
+
+        function cerrarPopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("fondo").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

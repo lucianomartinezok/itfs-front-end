@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01</title>
+</head>
+
+<body>
+    <script>
+
+        let nombre = 'Pepe';
+
+        const persona = {
+            nombre: 'Sacha',
+            apellido: 'Lifszyc',
+            edad: 28,
+            equipo: 'BOCAAA',
+
+            saludar: function () {
+                console.log(`Hola, me llamo ${this.nombre}`);
+            },
+            decirAdios: function () {
+                console.log('Chau, me voy!');
+            }
+        };
+        const otraPersona = {
+            ...persona,
+            nombre: 'Eric',
+            edad: 24
+        };
+        nombre = 'Lucas';
+        otraPersona.saludar();
+
+        console.log(persona.equipo)
+
+    </script>
+</body>
+
+</html>

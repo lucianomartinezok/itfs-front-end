@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector de Modo Claro/Oscuro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .tarjeta {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .claro {
+            background-color: white;
+            color: black;
+        }
+        .oscuro {
+            background-color: #333;
+            color: white;
+        }
+        .boton-tema {
+            margin-top: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .boton-tema.claro {
+            background-color: black;
+            color: white;
+        }
+        .boton-tema.oscuro {
+            background-color: white;
+            color: black;
+        }
+        .boton-tema:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body class="claro">
+    <div class="tarjeta claro">
+        <h1>Bienvenido a Nuestra Landing Page</h1>
+        <p>Explora nuestros productos y servicios.</p>
+        <button class="boton-tema claro" onclick="cambiarTema()">Cambiar a Modo Oscuro</button>
+        <button class="boton-tema claro" onclick="cambiarTema()">Cambiar a Modo Oscuro</button>
+        <button class="boton-tema claro" onclick="cambiarTema()">Cambiar a Modo Oscuro</button>
+    </div>
+
+    <script>
+        function cambiarTema() {
+            const body = document.body;
+            const tarjeta = document.querySelector('.tarjeta');
+            const boton = document.querySelector('.boton-tema');
+            
+            if (body.classList.contains('claro')) {
+                body.classList.remove('claro');
+                body.classList.add('oscuro');
+                tarjeta.classList.remove('claro');
+                tarjeta.classList.add('oscuro');
+                boton.classList.remove('claro');
+                boton.classList.add('oscuro');
+                boton.textContent = "Cambiar a Modo Claro";
+            } else {
+                body.classList.remove('oscuro');
+                body.classList.add('claro');
+                tarjeta.classList.remove('oscuro');
+                tarjeta.classList.add('claro');
+                boton.classList.remove('oscuro');
+                boton.classList.add('claro');
+                boton.textContent = "Cambiar a Modo Oscuro";
+            }
+        }
+    </script>
+</body>
+</html>

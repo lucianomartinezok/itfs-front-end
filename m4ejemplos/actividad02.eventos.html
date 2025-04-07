@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos en JavaScript</title>
+    <style>
+        .caja {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            background: #226fc1;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+            font-size: 30px;
+            color: #fff;
+            font-family: Arial;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botones para demostrar eventos -->
+    <button onclick="saludo()">Saludo</button>
+    <hr>
+    <button id="btn-saludar">Saludo con EventListener</button>
+    <hr>
+    <button id="btn-caja">Crear Caja</button>
+    <section id="contenedor"></section>
+
+    <script>
+        // Modelo básico de eventos (usando atributos HTML)
+        function saludo() {
+            alert('Hola');
+        }
+
+        // Modelo estándar de eventos (usando addEventListener)
+        function saludo2() {
+            alert('Hola 2');
+        }
+
+        // Obtener el botón por su ID
+        var btnSaludar = document.getElementById('btn-saludar');
+        
+        // Agregar eventos al botón
+        btnSaludar.addEventListener('click', saludo);
+        btnSaludar.addEventListener('click', saludo2);
+
+        // Eliminar un evento del botón
+        btnSaludar.removeEventListener('click', saludo);
+
+        // Función para crear una caja en el contenedor
+        function crearCaja() {
+            var contenedor = document.getElementById('contenedor');
+            var caja = document.createElement('div');
+            caja.className = 'caja';
+            contenedor.appendChild(caja);
+        }
+
+        // Obtener el botón de crear caja por su ID
+        var btnCaja = document.getElementById('btn-caja');
+        // Agregar evento al botón para crear una caja
+        btnCaja.addEventListener('click', crearCaja);
+
+        // Listado de eventos más comunes
+        /*
+         * Eventos más comunes:
+         * - click: Se activa al hacer clic en un elemento.
+         * - focus: Se activa cuando un elemento recibe el foco.
+         * - blur: Se activa cuando un elemento pierde el foco.
+         * - change: Se activa cuando el valor de un elemento cambia.
+         * - load: Se activa cuando una página o un recurso se carga.
+         * - mouseover: Se activa cuando el puntero del mouse se mueve sobre un elemento.
+         * - mouseout: Se activa cuando el puntero del mouse sale de un elemento.
+         * - resize: Se activa cuando la ventana del navegador cambia de tamaño.
+         * - submit: Se activa cuando se envía un formulario.
+         */
+    </script>
+
+</body>
+</html>

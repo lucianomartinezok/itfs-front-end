@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel de Imágenes</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .carrusel {
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .imagenes {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .imagenes img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .flecha {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            z-index: 100;
+        }
+        .anterior {
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .siguiente {
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .indicadores {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .indicadores span {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .activo {
+            background-color: #717171;
+        }
+    </style>
+</head>
+<body>
+
+<div class="carrusel">
+    <div class="imagenes" id="imagenes">
+        <img src="https://via.placeholder.com/600x300/FF5733/FFFFFF?text=Imagen+1" alt="Imagen 1">
+        <img src="https://via.placeholder.com/600x300/33C1FF/FFFFFF?text=Imagen+2" alt="Imagen 2">
+        <img src="https://via.placeholder.com/600x300/75FF33/FFFFFF?text=Imagen+3" alt="Imagen 3">
+        <img src="https://via.placeholder.com/600x300/FF5733/FFFFFF?text=Imagen+4" alt="Imagen 1">
+        <img src="https://via.placeholder.com/600x300/33C1FF/FFFFFF?text=Imagen+5" alt="Imagen 2">
+        <img src="https://via.placeholder.com/600x300/75FF33/FFFFFF?text=Imagen+6" alt="Imagen 3">
+        <img src="https://via.placeholder.com/600x300/FF5733/FFFFFF?text=Imagen+7" alt="Imagen 1">
+        <img src="https://via.placeholder.com/600x300/33C1FF/FFFFFF?text=Imagen+8" alt="Imagen 2">
+        <img src="https://via.placeholder.com/600x300/75FF33/FFFFFF?text=Imagen+9" alt="Imagen 3">
+    </div>
+    <a class="flecha anterior" onclick="cambiarImagen(-1)">&#10094;</a>
+    <a class="flecha siguiente" onclick="cambiarImagen(1)">&#10095;</a>
+</div>
+
+
+
+<script>
+    let indiceActual = 0;
+    const imagenes = document.getElementById('imagenes');
+    const totalImagenes = imagenes.children.length;
+
+    // Crear indicadores de puntos
+    const indicadores = document.getElementById('indicadores');
+    for (let i = 0; i < totalImagenes; i++) {
+        const span = document.createElement('span');
+        span.addEventListener('click', () => mostrarImagen(i));
+        indicadores.appendChild(span);
+    }
+
+    // Actualizar los indicadores y mostrar la imagen actual
+    function actualizarIndicadores() {
+        const puntos = indicadores.children;
+        for (let i = 0; i < puntos.length; i++) {
+            puntos[i].className = puntos[i].className.replace(' activo', '');
+        }
+        puntos[indiceActual].className += ' activo';
+    }
+
+    function mostrarImagen(indice) {
+        indiceActual = indice;
+        imagenes.style.transform = `translateX(-${indiceActual * 100}%)`;
+        actualizarIndicadores();
+    }
+
+    function cambiarImagen(direccion) {
+        indiceActual += direccion;
+        if (indiceActual >= totalImagenes) {
+            indiceActual = 0;
+        } else if (indiceActual < 0) {
+            indiceActual = totalImagenes - 1;
+        }
+        mostrarImagen(indiceActual);
+    }
+
+    // Inicializar carrusel
+    mostrarImagen(indiceActual);
+
+    // Cambio automático cada 5 segundos
+    setInterval(() => {
+        cambiarImagen(1);
+    }, 5000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Pokémon</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+            height: 100vh;
+            margin: 0;
+        }
+        .pokemon-container {
+            max-width: 800px;
+            text-align: center;
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        .pokemon-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .pokemon-info {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .pokemon-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .pokemon-buttons button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .pokemon-buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<main>
+<div class="pokemon-container">
+    <img id="pokemonImage" class="pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Pokémon">
+    <div id="pokemonInfo" class="pokemon-info">Haz hover sobre los botones para ver la información de los Pokémon.</div>
+    <div class="pokemon-buttons">
+        <button data-index="0">Pokémon 1</button>
+        <button data-index="1">Pokémon 2</button>
+        <button data-index="2">Pokémon 3</button>
+        <button data-index="3">Pokémon 4</button>
+        <button data-index="4">Pokémon 5</button>
+        <button data-index="5">Pokémon 6</button>
+    </div>
+</div>
+</main>
+
+<script>
+    const pokemons = [
+        { img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png', info: 'Información sobre Pokémon 1' },
+        { img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png', info: 'Información sobre Pokémon 2' },
+        { img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png', info: 'Información sobre Pokémon 3' },
+        { img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png', info: 'Información sobre Pokémon 4' },
+        { img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png', info: 'Información sobre Pokémon 5' },
+        { img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png', info: 'Información sobre Pokémon 6' }
+    ];
+
+    document.querySelectorAll('.pokemon-buttons button').forEach(button => {
+        button.addEventListener('mouseover', () => {
+            const index = button.getAttribute('data-index');
+            const pokemon = pokemons[index];
+            document.getElementById('pokemonImage').src = pokemon.img;
+            document.getElementById('pokemonInfo').textContent = pokemon.info;
+        });
+    });
+
+    // Inicializar con el primer Pokémon
+    document.getElementById('pokemonImage').src = pokemons[0].img;
+    document.getElementById('pokemonInfo').textContent = pokemons[0].info;
+</script>
+
+</body>
+</html>

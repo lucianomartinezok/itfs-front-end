@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios JavaScript</title>
+</head>
+<body>
+
+    <h1>Resultados de los Ejercicios</h1>
+
+    <p id="suma"></p>
+    <p id="functionDemo"></p>
+    <button id="myButton">Click me</button>
+
+    <script>
+        // 1. Crea una variable llamada carName y asígnele el valor “Volvo”.
+        let carName = "Volvo";
+        console.log(carName);
+
+        // 2. Muestra la suma de 5 + 10, usando dos variables: x y y.
+        let x = 5;
+        let y = 10;
+        document.getElementById('suma').innerHTML = "La suma de 5 + 10 es: " + (x + y);
+
+        // 3. En una sola línea, declara tres variables con los siguientes nombres y valores:
+        let firstName = "John", lastName = "Doe", age = 35;
+        console.log(firstName, lastName, age);
+
+        // 4. Divide 10 por 2, y muestra un alerta con el resultado.
+        alert("El resultado de 10 dividido 2 es: " + (10 / 2));
+    
+
+        // 5. Utiliza el operador de asignación correcto que dará como resultado x ser 15 (igual que x = x + y).
+        x = 10;
+        y = 5;
+        x += y; // Equivale a x = x + y
+        console.log("El valor de x es: " + x);
+
+        // 6. Haz que la función devuelva "Hola"
+        function myFunction() {
+            return "Hola";
+        }
+        document.getElementById('functionDemo').innerHTML = myFunction();
+
+        // 7. Crea una función myFunction() que muestre "Hola" en el HTML interno de un elemento con ID "demo".
+        function showGreeting() {
+            document.getElementById('functionDemo').innerHTML = "Hola";
+        }
+
+        // 8. Agrega la propiedad país y el valor “Argentina” al objeto persona.
+        const person = {
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+        person.country = 'Argentina';
+        console.log(person);
+
+        // 9. Crea un objeto llamado persona con nombre = Juan, edad = 50. Luego, accede al objeto para mostrar en un alert ("Juan tiene 50 años").
+        const persona = {
+            nombre: 'Juan',
+            edad: 50
+        };
+        alert(persona.nombre + " tiene " + persona.edad + " años.");
+
+        // 10. Haz que cuando se haga clic en el botón, se ejecute la función "myFunction".
+        document.getElementById('myButton').addEventListener('click', function() {
+            alert(myFunction());
+        });
+
+    </script>
+
+</body>
+</html>
