@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de Métodos de Array</title>
+</head>
+<body>
+    <h1>Resultados de Métodos de Array</h1>
+    <pre id="result"></pre>
+
+    <script>
+        // 1. Duplicar cada número en el array
+        const numbers1 = [1, 2, 3, 4, 5];
+        const result1 = numbers1.map((x) => x * 2);
+        console.log('Resultado 1:', result1);
+        // Explicación: map() aplica la función (x) => x * 2 a cada elemento del array, duplicando cada número.
+
+        // 2. Filtrar nombres con más de 4 caracteres
+        const names = ["Alice", "Bob", "Charlie", "Dave"];
+        const result2 = names.filter((name) => name.length > 4);
+        console.log('Resultado 2:', result2);
+        // Explicación: filter() devuelve un nuevo array con los nombres cuya longitud es mayor que 4. Solo "Charlie" cumple esta condición.
+
+        // 3. Sumar todos los números en el array
+        const numbers2 = [1, 2, 3, 4, 5];
+        const result3 = numbers2.reduce((sum, current) => sum + current, 0);
+        console.log('Resultado 3:', result3);
+        // Explicación: reduce() suma todos los elementos del array, comenzando con un valor inicial de 0.
+
+        // 4. Verificar si algún número es menor que 0
+        const numbers3 = [1, 2, 3, 4, 5];
+        const result4 = numbers3.some((x) => x < 0);
+        console.log('Resultado 4:', result4);
+        // Explicación: some() verifica si al menos un elemento del array cumple la condición x < 0. En este caso, no hay números menores que 0, por lo que el resultado es false.
+
+        // 5. Encontrar el primer número mayor que 3
+        const numbers4 = [1, 2, 3, 4, 5];
+        const result5 = numbers4.find((x) => x > 3);
+        console.log('Resultado 5:', result5);
+        // Explicación: find() devuelve el primer elemento que cumple la condición x > 3. En este caso, es 4.
+
+        // 6. Encontrar el índice del número 3
+        const numbers5 = [1, 2, 3, 4, 5];
+        const result6 = numbers5.findIndex((x) => x === 3);
+        console.log('Resultado 6:', result6);
+        // Explicación: findIndex() devuelve el índice del primer elemento que cumple la condición x === 3. En este caso, es 2.
+
+        // 7. Verificar si el array incluye el número 3
+        const numbers6 = [1, 2, 3, 4, 5];
+        const result7 = numbers6.includes(3);
+        console.log('Resultado 7:', result7);
+        // Explicación: includes() verifica si el array contiene el número 3. En este caso, el resultado es true.
+
+        // 8. Invertir el orden de los elementos del array
+        const numbers7 = [1, 2, 3, 4, 5];
+        const result8 = numbers7.reverse();
+        console.log('Resultado 8:', result8);
+        // Explicación: reverse() invierte el orden de los elementos del array. El array original es modificado.
+
+        // 9. Sumar las edades de todas las personas
+        const people = [
+            { name: "Alice", age: 25 },
+            { name: "Bob", age: 30 },
+            { name: "Charlie", age: 35 },
+            { name: "Dave", age: 40 }
+        ];
+        const result9 = people.reduce((sum, person) => sum + person.age, 0);
+        console.log('Resultado 9:', result9);
+        // Explicación: reduce() suma las edades de todas las personas en el array, comenzando con un valor inicial de 0.
+
+        // 10. Verificar si todas las personas tienen más de 20 años
+        const people2 = [
+            { name: "Alice", age: 25 },
+            { name: "Bob", age: 30 },
+            { name: "Charlie", age: 35 },
+            { name: "Dave", age: 40 }
+        ];
+        const result10 = people2.every((person) => person.age > 20);
+        console.log('Resultado 10:', result10);
+        // Explicación: every() verifica si todos los elementos en el array cumplen la condición person.age > 20. En este caso, todos los elementos la cumplen, por lo que el resultado es true.
+
+        // Mostrar los resultados en el HTML
+        document.getElementById('result').textContent = `
+            Resultado 1: ${result1}
+            Resultado 2: ${result2}
+            Resultado 3: ${result3}
+            Resultado 4: ${result4}
+            Resultado 5: ${result5}
+            Resultado 6: ${result6}
+            Resultado 7: ${result7}
+            Resultado 8: ${result8}
+            Resultado 9: ${result9}
+            Resultado 10: ${result10}
+        `;
+    </script>
+</body>
+</html>

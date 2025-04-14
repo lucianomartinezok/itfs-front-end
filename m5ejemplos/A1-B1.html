@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puntuación Media de Objetos</title>
+</head>
+<body>
+    <h1>Puntuación Media</h1>
+    <p id="result"></p>
+
+    <script>
+        // Array de objetos con nombres y puntuaciones
+        const datos = [
+            { nombre: "Alice", puntuacion: 85 },
+            { nombre: "Bob", puntuacion: 92 },
+            { nombre: "Charlie", puntuacion: 78 },
+            { nombre: "Diana", puntuacion: 88 }
+        ];
+
+        // Función que devuelve la puntuación media de todos los objetos en el array
+        function calcularPuntuacionMedia(array) {
+            // Usamos reduce() para sumar todas las puntuaciones
+            const sumaPuntuaciones = array.reduce((acumulador, objeto) => acumulador + objeto.puntuacion, 0);
+            // Calculamos la puntuación media dividiendo la suma por el número de objetos
+            return sumaPuntuaciones / array.length;
+        }
+
+        // Llamamos a la función y almacenamos el resultado
+        const puntuacionMedia = calcularPuntuacionMedia(datos);
+
+        // Mostramos el resultado en la página
+        document.getElementById('result').textContent = 'Puntuación media: ' + puntuacionMedia.toFixed(2);
+
+        // Explicación:
+        // 1. reduce() recorre el array y acumula la suma de las puntuaciones.
+        // 2. La función callback (acumulador, objeto) toma el valor acumulado y le suma la puntuación del objeto actual.
+        // 3. El valor inicial del acumulador es 0.
+        // 4. La puntuación media se calcula dividiendo la suma total por el número de objetos en el array.
+        // 5. toFixed(2) formatea el resultado a dos decimales.
+    </script>
+</body>
+</html>

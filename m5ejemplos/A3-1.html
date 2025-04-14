@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Rectangulo</title>
+</head>
+<body>
+    <h1>Clase Rectangulo</h1>
+    <p>Revisa la consola para ver los resultados.</p>
+
+    <script>
+        // Definición de la clase Rectangulo
+        class Rectangulo {
+            // Constructor que inicializa las propiedades ancho y alto
+            constructor(ancho, alto) {
+                this.ancho = ancho;
+                this.alto = alto;
+            }
+
+            // Método para calcular el área del rectángulo
+            calcularArea() {
+                return this.ancho * this.alto;
+            }
+
+            // Método para calcular el perímetro del rectángulo
+            calcularPerimetro() {
+                return 2 * (this.ancho + this.alto);
+            }
+        }
+
+        // Crear una instancia de la clase Rectangulo con valores de ancho y alto
+        const miRectangulo = new Rectangulo(10, 5);
+
+        // Calcular el área y el perímetro usando los métodos de la clase
+        const area = miRectangulo.calcularArea();
+        const perimetro = miRectangulo.calcularPerimetro();
+
+        // Mostrar los resultados en la consola
+        console.log('Área del rectángulo:', area);
+        console.log('Perímetro del rectángulo:', perimetro);
+
+        // Explicación del código:
+        // 1. La clase Rectangulo tiene un constructor que recibe ancho y alto como parámetros.
+        // 2. El método calcularArea() devuelve el área del rectángulo, que es ancho * alto.
+        // 3. El método calcularPerimetro() devuelve el perímetro del rectángulo, que es 2 * (ancho + alto).
+        // 4. Se crea una instancia de la clase Rectangulo con valores 10 y 5 para ancho y alto.
+        // 5. Se llaman a los métodos para calcular el área y el perímetro y se muestran los resultados en la consola.
+    </script>
+</body>
+</html>

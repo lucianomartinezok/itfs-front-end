@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cuenta Bancaria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        .account-info {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Cuenta Bancaria</h1>
+        <div id="account-info" class="account-info"></div>
+        <button class="button" onclick="depositar()">Depositar $100</button>
+        <button class="button" onclick="retirar()">Retirar $50</button>
+        <button class="button" onclick="mostrarEstado()">Mostrar Estado</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        // Clase Cuenta
+        class Cuenta {
+            constructor(titular, saldoInicial) {
+                this.titular = titular;
+                this.saldo = saldoInicial;
+            }
+
+            // Método para depositar dinero en la cuenta
+            depositar(monto) {
+                if (monto > 0) {
+                    this.saldo += monto;
+                    return `Depositado: $${monto}`;
+                } else {
+                    return 'Monto de depósito inválido.';
+                }
+            }
+
+            // Método para retirar dinero de la cuenta
+            retirar(monto) {
+                if (monto > 0) {
+                    if (monto <= this.saldo) {
+                        this.saldo -= monto;
+                        return `Retirado: $${monto}`;
+                    } else {
+                        return 'Saldo insuficiente.';
+                    }
+                } else {
+                    return 'Monto de retiro inválido.';
+                }
+            }
+
+            // Método para obtener la información de la cuenta
+            obtenerInformacion() {
+                return `Titular: ${this.titular}<br>Saldo: $${this.saldo}`;
+            }
+        }
+
+        // Crear una instancia de la clase Cuenta con un saldo inicial
+        const miCuenta = new Cuenta('Juan Pérez', 500);
+
+        // Mostrar la información de la cuenta en la página web
+        function mostrarEstado() {
+            const accountInfoDiv = document.getElementById('account-info');
+            accountInfoDiv.innerHTML = miCuenta.obtenerInformacion();
+        }
+
+        // Función para depositar dinero
+        function depositar() {
+            const resultado = miCuenta.depositar(100);
+            mostrarResultado(resultado);
+            mostrarEstado();
+        }
+
+        // Función para retirar dinero
+        function retirar() {
+            const resultado = miCuenta.retirar(50);
+            mostrarResultado(resultado);
+            mostrarEstado();
+        }
+
+        // Función para mostrar el resultado de una operación
+        function mostrarResultado(mensaje) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = mensaje;
+        }
+
+        // Inicializar el estado de la cuenta al cargar la página
+        mostrarEstado();
+    </script>
+</body>
+</html>

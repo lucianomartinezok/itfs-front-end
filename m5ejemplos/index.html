@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de archivos</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        h1 { color: #007B8F; }
+        ul { list-style: none; margin-top: 20px; }
+        li { margin: 10px 0; }
+        a { color: #007B8F; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Índice de archivos</h1>
+    <ul id="file-list">
+        <!-- La lista se generará automáticamente aquí -->
+    </ul>
+
+    <script>
+        // Lista MANUAL de tus archivos HTML (excepto index.html)
+        const files = [
+            '00dom1.html',
+            '00dom2.html',
+            'A1-A1.html',
+            'A1-A2.html',
+            'A1-A3.html',
+            'A1-A4.html',
+            'A1-B1.html',
+            'A1-B2.html',
+            'A2-1.html',
+            'A2-2.html',
+            'A3-1.html',
+            'A3-2-Cuenta.html',
+            'ZejemploPOO.html'
+           
+
+            // Añade aquí todos tus archivos HTML
+        ];
+
+        const fileList = document.getElementById('file-list');
+        
+        files.forEach(file => {
+            if(file !== 'index.html') {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = file;
+                link.textContent = file.replace('.html', '');
+                listItem.appendChild(link);
+                fileList.appendChild(listItem);
+            }
+        });
+    </script>
+</body>
+</html>

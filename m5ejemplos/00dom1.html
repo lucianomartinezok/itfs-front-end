@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulación del DOM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .example {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        .highlight {
+            color: blue;
+        }
+
+        #top{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="top">
+            <h1>The HTML DOM (Document Object Model)</h1>
+        <img src="https://www.w3schools.com/JS/pic_htmltree.gif" alt="dom">
+        <br>
+        <a href="https://www.w3schools.com/JS/js_htmldom.asp" target="_blank">Link a w3schools</a>
+        <br>
+        <a href="https://www.codecademy.com/learn/fscp-building-interactive-websites-with-javascript/modules/fecp-javascript-and-the-dom/cheatsheet">Cheatsheet Online</a>
+    </div>
+       
+        <h2>Ejemplos de Manipulación del DOM</h2>
+        
+
+        <div class="example" id="example1">
+            <h2>1. Cambiar texto con <code>textContent</code>:</h2>
+            <p id="text-example">Texto original</p>
+        </div>
+
+        <div class="example" id="example2">
+            <h2>2. Cambiar contenido HTML con <code>innerHTML</code>:</h2>
+            <p id="html-example">Este es un texto plano.</p>
+        </div>
+
+        <div class="example" id="example3">
+            <h2>3. Modificar el estilo con <code>style</code>:</h2>
+            <p id="style-example">Este texto cambiará de estilo.</p>
+        </div>
+
+        <div class="example" id="example4">
+            <h2>4. Manipular clases con <code>classList</code>:</h2>
+            <p id="class-example">Este párrafo cambiará de color al agregar una clase.</p>
+        </div>
+    </div>
+
+    <script>
+        // Ejemplo 1: Cambiar texto usando textContent
+        // Seleccionamos el elemento por su id 'text-example' y cambiamos su texto
+        const textExample = document.getElementById('text-example');
+        textExample.textContent = 'Texto modificado con textContent';
+        // textContent solo cambia el texto sin procesar etiquetas HTML
+
+        // Ejemplo 2: Cambiar contenido HTML usando innerHTML
+        // Seleccionamos el elemento 'html-example' y cambiamos su contenido HTML
+        const htmlExample = document.getElementById('html-example');
+        htmlExample.innerHTML = 'Texto <strong>modificado</strong> con <code>innerHTML</code>';
+        // innerHTML permite insertar contenido HTML dentro del elemento
+
+        // Ejemplo 3: Cambiar estilos usando la propiedad style
+        // Seleccionamos el elemento 'style-example' y cambiamos su color y tamaño de fuente
+        const styleExample = document.getElementById('style-example');
+        styleExample.style.color = 'red';  // Cambiamos el color del texto a rojo
+        styleExample.style.fontSize = '24px';  // Cambiamos el tamaño de la fuente
+        // La propiedad 'style' permite modificar estilos CSS directamente
+
+        // Ejemplo 4: Manipular clases usando classList
+        // Seleccionamos el elemento 'class-example' y añadimos una clase para cambiar su color
+        const classExample = document.getElementById('class-example');
+        classExample.classList.add('highlight');
+        // classList permite agregar, quitar o alternar clases CSS en un elemento
+
+        // Estilos CSS agregados dinámicamente a través de classList
+    </script>
+</body>
+</html>

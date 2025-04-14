@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Functions - map() Explicación en Comentarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .section {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .section p {
+            margin: 0 0 10px;
+        }
+        .section h2 {
+            color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Array Functions - map()</h1>
+
+        <div class="section">
+            <h2>Consigna:</h2>
+            <p>Crea un array de objetos con la información de personas, cada objeto tiene las siguientes propiedades: nombre, edad y género. Luego, utiliza la función map() para transformar el array y obtener un nuevo array solo con los nombres de las personas.</p>
+        </div>
+
+        <div class="section">
+            <h2>Resultado:</h2>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // Array de objetos con la información de personas
+        const personas = [
+            { nombre: 'Ana', edad: 25, genero: 'F' },
+            { nombre: 'Carlos', edad: 30, genero: 'M' },
+            { nombre: 'Lucía', edad: 22, genero: 'F' },
+            { nombre: 'Jorge', edad: 28, genero: 'M' }
+        ];
+
+   
+        // El método map() recorre cada elemento del array 'personas' y 
+        // devuelve un nuevo array que contiene solo los nombres de cada objeto. 
+        // Se usa para transformar datos de un array a otro formato o estructura.
+
+        const nombres = personas.map(persona => persona.nombre);
+        // La función flecha (persona => persona.nombre) toma cada objeto del array 'personas'
+        // como argumento 'persona' y devuelve el valor de la propiedad 'nombre'. 
+        // Es una manera más concisa de escribir funciones en JavaScript.
+
+        
+
+        // Explicación de textContent:
+        // textContent es una propiedad que permite insertar texto dentro de un elemento.
+        // En este caso, estamos usando document.getElementById('result').textContent
+        // para poner los nombres en el div 'result'.
+
+     
+       
+        // Este método selecciona el elemento del DOM con el ID 'result' para luego 
+        // modificar su contenido y mostrar el resultado en pantalla.
+        document.getElementById('result').textContent = nombres.join(', ');
+        // El método join() toma el array 'nombres' y lo convierte en una cadena de texto,
+        // donde los elementos están separados por una coma y un espacio ', '.
+    </script>
+</body>
+</html>

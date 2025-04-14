@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulación del DOM con Interacción</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .example {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        .highlight {
+            color: blue;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ejemplos de Manipulación del DOM con Interacción</h1>
+
+        <div class="example" id="example1">
+            <h2>1. Cambiar texto con <code>textContent</code>:</h2>
+            <p id="text-example">Texto original</p>
+            <button onclick="cambiarTexto()">Cambiar Texto</button>
+        </div>
+
+        <div class="example" id="example2">
+            <h2>2. Cambiar contenido HTML con <code>innerHTML</code>:</h2>
+            <p id="html-example">Este es un texto plano.</p>
+            <button onclick="cambiarHTML()">Cambiar HTML</button>
+        </div>
+
+        <div class="example" id="example3">
+            <h2>3. Modificar el estilo con <code>style</code>:</h2>
+            <p id="style-example">Este texto cambiará de estilo.</p>
+            <button onclick="cambiarEstilo()">Cambiar Estilo</button>
+        </div>
+
+        <div class="example" id="example4">
+            <h2>4. Manipular clases con <code>classList</code>:</h2>
+            <p id="class-example">Este párrafo cambiará de color al agregar una clase.</p>
+            <button onclick="cambiarClase()">Cambiar Clase</button>
+        </div>
+    </div>
+
+    <script>
+        // Función para cambiar el texto usando textContent
+        function cambiarTexto() {
+            const textExample = document.getElementById('text-example');
+            textExample.textContent = 'Texto modificado con textContent';
+        }
+
+        // Función para cambiar el contenido HTML usando innerHTML
+        function cambiarHTML() {
+            const htmlExample = document.getElementById('html-example');
+            htmlExample.innerHTML = 'Texto <strong>modificado</strong> con <code>innerHTML</code>';
+        }
+
+        // Función para cambiar estilos usando la propiedad style
+        function cambiarEstilo() {
+            const styleExample = document.getElementById('style-example');
+            styleExample.style.color = 'red';  // Cambiamos el color del texto a rojo
+            styleExample.style.fontSize = '24px';  // Cambiamos el tamaño de la fuente
+        }
+
+        // Función para manipular clases usando classList
+        function cambiarClase() {
+            const classExample = document.getElementById('class-example');
+            classExample.classList.add('highlight');
+        }
+    </script>
+</body>
+</html>

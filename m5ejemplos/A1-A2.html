@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números mayores que 10</title>
+</head>
+<body>
+    <h1>Filtrar Números Mayores que 10</h1>
+    <p id="result"></p>
+
+    <script>
+        // Array de números
+        const numeros = [4, 11, 20, 5, 8, 15, 3, 12];
+
+        // Función que devuelve un nuevo array con números mayores que 10
+        function filtrarMayoresQueDiez(array) {
+            // Usamos el método filter() para filtrar solo los números mayores a 10
+            return array.filter(num => num > 10);
+        }
+
+        // Llamamos a la función y almacenamos el resultado
+        const numerosMayores = filtrarMayoresQueDiez(numeros);
+
+        // Mostramos el resultado en la página
+        document.getElementById('result').textContent = 'Números mayores que 10: ' + numerosMayores.join(', ');
+
+        // Explicación:
+        // 1. filter() recorre el array y evalúa cada elemento. Solo incluye los números que cumplen la condición num > 10.
+        // 2. El arrow function (num => num > 10) es una forma concisa de definir la condición para filtrar.
+        // 3. join() convierte el array resultante en una cadena, separando los números con una coma.
+    </script>
+</body>
+</html>

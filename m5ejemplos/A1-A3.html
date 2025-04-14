@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtrar Cadenas de 5 o más Caracteres</title>
+</head>
+<body>
+    <h1>Cadenas con 5 o más caracteres</h1>
+    <p id="result"></p>
+
+    <script>
+        // Array de cadenas (strings)
+        const cadenas = ["arbol", "hoja", "salto", "luz", "aproximación", "mueble", "lana", "gusto", "pie"];
+
+        // Función que devuelve un nuevo array con cadenas de al menos 5 caracteres
+        function filtrarPorLongitud(array) {
+            // Usamos el método filter() para filtrar las cadenas que tengan longitud >= 5
+            return array.filter(str => str.length >= 5);
+        }
+
+        // Llamamos a la función y almacenamos el resultado
+        const cadenasFiltradas = filtrarPorLongitud(cadenas);
+
+        // Mostramos el resultado en la página
+        document.getElementById('result').textContent = 'Cadenas de 5 o más caracteres: ' + cadenasFiltradas.join(', ');
+
+        // Explicación:
+        // 1. filter() recorre el array y evalúa cada cadena. Solo incluye las cadenas cuya longitud es mayor o igual a 5.
+        // 2. El arrow function (str => str.length >= 5) evalúa la longitud de cada cadena.
+        // 3. join() convierte el array resultante en una cadena de texto, separando los valores con una coma.
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtrar Personas Mayores de 18</title>
+</head>
+<body>
+    <h1>Personas Mayores de 18</h1>
+    <p id="result"></p>
+
+    <script>
+        // Array de objetos con nombres y edades
+        const personas = [
+            { nombre: "Luis", edad: 17 },
+            { nombre: "Norberto", edad: 22 },
+            { nombre: "Gustavo", edad: 19 },
+            { nombre: "Carlos", edad: 16 }
+        ];
+
+        /**
+         * Función que devuelve un array con los nombres de personas mayores de 18 años.
+         * @param {Array} array - Array de objetos con propiedades nombre y edad.
+         * @returns {Array} - Array con nombres de personas mayores de 18 años.
+         */
+        function obtenerNombresMayoresDe18(array) {
+            // Filtramos las personas mayores de 18 y luego extraemos solo los nombres
+            return array
+                .filter(persona => persona.edad > 18)  // Filtra las personas mayores de 18 años
+                .map(persona => persona.nombre);  // Extrae solo los nombres
+        }
+
+        // Llamamos a la función y almacenamos el resultado
+        const nombresMayores = obtenerNombresMayoresDe18(personas);
+
+        // Mostramos el resultado en la página
+        document.getElementById('result').textContent = 'Nombres de personas mayores de 18: ' + nombresMayores.join(', ');
+
+        // Explicación del código:
+        // 1. filter() - Filtra los objetos del array para incluir solo aquellos cuyo campo 'edad' es mayor a 18.
+        // 2. map() - Transforma el array filtrado en un array de nombres, extrayendo el campo 'nombre' de cada objeto.
+        // 3. join() - Convierte el array de nombres en una cadena de texto, separando los nombres con una coma.
+    </script>
+</body>
+</html>

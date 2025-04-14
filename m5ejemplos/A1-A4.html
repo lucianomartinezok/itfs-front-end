@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtrar Cadenas que Contienen la Letra "e"</title>
+</head>
+<body>
+    <h1>Cadenas que contienen la letra "e"</h1>
+    <p id="result"></p>
+
+    <script>
+        // Array de cadenas (strings)
+        const cadenas = ["sol", "mariposa", "luz", "estrella", "cielo", "montaña"];
+
+        // Función que devuelve un nuevo array con cadenas que contienen la letra "e"
+        function filtrarPorLetraE(array) {
+            // Usamos el método filter() y el método includes() para verificar si la cadena contiene "e"
+            return array.filter(str => str.includes('e'));
+        }
+
+        // Llamamos a la función y almacenamos el resultado
+        const cadenasConE = filtrarPorLetraE(cadenas);
+
+        // Mostramos el resultado en la página
+        document.getElementById('result').textContent = 'Cadenas que contienen la letra "e": ' + cadenasConE.join(', ');
+
+        // Explicación:
+        // 1. filter() recorre el array y evalúa cada cadena.
+        // 2. includes() verifica si la cadena contiene la letra "e".
+        // 3. El arrow function (str => str.includes('e')) es una forma concisa de aplicar la condición.
+        // 4. join() convierte el array resultante en una cadena de texto, separando los valores con una coma.
+    </script>
+</body>
+</html>

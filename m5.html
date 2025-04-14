@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Rápida Front-End - Semana 6</title>
+    <style>
+        /* Estilos mejorados */
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #2d3436;
+        }
+
+        .container {
+            width: 70%;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        h1 { color: #2c3e50; font-size: 2rem; border-bottom: 3px solid #3498db; padding-bottom: 0.5rem; grid-column: 1/-1; }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .w3-link {
+            display: block;
+            font-size: 0.9rem;
+            color: #3498db !important;
+            margin-top: 0.5rem;
+            text-decoration: none;
+        }
+
+        .w3-link:hover {
+            text-decoration: underline;
+        }
+
+        .w3-link::after {
+            content: "→";
+            margin-left: 5px;
+        }
+
+        @media (max-width: 1200px) { .container { width: 85%; } }
+        @media (max-width: 992px) { .container { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .container { width: 95%; padding: 1rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guía de Referencia Rápida - Semana 6</h1>
+        
+        <!-- Columna Izquierda -->
+        <div>
+            <div class="code-block">
+                <h3>Funciones Flecha</h3>
+                <code>const suma = (a, b) => a + b;</code>
+                <a href="https://www.w3schools.com/js/js_arrow_function.asp" 
+                   class="w3-link" 
+                   target="_blank">
+                   Ver ejemplos en W3Schools
+                </a>
+            </div>
+
+            <div class="code-block">
+                <h3>Métodos de Arrays</h3>
+                <code>// Map y Filter\n[1,2,3].map(x => x*2)\n[5,12,8].filter(x => x>10)</code>
+                <div class="links">
+                    <a href="https://www.w3schools.com/js/js_array_iteration.asp" 
+                       class="w3-link" 
+                       target="_blank">
+                       Métodos de Array
+                    </a>
+                    <a href="https://www.w3schools.com/js/js_array_map.asp" 
+                       class="w3-link" 
+                       target="_blank">
+                       Map() en detalle
+                    </a>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <h3>Destructuring</h3>
+                <code>const { nombre, edad } = usuario;</code>
+                <a href="https://www.w3schools.com/react/react_es6_destructuring.asp" 
+                   class="w3-link" 
+                   target="_blank">
+                   Ejemplos completos
+                </a>
+            </div>
+        </div>
+
+        <!-- Columna Derecha -->
+        <div>
+            <div class="code-block">
+                <h3>Spread Operator</h3>
+                <code>const nuevoArray = [...array1, ...array2];</code>
+                <a href="https://www.w3schools.com/react/react_es6_spread.asp" 
+                   class="w3-link" 
+                   target="_blank">
+                   Usos avanzados
+                </a>
+            </div>
+
+            <div class="code-block">
+                <h3>Set y Map</h3>
+                <code>const unique = new Set([1,2,2,3]);\nunique.has(2); // true</code>
+                <a href="https://www.w3schools.com/js/js_object_sets.asp" 
+                   class="w3-link" 
+                   target="_blank">
+                   Guía de Sets
+                </a>
+                <a href="https://www.w3schools.com/js/js_object_maps.asp" 
+                   class="w3-link" 
+                   target="_blank">
+                   Guía de Maps
+                </a>
+            </div>
+
+            <div class="code-block">
+                <h3>Reduce</h3>
+                <code>[1,2,3].reduce((total, num) => total + num, 0);</code>
+                <a href="https://www.w3schools.com/js/js_array_iteration.asp#mark_reduce" 
+                   class="w3-link" 
+                   target="_blank">
+                   Ejemplos prácticos
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
