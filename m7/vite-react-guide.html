@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía React + Vite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #646cff;
+      --primary-hover: #535bf2;
+      --dark: #213547;
+      --light: #f9f9f9;
+      --gray: #e2e2e2;
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --error: #f87171;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #f5f7fa;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    header {
+      background: var(--dark);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--gray);
+      font-weight: 400;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      border-bottom: 2px solid var(--gray);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin: 1.5rem 0 1rem;
+      color: var(--dark);
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .steps {
+      counter-reset: step-counter;
+    }
+
+    .step {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 2rem;
+      counter-increment: step-counter;
+    }
+
+    .step:before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: var(--primary);
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      margin: 1.5rem 0;
+      overflow-x: auto;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+    }
+
+    .command {
+      color: var(--success);
+    }
+
+    .file-structure {
+      background: #f8fafc;
+      border: 1px solid var(--gray);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Source Code Pro', monospace;
+    }
+
+    .file-item {
+      margin-left: 1.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .file-item:before {
+      content: "📄";
+      position: absolute;
+      left: 0;
+    }
+
+    .folder-item {
+      margin-left: 1.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+      font-weight: bold;
+    }
+
+    .folder-item:before {
+      content: "📁";
+      position: absolute;
+      left: 0;
+    }
+
+    .tips {
+      background: #eff6ff;
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .tips h3 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
+    .commands-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    .commands-table th, .commands-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray);
+    }
+
+    .commands-table th {
+      background: var(--dark);
+      color: white;
+    }
+
+    .commands-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .error-solution {
+      background: #fee2e2;
+      border-left: 4px solid var(--error);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .error-solution h3 {
+      color: var(--error);
+      margin-top: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--dark);
+      color: white;
+      margin-top: 2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .container {
+        border-radius: 0;
+      }
+      
+      main {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      
+      header {
+        padding: 1.5rem;
+      }
+      
+      .step {
+        padding-left: 2.5rem;
+      }
+      
+      .step:before {
+        width: 2rem;
+        height: 2rem;
+      }
+      
+      .code-block, .file-structure {
+        padding: 1rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 320px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      .subtitle {
+        font-size: 0.9rem;
+      }
+      
+      .commands-table th, .commands-table td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Guía Completa: React con Vite</h1>
+      <p class="subtitle">Crea proyectos React modernos con configuración optimizada</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>🚀 Pasos para crear un proyecto React con Vite</h2>
+        
+        <div class="steps">
+          <div class="step">
+            <h3>Abre la terminal en VS Code</h3>
+            <p>Asegúrate de estar en la carpeta donde quieres crear el proyecto.</p>
+            <p>Si necesitas cambiar de directorio:</p>
+            <div class="code-block">
+              <span class="command">cd ruta/de/tu/proyecto</span>
+            </div>
+          </div>
+          
+          <div class="step">
+            <h3>Crea el proyecto con Vite</h3>
+            <p>Ejecuta este comando en la terminal:</p>
+            <div class="code-block">
+              <span class="command">npm create vite@latest</span>
+            </div>
+            <p>Te preguntará:</p>
+            <ol>
+              <li><strong>Project name:</strong> Escribe el nombre (ej. <code>mi-app-react</code>)</li>
+              <li><strong>Framework:</strong> Selecciona <strong>React</strong> (usa las flechas del teclado)</li>
+              <li><strong>Variant:</strong> Elige <strong>JavaScript</strong> o TypeScript</li>
+            </ol>
+            <p><strong>Alternativa rápida (sin preguntas):</strong></p>
+            <div class="code-block">
+              <span class="command">npm create vite@latest . -- --template react</span>
+            </div>
+          </div>
+          
+          <div class="step">
+            <h3>Entra a la carpeta del proyecto</h3>
+            <div class="code-block">
+              <span class="command">cd mi-app-react</span> <span style="color: #999;"># Reemplaza con tu nombre de proyecto</span>
+            </div>
+          </div>
+          
+          <div class="step">
+            <h3>Instala las dependencias</h3>
+            <div class="code-block">
+              <span class="command">npm install</span>
+            </div>
+          </div>
+          
+          <div class="step">
+            <h3>Inicia el servidor de desarrollo</h3>
+            <div class="code-block">
+              <span class="command">npm run dev</span>
+            </div>
+            <p>Esto abrirá automáticamente tu app en <a href="http://localhost:5173" target="_blank">http://localhost:5173</a>.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h2>📁 Estructura del proyecto</h2>
+        <p>Tu proyecto tendrá esta estructura inicial:</p>
+        
+        <div class="file-structure">
+          <div class="folder-item">mi-app-react/</div>
+          <div class="file-item">├── node_modules/       # Dependencias instaladas</div>
+          <div class="file-item">├── public/            # Assets estáticos (opcional)</div>
+          <div class="folder-item">├── src/</div>
+          <div class="file-item">│   ├── App.jsx        # Componente principal</div>
+          <div class="file-item">│   ├── main.jsx      # Punto de entrada</div>
+          <div class="file-item">│   └── index.css     # Estilos globales</div>
+          <div class="file-item">├── index.html        # HTML base</div>
+          <div class="file-item">├── package.json      # Configuración y scripts</div>
+          <div class="file-item">└── vite.config.js    # Configuración de Vite</div>
+        </div>
+      </section>
+      
+      <section>
+        <h2>🔧 Comandos esenciales</h2>
+        
+        <table class="commands-table">
+          <thead>
+            <tr>
+              <th>Comando</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>npm run dev</code></td>
+              <td>Inicia el servidor de desarrollo (modo hot-reload)</td>
+            </tr>
+            <tr>
+              <td><code>npm run build</code></td>
+              <td>Genera la versión optimizada para producción</td>
+            </tr>
+            <tr>
+              <td><code>npm run preview</code></td>
+              <td>Prueba localmente la versión de producción</td>
+            </tr>
+            <tr>
+              <td><code>npm install [paquete]</code></td>
+              <td>Agrega una nueva dependencia</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <section>
+        <h2>🚨 Solución de errores comunes</h2>
+        
+        <div class="error-solution">
+          <h3>Error: "Cannot find module 'vite'"</h3>
+          <p><strong>Solución:</strong> Instala Vite como dependencia de desarrollo:</p>
+          <div class="code-block">
+            <span class="command">npm install --save-dev vite</span>
+          </div>
+        </div>
+        
+        <div class="error-solution">
+          <h3>Error: "Port 5173 already in use"</h3>
+          <p><strong>Solución:</strong> Cambia el puerto en <code>vite.config.js</code>:</p>
+          <div class="code-block">
+            <span class="command">export default defineConfig({</span><br>
+            <span class="command">  server: { port: 3000 }  // Usa otro puerto</span><br>
+            <span class="command">});</span>
+          </div>
+        </div>
+      </section>
+      
+      <div class="tips">
+        <h3>💡 Tips profesionales</h3>
+        <ul>
+          <li>Usa <strong>VS Code</strong> con la extensión <strong>Volar</strong> para mejor soporte de JSX.</li>
+          <li>Para agregar React Router: <code>npm install react-router-dom</code></li>
+          <li>Configura ESLint y Prettier para mantener código limpio.</li>
+          <li>Vite soporta <strong>importación directa de imágenes y CSS</strong> en componentes.</li>
+        </ul>
+      </div>
+    </main>
+    
+    <footer>
+      <p>© 2025</p>
+    </footer>
+  </div>
+</body>
+</html>
