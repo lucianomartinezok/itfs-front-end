@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen del Curso de React</title>
+    <style>
+        /* Estilos mejorados */
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #2d3436;
+        }
+
+        .container {
+            width: 70%;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+            grid-column: 1/-1;
+        }
+
+        .section {
+            padding: 1rem;
+            background: #ecf0f1;
+            border-radius: 6px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        @media (max-width: 992px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .container { width: 95%; padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Resumen Mosaico 8</h1>
+
+        <div class="section">
+            <h2>2. Componentes con y sin estado</h2>
+            <p>Los componentes en React pueden ser <span class="highlight">con estado</span> (stateful) o <span class="highlight">sin estado</span> (stateless). Los componentes sin estado solo reciben datos y los muestran, mientras que los componentes con estado pueden manejar cambios internos.</p>
+            <p>Ejemplo oficial: <a href="https://react.dev/learn/state-and-lifecycle">Estado y ciclo de vida en React</a></p>
+        </div>
+
+        <div class="section">
+            <h3>2.1. Manejadores de eventos y estado</h3>
+            <p>Los eventos en React funcionan de manera similar a los eventos en HTML, pero con una sintaxis diferente. Se manejan con funciones y pueden modificar el estado del componente.</p>
+            <p>Ejemplo oficial: <a href="https://react.dev/learn/handling-events">Manejando eventos en React</a></p>
+        </div>
+
+        <div class="section">
+            <h3>2.2. Cambiando Props y Estado</h3>
+            <p>Las <span class="highlight">props</span> permiten pasar datos entre componentes, mientras que el <span class="highlight">estado</span> cambia dinámicamente dentro de un componente.</p>
+            <p>Ejemplo oficial: <a href="https://react.dev/learn/passing-props-to-a-component">Pasando props a un componente</a></p>
+        </div>
+
+        <div class="section">
+            <h2>3. Componentes sin estado heredados</h2>
+            <p>Los componentes funcionales pueden recibir estado de sus padres y renderizar información sin manejar cambios internos.</p>
+            <p>Ejemplo oficial: <a href="https://react.dev/learn/conditional-rendering">Renderizado condicional en React</a></p>
+        </div>
+
+        <div class="section">
+            <h2>4. Ciclo de vida en React</h2>
+            <p>Los componentes de clase tienen métodos específicos que se ejecutan en distintas fases de su existencia.</p>
+            <p>Ejemplo oficial: <a href="https://react.dev/learn/state-and-lifecycle">Estado y ciclo de vida en React</a></p>
+        </div>
+
+        <div class="section">
+            <h3>4.4. componentDidMount</h3>
+            <p>Este método se ejecuta al montar un componente. Ideal para hacer peticiones a APIs o inicializar datos.</p>
+        </div>
+
+        <div class="section">
+            <h3>4.5. componentWillUnmount</h3>
+            <p>Se usa antes de eliminar un componente. Útil para limpiar eventos o conexiones innecesarias.</p>
+        </div>
+
+        <div class="section">
+            <h2>5. Componentes funcionales</h2>
+            <p>Más simples, concisos y usados en la mayoría de proyectos modernos. Aprende a usarlos junto con <span class="highlight">hooks</span> para potenciar su funcionalidad.</p>
+            <p>Ejemplo oficial: <a href="https://react.dev/learn/your-first-component">Tu primer componente en React</a></p>
+        </div>
+
+        <p>📌 Para más detalles, explora la documentación oficial de React: <a href="https://react.dev/">React Docs</a></p>
+    </div>
+</body>
+</html>
