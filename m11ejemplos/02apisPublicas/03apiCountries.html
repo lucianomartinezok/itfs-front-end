@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Países - REST Countries API</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f4f8;
+      color: #333333;
+    }
+
+    .country-card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      margin-bottom: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .country-card:hover {
+      transform: scale(1.05);
+    }
+
+    .country-flag {
+      height: 150px;
+      object-fit: contain;
+    }
+
+    .country-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .country-info {
+      font-size: 1.1rem;
+      color: #555555;
+    }
+
+    .card-body {
+      padding: 15px;
+    }
+
+    .btn-primary {
+      background-color: #ff7f50;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff6347;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-5">Países de REST Countries API</h1>
+    <div class="row" id="country-list">
+      <!-- Aquí se mostrarán los países -->
+    </div>
+  </div>
+
+  <script>
+    // URL de la REST Countries API
+    const apiUrl = 'https://restcountries.com/v3.1/all';
+
+    // Función para crear tarjetas de países
+    function createCountryCard(country) {
+      return `
+        <div class="col-md-4">
+          <div class="card country-card">
+            <img src="${country.flags.svg}" class="card-img-top country-flag" alt="Bandera de ${country.name.common}">
+            <div class="card-body">
+              <h5 class="country-name">${country.name.common}</h5>
+              <p class="country-info">Capital: ${country.capital ? country.capital[0] : 'N/A'}</p>
+              <p class="country-info">Población: ${country.population.toLocaleString()}</p>
+              <p class="country-info">Región: ${country.region}</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Función para mostrar los países
+    function displayCountries(countries) {
+      const countryList = document.getElementById('country-list');
+      countries.slice(0, 10).forEach(country => {
+        countryList.innerHTML += createCountryCard(country);
+      });
+    }
+
+    // Llamada a la REST Countries API para obtener los países
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        // Ordenar los países aleatoriamente
+        const shuffledCountries = data.sort(() => 0.5 - Math.random());
+        displayCountries(shuffledCountries);
+      })
+      .catch(error => console.error('Error al cargar los países:', error));
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

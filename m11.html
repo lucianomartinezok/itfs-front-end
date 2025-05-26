@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React - Guía de Consumo de APIs</title>
+    <style>
+        /* Estilos consistentes con guías anteriores */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui;
+            background: #f8f9fa;
+            color: #2d3436;
+            line-height: 1.7;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+        }
+        h1 {
+            text-align: center;
+            color: #3498db;
+            font-size: 2.8em;
+            margin-bottom: 40px;
+        }
+        pre {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #e8f4f8;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #2980b9;
+        }
+        .columns {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .ejemplo {
+            background: #f8f9fa;
+            border: 2px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .nota {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+        .volver-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            padding: 12px;
+            text-align: center;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .volver-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚛️ React - Consumo de APIs</h1>
+
+        <!-- 1. Conceptos Básicos -->
+        <div class="ejemplo">
+            <h2>1. Fundamentos de APIs</h2>
+            <table>
+                <tr><th>Método</th><th>Descripción</th></tr>
+                <tr><td>GET</td><td>Obtener recursos</td></tr>
+                <tr><td>POST</td><td>Crear recurso</td></tr>
+                <tr><td>PUT</td><td>Actualizar recurso</td></tr>
+                <tr><td>DELETE</td><td>Eliminar recurso</td></tr>
+            </table>
+        </div>
+
+        <!-- 2. Fetch API -->
+        <h2>2. Peticiones con Fetch</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>2.2 GET</h3>
+                    <pre>
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));</pre>
+                </div>
+                
+                <div class="ejemplo">
+                    <h3>2.3 POST</h3>
+                    <pre>
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        title: 'Nuevo post',
+        body: 'Contenido del post'
+    })
+});</pre>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>2.6 Headers</h3>
+                    <pre>
+const headers = new Headers({
+    'Authorization': 'Bearer token',
+    'Custom-Header': 'valor'
+});
+
+fetch(url, { headers });</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Async/Await -->
+        <h2>3. Manejo Asíncrono</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>3.2 async/await</h3>
+                    <pre>
+async function obtenerDatos() {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. React y useEffect -->
+        <h2>5. Uso en React</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>5.1 useEffect</h3>
+                    <pre>
+import { useState, useEffect } from 'react';
+
+function App() {
+    const [posts, setPosts] = useState([]);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                setPosts(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        
+        fetchData();
+    }, []); // [] = Ejecutar solo al montar
+
+    return (
+        &lt;div&gt;
+            {posts.map(post => (
+                &lt;div key={post.id}&gt;{post.title}&lt;/div&gt;
+            ))}
+        &lt;/div&gt;
+    );
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Axios -->
+        <h2>6. Peticiones con Axios</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>6.1 Instalación</h3>
+                    <pre>
+npm install axios</pre>
+                </div>
+                
+                <div class="ejemplo">
+                    <h3>6.2 Uso Básico</h3>
+                    <pre>
+import axios from 'axios';
+
+// GET
+axios.get('https://jsonplaceholder.typicode.com/posts/1')
+    .then(response => console.log(response.data));
+
+// POST
+axios.post('https://jsonplaceholder.typicode.com/posts', {
+    title: 'Nuevo post',
+    body: 'Contenido'
+});</pre>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>6.4 Cancelación</h3>
+                    <pre>
+const source = axios.CancelToken.source();
+
+axios.get(url, {
+    cancelToken: source.token
+});
+
+// Cancelar petición
+source.cancel('Operación cancelada por el usuario');</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Ejemplo REST Countries -->
+        <h2>8. Ejemplo Práctico</h2>
+        <div class="ejemplo">
+            <h3>8.1 Obtener Países</h3>
+            <pre>
+function Paises() {
+    const [paises, setPaises] = useState([]);
+    
+    useEffect(() => {
+        axios.get('https://restcountries.com/v3.1/all')
+            .then(response => setPaises(response.data))
+            .catch(error => console.error(error));
+    }, []);
+
+    return (
+        &lt;div&gt;
+            {paises.map(pais => (
+                &lt;div key={pais.cca3}&gt;
+                    &lt;h3&gt;{pais.name.common}&lt;/h3&gt;
+                    &lt;img src={pais.flags.png} alt="Bandera" /&gt;
+                &lt;/div&gt;
+            ))}
+        &lt;/div&gt;
+    );
+}</pre>
+        </div>
+
+        <!-- 9. Estado Global -->
+        <h2>9. Manejo de Estado Global</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>9.4 Context API</h3>
+                    <pre>
+// Crear contexto
+const ApiContext = createContext();
+
+// Proveedor
+function ApiProvider({ children }) {
+    const [data, setData] = useState([]);
+    
+    const fetchData = async () => {
+        const response = await axios.get(url);
+        setData(response.data);
+    };
+
+    return (
+        &lt;ApiContext.Provider value={{ data, fetchData }}&gt;
+            {children}
+        &lt;/ApiContext.Provider&gt;
+    );
+}
+
+// Uso en componentes
+function Componente() {
+    const { data } = useContext(ApiContext);
+    return &lt;div&gt;{data.length} elementos&lt;/div&gt;;
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="nota">
+            <strong>Recursos Recomendados:</strong>
+            <ul>
+                <li><a href="https://jsonplaceholder.typicode.com/" target="_blank">JSONPlaceholder</a></li>
+                <li><a href="https://restcountries.com/" target="_blank">REST Countries</a></li>
+                <li><a href="https://axios-http.com/docs/intro" target="_blank">Documentación Axios</a></li>
+            </ul>
+        </div>
+
+        <a href="./index.html" class="volver-btn">Volver al Inicio</a>
+    </div>
+</body>
+</html>

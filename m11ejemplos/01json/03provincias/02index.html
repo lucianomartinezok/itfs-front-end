@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provincias y Capitales Argentinas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #provincia-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .provincia {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 180px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Provincias y Capitales Argentinas</h1>
+    <div id="provincia-container"></div>
+
+    <script>
+        // Este script se encarga de cargar y mostrar las provincias argentinas y sus capitales desde un archivo JSON.
+
+        // Utilizamos fetch para obtener el archivo JSON.
+        fetch('02provincias.json')
+            .then(response => {
+                // Retornamos la respuesta en formato JSON.
+                return response.json();
+            })
+            // Aquí procesamos los datos del JSON que hemos convertido.
+            .then(data => {
+                // Obtenemos el contenedor donde se mostrarán las provincias y capitales.
+                const container = document.getElementById('provincia-container');
+
+                // Iteramos sobre cada provincia en el JSON.
+                data.provincias.forEach(item => {
+                    // Creamos un nuevo elemento div para cada provincia.
+                    const provinciaDiv = document.createElement('div');
+                    provinciaDiv.className = 'provincia'; // Asignamos una clase al div.
+
+                    // Asignamos el contenido del div con el nombre de la provincia.
+                    const nombreProvincia = document.createElement('strong');
+                    nombreProvincia.textContent = item.nombre; // Asignamos el nombre de la provincia.
+                    provinciaDiv.appendChild(nombreProvincia); // Añadimos el nombre al div.
+
+                    // Creamos un nuevo elemento para la capital.
+                    const capitalProvincia = document.createElement('p');
+                    capitalProvincia.textContent = `Capital: ${item.capital}`; // Asignamos el texto de la capital.
+                    provinciaDiv.appendChild(capitalProvincia); // Añadimos la capital al div.
+
+                    //EDITAR EN VIVO
+                    // const habitantesProvincia = document.createElement('p');
+                    // habitantesProvincia.textContent = `Habitantes: ${item.habitantes}`;
+                    // provinciaDiv.appendChild(habitantesProvincia);
+
+                    //
+                    // const descripcionProvincia = document.createElement('p');
+                    // descripcionProvincia.textContent = `Descripcion: ${item.descripcion}`;
+                    // provinciaDiv.appendChild(descripcionProvincia);
+
+
+                    // Añadimos el div de la provincia al contenedor.
+                    container.appendChild(provinciaDiv);
+                });
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React - Guía de Formularios</title>
+    <style>
+        /* Estilos consistentes con guías anteriores */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui;
+            background: #f8f9fa;
+            color: #2d3436;
+            line-height: 1.7;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+        }
+        h1 {
+            text-align: center;
+            color: #3498db;
+            font-size: 2.8em;
+            margin-bottom: 40px;
+        }
+        pre {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #e8f4f8;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #2980b9;
+        }
+        .columns {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .ejemplo {
+            background: #f8f9fa;
+            border: 2px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .nota {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+        .volver-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            padding: 12px;
+            text-align: center;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .volver-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚛️ React - Manejo de Formularios</h1>
+
+        <!-- 1. Preguntas Iniciales -->
+        <div class="ejemplo">
+            <h2>1. Preguntas Iniciales</h2>
+            <ul>
+                <li><strong>¿Por qué manejar formularios en React?</strong> Para tener control completo sobre los datos</li>
+                <li><strong>¿Qué es un componente controlado?</strong> Input cuyo valor es manejado por React</li>
+                <li><strong>¿Cuándo usar useRef?</strong> Para acceder directamente al DOM cuando sea necesario</li>
+            </ul>
+        </div>
+
+        <!-- 2. Introducción -->
+        <h2>2. Conceptos Básicos</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>2.1 React vs HTML</h3>
+                    <pre>
+// HTML
+&lt;form&gt;
+    &lt;input type="text" name="usuario"&gt;
+&lt;/form&gt;
+
+// React
+function Formulario() {
+    const [valor, setValor] = useState('');
+    
+    return (
+        &lt;form&gt;
+            &lt;input 
+                type="text" 
+                value={valor}
+                onChange={(e) => setValor(e.target.value)}
+            /&gt;
+        &lt;/form&gt;
+    );
+}</pre>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>2.2 Parámetro Evento (e)</h3>
+                    <pre>
+function handleChange(e) {
+    // Acceder al valor del input
+    console.log(e.target.value);
+    
+    // Prevenir comportamiento por defecto
+    e.preventDefault();
+}
+
+&lt;input onChange={handleChange} /&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Componentes Controlados vs No Controlados -->
+        <h2>3. Componentes Controlados y No Controlados</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>3.1 Controlado</h3>
+                    <pre>
+function Formulario() {
+    const [email, setEmail] = useState('');
+    
+    return (
+        &lt;input 
+            type="email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+        /&gt;
+    );
+}</pre>
+                </div>
+                
+                <div class="ejemplo">
+                    <h3>3.3 useRef()</h3>
+                    <pre>
+function Formulario() {
+    const inputRef = useRef(null);
+    
+    const handleSubmit = () => {
+        console.log(inputRef.current.value);
+    };
+    
+    return (
+        &lt;input ref={inputRef} /&gt;
+        &lt;button onClick={handleSubmit}&gt;Enviar&lt;/button&gt;
+    );
+}</pre>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>3.2 No Controlado</h3>
+                    <pre>
+function Formulario() {
+    const fileInput = useRef(null);
+    
+    const handleSubmit = () => {
+        console.log(fileInput.current.files[0]);
+    };
+    
+    return (
+        &lt;input 
+            type="file" 
+            ref={fileInput} 
+        /&gt;
+    );
+}</pre>
+                </div>
+                
+                <h3>3.4 Ventajas/Desventajas</h3>
+                <table>
+                    <tr><th></th><th>Controlados</th><th>No Controlados</th></tr>
+                    <tr><td>Validación</td><td>✅ En tiempo real</td><td>❌ Solo al enviar</td></tr>
+                    <tr><td>Rendimiento</td><td>❌ Más re-renders</td><td>✅ Mejor performance</td></tr>
+                    <tr><td>Uso recomendado</td><td>Formularios complejos</td><td>Inputs especiales (archivos)</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. Manejo de Estados y Eventos -->
+        <h2>4. Manejo de Estados y Eventos</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>4.1 Eventos de Formulario</h3>
+                    <pre>
+function Formulario() {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Lógica de envío
+    };
+    
+    return (
+        &lt;form onSubmit={handleSubmit}&gt;
+            &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+        &lt;/form&gt;
+    );
+}</pre>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>4.3 Actualización de Estado</h3>
+                    <pre>
+const [formData, setFormData] = useState({
+    nombre: '',
+    email: ''
+});
+
+const handleChange = (e) => {
+    setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+    });
+};</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Validación con Yup -->
+        <h2>7. Validación con Yup</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>7.1 Instalación</h3>
+                    <pre>
+npm install yup</pre>
+                </div>
+                
+                <div class="ejemplo">
+                    <h3>7.3 Esquema Básico</h3>
+                    <pre>
+import * as yup from 'yup';
+
+const esquemaValidacion = yup.object().shape({
+    nombre: yup.string().required('Campo obligatorio'),
+    email: yup.string().email('Email inválido').required(),
+    edad: yup.number().min(18, 'Debes ser mayor de edad')
+});</pre>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>7.4 Validación en Submit</h3>
+                    <pre>
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+        await esquemaValidacion.validate(formData, { abortEarly: false });
+        // Enviar datos
+    } catch (errores) {
+        const nuevosErrores = {};
+        errores.inner.forEach(error => {
+            nuevosErrores[error.path] = error.message;
+        });
+        setErrores(nuevosErrores);
+    }
+};</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="nota">
+            <strong>Mejor Práctica:</strong> Combinar Yup con react-hook-form para validaciones eficientes
+            <pre>
+npm install react-hook-form @hookform/resolvers yup</pre>
+        </div>
+
+        <a href="./index.html" class="volver-btn">Volver al Inicio</a>
+    </div>
+</body>
+</html>
