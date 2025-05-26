@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía React - Estilos y Routing</title>
+    <style>
+        /* Estilos mejorados y consistentes */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui;
+            background: #f8f9fa;
+            color: #2d3436;
+            line-height: 1.7;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+        }
+        h1 {
+            text-align: center;
+            color: #3498db;
+            font-size: 2.8em;
+            margin-bottom: 40px;
+        }
+        pre {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #e8f4f8;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #2980b9;
+        }
+        .columns {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .ejemplo {
+            background: #f8f9fa;
+            border: 2px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+        .volver-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            padding: 12px;
+            text-align: center;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .volver-btn:hover {
+            transform: translateY(-2px);
+        }
+        .nota {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚛️ React - Estilos y Routing</h1>
+
+        <!-- 1. Preguntas Iniciales -->
+        <div class="ejemplo">
+            <h2>1. Preguntas Iniciales</h2>
+            <ul>
+                <li><strong>¿Qué es JSX?</strong> Sintaxis que permite HTML en JavaScript</li>
+                <li><strong>Componente vs Elemento:</strong> Los componentes contienen elementos y lógica</li>
+                <li><strong>SPA (Single Page Application):</strong> Aplicación que carga una sola página</li>
+            </ul>
+        </div>
+
+        <!-- 2. Componentes Contenedores y Presentacionales -->
+        <div class="ejemplo">
+            <h2>2. Componentes Contenedores vs Presentacionales</h2>
+            <div class="columns">
+                <div class="column">
+                    <h3>Contenedor (Smart)</h3>
+                    <pre>
+class ListaUsuarios extends React.Component {
+    state = { usuarios: [] };
+    
+    componentDidMount() {
+        // Lógica para obtener datos
+    }
+    
+    render() {
+        return &lt;ListaPresentacional items={this.state.usuarios} /&gt;;
+    }
+}</pre>
+                </div>
+                <div class="column">
+                    <h3>Presentacional (Dumb)</h3>
+                    <pre>
+function ListaPresentacional({ items }) {
+    return (
+        &lt;ul&gt;
+            {items.map(item => 
+                &lt;li key={item.id}&gt;{item.nombre}&lt;/li&gt;
+            )}
+        &lt;/ul&gt;
+    );
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. CSS en React -->
+        <h2>3. CSS en React</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>3.1 Estilos en Línea</h3>
+                    <pre>
+const estilos = {
+    boton: {
+        padding: '10px 20px',
+        backgroundColor: '#3498db',
+        color: 'white'
+    }
+};
+
+function Boton() {
+    return &lt;button style={estilos.boton}&gt;Click&lt;/button&gt;;
+}</pre>
+                </div>
+
+                <div class="ejemplo">
+                    <h3>3.4 CSS Modules</h3>
+                    <pre>
+// Boton.module.css
+.boton {
+    padding: 10px 20px;
+    background: #3498db;
+}
+
+// Componente
+import styles from './Boton.module.css';
+
+function Boton() {
+    return &lt;button className={styles.boton}&gt;Click&lt;/button&gt;;
+}</pre>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>3.5 Styled-components</h3>
+                    <pre>
+import styled from 'styled-components';
+
+const Boton = styled.button`
+    padding: 10px 20px;
+    background: ${props => props.primario ? '#3498db' : '#95a5a6'};
+    color: white;
+`;
+
+function App() {
+    return &lt;Boton primario&gt;Click&lt;/Boton&gt;;
+}</pre>
+                </div>
+
+                <div class="ejemplo">
+                    <h3>3.6 SASS/SCSS</h3>
+                    <pre>
+// Instalación
+npm install sass
+
+// Uso
+import './Estilos.scss';
+
+function App() {
+    return &lt;div className="contenedor"&gt;...&lt;/div&gt;;
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Bootstrap en React -->
+        <h2>4. Bootstrap en React</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>4.1 Instalación</h3>
+                    <pre>
+npm install bootstrap react-bootstrap
+
+// En index.js
+import 'bootstrap/dist/css/bootstrap.min.css';</pre>
+                </div>
+
+                <div class="ejemplo">
+                    <h3>4.3 React-Bootstrap</h3>
+                    <pre>
+import { Button, Alert } from 'react-bootstrap';
+
+function App() {
+    return (
+        &lt;Button variant="primary"&gt;
+            &lt;Alert variant="info"&gt;Mensaje&lt;/Alert&gt;
+        &lt;/Button&gt;
+    );
+}</pre>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>4.4 Personalización</h3>
+                    <pre>
+// Sobrescribir variables Bootstrap
+$theme-colors: (
+    "primary": #3498db,
+    "danger": #e74c3c
+);
+
+@import "~bootstrap/scss/bootstrap";</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. PropTypes -->
+        <h2>5. PropTypes</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>5.4 Ejemplo</h3>
+                    <pre>
+import PropTypes from 'prop-types';
+
+function Usuario({ nombre, edad }) {
+    return (
+        &lt;div&gt;
+            {nombre} - {edad} años
+        &lt;/div&gt;
+    );
+}
+
+Usuario.propTypes = {
+    nombre: PropTypes.string.isRequired,
+    edad: PropTypes.number
+};</pre>
+                </div>
+            </div>
+
+            <div class="column">
+                <h3>5.2 Tipos</h3>
+                <table>
+                    <tr><th>Tipo</th><th>Ejemplo</th></tr>
+                    <tr><td>string</td><td>PropTypes.string</td></tr>
+                    <tr><td>number</td><td>PropTypes.number</td></tr>
+                    <tr><td>bool</td><td>PropTypes.bool</td></tr>
+                    <tr><td>array</td><td>PropTypes.array</td></tr>
+                    <tr><td>func</td><td>PropTypes.func</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 6. React Router -->
+        <h2>6. Rutas en React</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>6.1 Instalación</h3>
+                    <pre>
+npm install react-router-dom</pre>
+                </div>
+
+                <div class="ejemplo">
+                    <h3>6.3 Ejemplo Básico</h3>
+                    <pre>
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+function App() {
+    return (
+        &lt;BrowserRouter&gt;
+            &lt;nav&gt;
+                &lt;Link to="/"&gt;Inicio&lt;/Link&gt;
+                &lt;Link to="/acerca"&gt;Acerca&lt;/Link&gt;
+            &lt;/nav&gt;
+            
+            &lt;Routes&gt;
+                &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                &lt;Route path="/acerca" element={&lt;Acerca /&gt;} /&gt;
+            &lt;/Routes&gt;
+        &lt;/BrowserRouter&gt;
+    );
+}</pre>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>6.4 Rutas Dinámicas</h3>
+                    <pre>
+&lt;Route path="/usuario/:id" element={&lt;Usuario /&gt;} /&gt;
+
+// En componente Usuario:
+import { useParams } from 'react-router-dom';
+
+function Usuario() {
+    const { id } = useParams();
+    return &lt;div&gt;Usuario ID: {id}&lt;/div&gt;;
+}</pre>
+                </div>
+
+                <div class="ejemplo">
+                    <h3>6.10 Manejo de Errores</h3>
+                    <pre>
+&lt;Routes&gt;
+    &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+    &lt;Route path="*" element={&lt;Error404 /&gt;} /&gt;
+&lt;/Routes&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <a href="./index.html" class="volver-btn">Volver al Inicio</a>
+    </div>
+</body>
+</html>

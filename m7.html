@@ -3,103 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resumen del Curso de React</title>
+    <title>Guía Completa React + Vite</title>
     <style>
-        /* Estilos mejorados */
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            line-height: 1.6;
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #F0F7FB;
+            color: #333;
             padding: 20px;
-            background: #f8f9fa;
-            color: #2d3436;
+            line-height: 1.6;
         }
-
         .container {
-            width: 70%;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
-
-        h1 {
+        h1, h2, h3 {
             color: #2c3e50;
-            font-size: 2rem;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 0.5rem;
-            grid-column: 1/-1;
+            margin: 25px 0 15px;
         }
-
-        .section {
-            padding: 1rem;
-            background: #ecf0f1;
-            border-radius: 6px;
-        }
-
-        a {
+        h1 {
+            text-align: center;
             color: #3498db;
-            text-decoration: none;
+            font-size: 2.5em;
+            margin-bottom: 40px;
         }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .code-block {
+        pre {
             background: #2c3e50;
             color: #ecf0f1;
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 1rem 0;
-            position: relative;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
         }
-
-        @media (max-width: 992px) {
-            .container { grid-template-columns: 1fr; }
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #e8f4f8;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #2980b9;
         }
-
-        @media (max-width: 768px) {
-            .container { width: 95%; padding: 1rem; }
+        .columns {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .actualizacion {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        .ejemplo {
+            background: #f9f9f9;
+            border: 2px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+        .volver-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            padding: 12px;
+            text-align: center;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .volver-btn:hover {
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Resumen del Curso de React</h1>
+        <h1>🚀 Guía Definitiva React + Vite 2023</h1>
 
-        <div class="section">
-            <h2>Introducción a React</h2>
-            <p>React es una biblioteca de JavaScript para construir interfaces de usuario declarativas y eficientes.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn">React Docs</a></p>
+        <div class="actualizacion">
+            <h2>🔥 ¿Por qué Vite?</h2>
+            <ul>
+                <li>⚡ Tiempos de construcción 10-100x más rápidos</li>
+                <li>🔄 HMR (Recarga instantánea) en &lt;50ms</li>
+                <li>📦 Optimización automática para producción</li>
+                <li>⚛️ Soporte nativo para React/JSX</li>
+            </ul>
         </div>
 
-        <div class="section">
-            <h2>JSX</h2>
-            <p>JSX es una extensión de JavaScript que permite escribir código similar a HTML dentro de React.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn/jsx">JSX en React</a></p>
+        <!-- Configuración Inicial -->
+        <h2>1. Creación del Proyecto</h2>
+        <div class="ejemplo">
+            <h3>Inicializar proyecto con Vite</h3>
+            <pre><code>npm create vite@latest mi-app
+cd mi-app
+npm install
+npm run dev</code></pre>
+            <p>Seleccionar opción React → JavaScript/TypeScript</p>
         </div>
 
-        <div class="section">
-            <h2>Componentes en React</h2>
-            <p>Los componentes permiten dividir la interfaz en partes reutilizables.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn#components">Componentes en React</a></p>
+        <div class="columns">
+            <div class="column">
+                <h3>Estructura de archivos</h3>
+                <pre>
+mi-app/
+├── node_modules/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── ...
+├── index.html
+├── vite.config.js
+└── package.json</pre>
+            </div>
+            
+            <div class="column">
+                <h3>Scripts principales</h3>
+                <table>
+                    <tr><th>Comando</th><th>Descripción</th></tr>
+                    <tr><td><code>npm run dev</code></td><td>Inicia servidor desarrollo</td></tr>
+                    <tr><td><code>npm run build</code></td><td>Crea versión producción</td></tr>
+                    <tr><td><code>npm run preview</code></td><td>Previsualiza build</td></tr>
+                </table>
+            </div>
         </div>
 
-        <div class="section">
-            <h2>Estado y Props</h2>
-            <p>Los estados y las propiedades permiten manejar la información dentro de React.</p>
+        <!-- Componentes Básicos -->
+        <h2>2. Componentes React</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>Componente Funcional</h3>
+                    <pre>
+function Saludo() {
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;¡Hola Vite!&lt;/h1&gt;
+            &lt;p&gt;Componente funcional básico&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}</pre>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>Componente con Props</h3>
+                    <pre>
+function TarjetaUsuario({ nombre, edad }) {
+    return (
+        &lt;div className="tarjeta"&gt;
+            &lt;h2&gt;{nombre}&lt;/h2&gt;
+            &lt;p&gt;Edad: {edad}&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}
+
+// Uso:
+&lt;TarjetaUsuario nombre="Ana" edad={28} /&gt;</pre>
+                </div>
+            </div>
         </div>
 
-        <div class="section">
-            <h2>React 18: ReactDOM.createRoot</h2>
-            <p>React 18 introduce mejoras en la renderización.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/blog/2022/03/29/react-18">React 18 Updates</a></p>
+        <!-- Estado y Hooks -->
+        <h2>3. Manejo de Estado</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>useState Hook</h3>
+                    <pre>
+import { useState } from 'react';
+
+function Contador() {
+    const [count, setCount] = useState(0);
+
+    return (
+        &lt;div&gt;
+            &lt;button onClick={() => setCount(c => c - 1)}&gt;-&lt;/button&gt;
+            &lt;span&gt;{count}&lt;/span&gt;
+            &lt;button onClick={() => setCount(c => c + 1)}&gt;+&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</pre>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>useEffect Hook</h3>
+                    <pre>
+import { useEffect } from 'react';
+
+function EjemploAPI() {
+    useEffect(() => {
+        fetch('https://api.example.com/data')
+            .then(response => response.json())
+            .then(data => console.log(data));
+    }, []); // [] = Ejecutar solo al montar
+
+    return &lt;div&gt;Cargando datos...&lt;/div&gt;;
+}</pre>
+                </div>
+            </div>
         </div>
+
+        <!-- JSX y Renderizado -->
+        <h2>4. JSX Esencial</h2>
+        <div class="ejemplo">
+            <h3>Características clave</h3>
+            <pre>
+// 1. JavaScript en llaves
+const nombre = 'Carlos';
+&lt;h1&gt;Hola {nombre}&lt;/h1&gt;
+
+// 2. Atributos con camelCase
+&lt;div className="container" tabIndex="1"&gt;
+
+// 3. Estilos en objeto
+&lt;div style={{ color: 'red', fontSize: '20px' }}&gt;
+
+// 4. Listas con map()
+{items.map((item) => (
+    &lt;li key={item.id}&gt;{item.nombre}&lt;/li&gt;
+))}</pre>
+        </div>
+
+        <!-- Errores Comunes -->
+        <h2>5. Solución de Errores</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>Error: Keys Únicas</h3>
+                    <pre>
+// ❌ Incorrecto
+{items.map(item => &lt;li&gt;{item}&lt;/li&gt;)}
+
+// ✅ Correcto
+{items.map((item, index) => (
+    &lt;li key={index}&gt;{item}&lt;/li&gt;
+))}</pre>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>Error: Importaciones</h3>
+                    <pre>
+// ❌ Falta importar React
+function Componente() { ... }
+
+// ✅ Solución (para componentes de clase)
+import React from 'react';
+
+class Componente extends React.Component { ... }</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recursos Adicionales -->
+        <div class="actualizacion">
+            <h3>📚 Recursos Recomendados</h3>
+            <ul>
+                <li><a href="https://vitejs.dev/guide/" target="_blank">Documentación Oficial de Vite</a></li>
+                <li><a href="https://react.dev" target="_blank">Nueva Documentación de React</a></li>
+                <li><a href="https://www.w3schools.com/react/" target="_blank">Tutorial React en W3Schools</a></li>
+            </ul>
+        </div>
+
+        <a href="./index.html" class="volver-btn">Volver al Inicio</a>
     </div>
 </body>
 </html>

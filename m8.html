@@ -3,118 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resumen del Curso de React</title>
+    <title>Guía Avanzada de React</title>
     <style>
         /* Estilos mejorados */
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            line-height: 1.6;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f8f9fa;
             color: #2d3436;
+            line-height: 1.8;
+            padding: 20px;
         }
-
         .container {
-            width: 70%;
-            margin: 2rem auto;
+            max-width: 1200px;
+            margin: 0 auto;
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-
-        h1 {
+        h1, h2, h3 {
             color: #2c3e50;
-            font-size: 2rem;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 0.5rem;
-            grid-column: 1/-1;
+            margin: 25px 0 15px;
         }
-
-        .section {
-            padding: 1rem;
-            background: #ecf0f1;
-            border-radius: 6px;
-        }
-
-        a {
+        h1 {
+            text-align: center;
             color: #3498db;
+            font-size: 2.8em;
+            margin-bottom: 40px;
+        }
+        pre {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #e8f4f8;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #2980b9;
+        }
+        .columns {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .ejemplo {
+            background: #f8f9fa;
+            border: 2px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+        .volver-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto 0;
+            padding: 12px;
+            text-align: center;
+            background: #3498db;
+            color: white;
             text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .highlight {
+            border-radius: 25px;
             font-weight: bold;
-            color: #e74c3c;
+            transition: transform 0.2s;
         }
-
-        @media (max-width: 992px) {
-            .container { grid-template-columns: 1fr; }
+        .volver-btn:hover {
+            transform: translateY(-2px);
         }
-
-        @media (max-width: 768px) {
-            .container { width: 95%; padding: 1rem; }
+        .nota {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Resumen Mosaico 8</h1>
+        <h1>⚛️ React - Componentes y Ciclo de Vida</h1>
 
-        <div class="section">
-            <h2>2. Componentes con y sin estado</h2>
-            <p>Los componentes en React pueden ser <span class="highlight">con estado</span> (stateful) o <span class="highlight">sin estado</span> (stateless). Los componentes sin estado solo reciben datos y los muestran, mientras que los componentes con estado pueden manejar cambios internos.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn/state-and-lifecycle">Estado y ciclo de vida en React</a></p>
+        <!-- 1. Preguntas Iniciales -->
+        <div class="ejemplo">
+            <h2>1. Preguntas Iniciales</h2>
+            <ul>
+                <li><strong>¿Qué es un componente?</strong> Bloques reutilizables de UI</li>
+                <li><strong>Diferencia entre estado y props:</strong> El estado es interno y mutable, las props son externas y de solo lectura</li>
+                <li><strong>¿Qué es el Virtual DOM?</strong> Representación optimizada del DOM real</li>
+            </ul>
         </div>
 
-        <div class="section">
-            <h3>2.1. Manejadores de eventos y estado</h3>
-            <p>Los eventos en React funcionan de manera similar a los eventos en HTML, pero con una sintaxis diferente. Se manejan con funciones y pueden modificar el estado del componente.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn/handling-events">Manejando eventos en React</a></p>
+        <!-- 2. Componentes con y sin estado -->
+        <h2>2. Componentes con y sin Estado</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>2.1 Manejadores de Eventos</h3>
+                    <pre>
+function Contador() {
+    const [count, setCount] = useState(0);
+
+    const handleClick = () => {
+        setCount(prev => prev + 1);
+    };
+
+    return (
+        &lt;button onClick={handleClick}&gt;
+            Clics: {count}
+        &lt;/button&gt;
+    );
+}</pre>
+                </div>
+                
+                <div class="ejemplo">
+                    <h3>2.3 Pasando Funciones como Props</h3>
+                    <pre>
+function Padre() {
+    const [valor, setValor] = useState('');
+
+    return (
+        &lt;Hijo 
+            valor={valor}
+            onChange={(nuevoValor) => setValor(nuevoValor)}
+        /&gt;
+    );
+}</pre>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>2.4 Actualizadores de Estado</h3>
+                    <pre>
+// Forma segura cuando depende del estado anterior
+setCount(prevCount => prevCount + 1);
+
+// Para objetos
+setUsuario(prev => ({
+    ...prev,
+    nombre: 'Nuevo Nombre'
+}));</pre>
+                </div>
+
+                <h3>Estado vs Props</h3>
+                <table>
+                    <tr><th></th><th>Estado</th><th>Props</th></tr>
+                    <tr><td>Mutabilidad</td><td>Mutable</td><td>Read-only</td></tr>
+                    <tr><td>Alcance</td><td>Componente</td><td>Padre → Hijo</td></tr>
+                    <tr><td>Actualización</td><td>setState</td><td>Padre controla</td></tr>
+                </table>
+            </div>
         </div>
 
-        <div class="section">
-            <h3>2.2. Cambiando Props y Estado</h3>
-            <p>Las <span class="highlight">props</span> permiten pasar datos entre componentes, mientras que el <span class="highlight">estado</span> cambia dinámicamente dentro de un componente.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn/passing-props-to-a-component">Pasando props a un componente</a></p>
+        <!-- 3. Componentes sin estado heredados -->
+        <h2>3. Componentes sin Estado Heredados</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>3.2 Pasar Estado al Hijo</h3>
+                    <pre>
+function Padre() {
+    const [tareas, setTareas] = useState([]);
+
+    return (
+        &lt;ListaTareas tareas={tareas} /&gt;
+    );
+}
+
+function ListaTareas({ tareas }) {
+    return (
+        &lt;ul&gt;
+            {tareas.map(t => &lt;li key={t.id}&gt;{t.texto}&lt;/li&gt;)}
+        &lt;/ul&gt;
+    );
+}</pre>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>3.3 Componentes Hermanos</h3>
+                    <pre>
+function App() {
+    const [usuario, setUsuario] = useState(null);
+
+    return (
+        &lt;&gt;
+            &lt;Perfil usuario={usuario} /&gt;
+            &lt;Configuracion usuario={usuario} /&gt;
+        &lt;/&gt;
+    );
+}</pre>
+                </div>
+            </div>
         </div>
 
-        <div class="section">
-            <h2>3. Componentes sin estado heredados</h2>
-            <p>Los componentes funcionales pueden recibir estado de sus padres y renderizar información sin manejar cambios internos.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn/conditional-rendering">Renderizado condicional en React</a></p>
+        <!-- 4. Ciclo de Vida -->
+        <h2>4. Ciclo de Vida en React</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>4.4 componentDidMount</h3>
+                    <pre>
+class Ejemplo extends React.Component {
+    componentDidMount() {
+        // Cargar datos iniciales
+        fetch('/api/datos')
+            .then(res => res.json())
+            .then(data => this.setState({ datos: data }));
+    }
+    
+    render() { ... }
+}</pre>
+                </div>
+
+                <div class="ejemplo">
+                    <h3>4.5 componentWillUnmount</h3>
+                    <pre>
+class Temporizador extends React.Component {
+    componentDidMount() {
+        this.timerID = setInterval(() => {
+            // Lógica del temporizador
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+}</pre>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ejemplo">
+                    <h3>4.8 componentDidUpdate</h3>
+                    <pre>
+componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+        // Actualizar datos cuando cambia el ID
+        this.cargarDatos(this.props.id);
+    }
+}</pre>
+                </div>
+
+                <h3>Ciclo de Vida Clásico</h3>
+                <table>
+                    <tr><th>Fase</th><th>Métodos</th></tr>
+                    <tr><td>Montaje</td><td>constructor → render → componentDidMount</td></tr>
+                    <tr><td>Actualización</td><td>render → componentDidUpdate</td></tr>
+                    <tr><td>Desmontaje</td><td>componentWillUnmount</td></tr>
+                </table>
+            </div>
         </div>
 
-        <div class="section">
-            <h2>4. Ciclo de vida en React</h2>
-            <p>Los componentes de clase tienen métodos específicos que se ejecutan en distintas fases de su existencia.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn/state-and-lifecycle">Estado y ciclo de vida en React</a></p>
+        <!-- 5. Componentes Funcionales -->
+        <div class="ejemplo">
+            <h2>5. Componentes Funcionales</h2>
+            <pre>
+import { useState, useEffect } from 'react';
+
+function Reloj() {
+    const [hora, setHora] = useState(new Date());
+
+    useEffect(() => {
+        const timerID = setInterval(() => {
+            setHora(new Date());
+        }, 1000);
+
+        return () => clearInterval(timerID);
+    }, []);
+
+    return &lt;div&gt;{hora.toLocaleTimeString()}&lt;/div&gt;;
+}</pre>
+            <div class="nota">
+                <strong>Nota:</strong> Los Hooks permiten usar estado y ciclo de vida en componentes funcionales
+            </div>
         </div>
 
-        <div class="section">
-            <h3>4.4. componentDidMount</h3>
-            <p>Este método se ejecuta al montar un componente. Ideal para hacer peticiones a APIs o inicializar datos.</p>
-        </div>
-
-        <div class="section">
-            <h3>4.5. componentWillUnmount</h3>
-            <p>Se usa antes de eliminar un componente. Útil para limpiar eventos o conexiones innecesarias.</p>
-        </div>
-
-        <div class="section">
-            <h2>5. Componentes funcionales</h2>
-            <p>Más simples, concisos y usados en la mayoría de proyectos modernos. Aprende a usarlos junto con <span class="highlight">hooks</span> para potenciar su funcionalidad.</p>
-            <p>Ejemplo oficial: <a href="https://react.dev/learn/your-first-component">Tu primer componente en React</a></p>
-        </div>
-
-        <p>📌 Para más detalles, explora la documentación oficial de React: <a href="https://react.dev/">React Docs</a></p>
+        <a href="./index.html" class="volver-btn">Volver al Inicio</a>
     </div>
 </body>
 </html>

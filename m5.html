@@ -1,146 +1,212 @@
-<!DOCTYPE html>
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Rápida Front-End - Semana 6</title>
+    <title>Resumen JavaScript Moderno</title>
     <style>
-        /* Estilos mejorados */
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            line-height: 1.6;
+        /* Estilos base */
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #F0F7FB;
+            color: #333;
             padding: 20px;
-            background: #f8f9fa;
-            color: #2d3436;
         }
-
+        
         .container {
-            width: 70%;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            max-width: 1200px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-
-        h1 { color: #2c3e50; font-size: 2rem; border-bottom: 3px solid #3498db; padding-bottom: 0.5rem; grid-column: 1/-1; }
-
-        .code-block {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 1rem 0;
-            position: relative;
+        
+        h1, h2, h3 {
+            color: #007B8F;
+            margin-bottom: 15px;
         }
-
-        .w3-link {
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        
+        h2 {
+            margin-top: 25px;
+            font-size: 1.6em;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            color: #005f6b;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            background: #FFFBEC;
+            margin: 8px 0;
+            padding: 12px;
+            border-left: 5px solid #007B8F;
+            border-radius: 4px;
+            line-height: 1.5;
+        }
+        
+        code {
+            background: #e7f3fe;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .columns {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .hint {
+            margin: 20px 0;
+            padding: 15px;
+            background: #E2F7E2;
+            border-left: 5px solid #007B8F;
+            border-radius: 4px;
+        }
+        
+        .volver-btn {
             display: block;
-            font-size: 0.9rem;
-            color: #3498db !important;
-            margin-top: 0.5rem;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 12px 20px;
+            text-align: center;
+            background-color: #007B8F;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
         }
-
-        .w3-link:hover {
+        
+        .volver-btn:hover {
+            background-color: #005f6b;
+        }
+        
+        .destacado {
+            color: #005f6b;
+            font-weight: bold;
+            display: block;
+            margin: 10px 0;
+        }
+        
+        a {
+            color: #007B8F;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        a:hover {
             text-decoration: underline;
         }
-
-        .w3-link::after {
-            content: "→";
-            margin-left: 5px;
-        }
-
-        @media (max-width: 1200px) { .container { width: 85%; } }
-        @media (max-width: 992px) { .container { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) { .container { width: 95%; padding: 1rem; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Guía de Referencia Rápida - Semana 5</h1>
-        
-        <!-- Columna Izquierda -->
-        <div>
-            <div class="code-block">
-                <h3>Funciones Flecha</h3>
-                <code>const suma = (a, b) => a + b;</code>
-                <a href="https://www.w3schools.com/js/js_arrow_function.asp" 
-                   class="w3-link" 
-                   target="_blank">
-                   Ver ejemplos en W3Schools
-                </a>
-            </div>
+<div class="container">
+    <h1>🚀 JavaScript Moderno - Resumen Semanal</h1>
+    
+    <div class="columns">
+        <div class="column">
+            <h2>1. Preguntas Iniciales</h2>
+            <ul>
+                <li><strong>¿Qué es JavaScript?</strong> Lenguaje de scripting para web</li>
+                <li><strong>Diferencias ES5/ES6+:</strong> let/const, arrow functions, clases</li>
+                <li><strong>Importancia del DOM:</strong> Interactividad en páginas web</li>
+            </ul>
 
-            <div class="code-block">
-                <h3>Métodos de Arrays</h3>
-                <code>// Map y Filter\n[1,2,3].map(x => x*2)\n[5,12,8].filter(x => x>10)</code>
-                <div class="links">
-                    <a href="https://www.w3schools.com/js/js_array_iteration.asp" 
-                       class="w3-link" 
-                       target="_blank">
-                       Métodos de Array
-                    </a>
-                    <a href="https://www.w3schools.com/js/js_array_map.asp" 
-                       class="w3-link" 
-                       target="_blank">
-                       Map() en detalle
-                    </a>
-                </div>
-            </div>
+            <h2>2. ECMAScript</h2>
+            <h3>2.1 Versiones clave</h3>
+            <ul>
+                <li><a href="https://www.w3schools.com/js/js_es6.asp" target="_blank">ES6 (2015)</a>: Clases, módulos, let/const</li>
+                <li>ES2016: Operador exponencial (**)</li>
+                <li>ES2020: Optional chaining (?.)</li>
+            </ul>
 
-            <div class="code-block">
-                <h3>Destructuring</h3>
-                <code>const { nombre, edad } = usuario;</code>
-                <a href="https://www.w3schools.com/react/react_es6_destructuring.asp" 
-                   class="w3-link" 
-                   target="_blank">
-                   Ejemplos completos
-                </a>
-            </div>
+            <h3>2.2 Estrategia Crossbrowser</h3>
+            <ul>
+                <li>Usar <code>Babel</code> para transpilar código</li>
+                <li>Verificar compatibilidad en <a href="https://caniuse.com" target="_blank">Can I Use</a></li>
+                <li>Polyfills para funciones faltantes</li>
+            </ul>
+
+            <h2>3. Arrays</h2>
+            <h3>3.1 Array Functions</h3>
+            <ul>
+                <li><code>map()</code>: Transforma elementos <a href="https://www.w3schools.com/jsref/jsref_map.asp" target="_blank">(Ejemplo)</a></li>
+                <li><code>filter()</code>: Filtra elementos</li>
+                <li><code>reduce()</code>: Acumula valores</li>
+            </ul>
         </div>
 
-        <!-- Columna Derecha -->
-        <div>
-            <div class="code-block">
-                <h3>Spread Operator</h3>
-                <code>const nuevoArray = [...array1, ...array2];</code>
-                <a href="https://www.w3schools.com/react/react_es6_spread.asp" 
-                   class="w3-link" 
-                   target="_blank">
-                   Usos avanzados
-                </a>
+        <div class="column">
+            <h3>3.7 Desestructuración</h3>
+            <ul>
+                <li><code>const [a, b] = [1, 2]</code></li>
+                <li>Intercambio: <code>[x, y] = [y, x]</code></li>
+            </ul>
+
+            <h3>3.11 Reestructuración</h3>
+            <ul>
+                <li><code>flat()</code>: Aplana arrays anidados</li>
+                <li><code>flatMap()</code>: Mapeo y aplanado</li>
+            </ul>
+
+            <div class="hint">
+                💡 <strong>Métodos Clave:</strong><br>
+                <span class="destacado">Búsquedas:</span> find(), includes()<br>
+                <span class="destacado">Transformación:</span> slice(), splice()<br>
+                <span class="destacado">Ordenación:</span> sort(), reverse()
             </div>
 
-            <div class="code-block">
-                <h3>Set y Map</h3>
-                <code>const unique = new Set([1,2,2,3]);\nunique.has(2); // true</code>
-                <a href="https://www.w3schools.com/js/js_object_sets.asp" 
-                   class="w3-link" 
-                   target="_blank">
-                   Guía de Sets
-                </a>
-                <a href="https://www.w3schools.com/js/js_object_maps.asp" 
-                   class="w3-link" 
-                   target="_blank">
-                   Guía de Maps
-                </a>
-            </div>
+            <h2>4. Set/Map</h2>
+            <ul>
+                <li><strong>Set:</strong> Valores únicos <a href="https://www.w3schools.com/js/js_sets.asp" target="_blank">(Ejemplo)</a></li>
+                <li><strong>Map:</strong> Pares clave-valor</li>
+            </ul>
 
-            <div class="code-block">
-                <h3>Reduce</h3>
-                <code>[1,2,3].reduce((total, num) => total + num, 0);</code>
-                <a href="https://www.w3schools.com/js/js_array_iteration.asp#mark_reduce" 
-                   class="w3-link" 
-                   target="_blank">
-                   Ejemplos prácticos
-                </a>
-            </div>
+            <h3>4.2-4.5 Métodos</h3>
+            <ul>
+                <li><code>add()</code>: Añade elementos</li>
+                <li><code>has()</code>: Comprueba existencia</li>
+                <li><code>delete()</code>: Elimina elementos</li>
+                <li><code>size</code>: Obtiene cantidad</li>
+            </ul>
+
+            <h3>4.6 Conversión</h3>
+            <ul>
+                <li>Set a Array: <code>[...miSet]</code></li>
+                <li>Array a Set: <code>new Set(miArray)</code></li>
+            </ul>
         </div>
     </div>
+
+    <div class="hint" style="margin-top: 20px;">
+        💡 <strong>Recuerda:</strong> Practica con ejercicios en 
+        <a href="https://www.w3schools.com/js/exercise_js.asp" target="_blank">W3Schools</a> y usa la consola del navegador para probar código.
+    </div>
+
+    <a href="./index.html" class="volver-btn">Volver al Índice</a>
+</div>
 </body>
-</html>
