@@ -6,190 +6,217 @@
     <link rel="icon" href="./assets/img/favicon-32x32.png" type="image/x-icon">
     <title>Dashboard Front End</title>
     <style>
-        /* Estilo para el cuerpo */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
             margin: 0;
-            background-color: #9ba7b6; /* Gris azulado estilo antiguo */
-            font-family: "Courier New", monospace; /* Tipografía retro de sistemas antiguos */
-            color: black;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f6f8fa;
+            color: #24292f;
+            line-height: 1.6;
         }
 
         .container {
-            width: 95%;
-            max-width: 1000px;
-            background-color: #f2f2f2; /* Fondo clásico */
-            border: 3px solid #4b4b4b; /* Bordes más gruesos y oscuros */
-            padding: 25px;
-            box-shadow: 6px 6px 0 #808080; /* Sombra más destacada */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333333; /* Texto oscuro */
+            margin-bottom: 48px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #24292f;
         }
 
-        /* Estilo de la rejilla */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
-        /* Estilo para cada mosaico */
         .tile {
-            background-color: #e0e0e0; /* Fondo claro y neutral */
-            border: 2px solid #6d6d6d;
-            border-right-color: #f9f9f9;
-            border-bottom-color: #f9f9f9;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 3px 3px 0 #4b4b4b;
-            transition: background-color 0.2s, box-shadow 0.2s;
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 24px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .tile:hover {
-            background-color: #cacaca; /* Efecto de resaltado en el mosaico */
-            box-shadow: 3px 3px 0 #2f2f2f; /* Sombra más profunda al hacer hover */
+            border-color: #0969da;
+            box-shadow: 0 1px 3px rgba(27, 31, 36, 0.04), 0 1px 0 rgba(255, 255, 255, 0.25) inset;
         }
 
         .tile h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #000000; /* Título más destacado */
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #24292f;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 8px;
         }
 
-        /* Estilo de botones dentro de los mosaicos */
-        .tile .button {
+        .button {
             display: inline-block;
-            margin: 5px;
-            padding: 10px 12px;
-            border: 2px solid #4b4b4b;
-            border-right-color: #f9f9f9;
-            border-bottom-color: #f9f9f9;
-            background-color: #d9d9d9;
-            color: black;
+            margin: 4px 8px 4px 0;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-radius: 6px;
             font-size: 14px;
+            font-weight: 500;
             text-decoration: none;
             cursor: pointer;
-            box-shadow: 2px 2px 0 #6d6d6d;
-            transition: transform 0.1s ease-in-out, background-color 0.2s;
+            transition: all 0.2s ease;
+            line-height: 1.25;
         }
 
-        .tile .button:hover {
-            transform: translate(-2px, -2px);
-            background-color: #bfbfbf;
-        }
-
-        /* Botones activos */
         .button.published {
-            background-color: #5c9e5c;
-            color: white;
-            box-shadow: 2px 2px 0 #357a35;
+            background-color: #0969da;
+            color: #ffffff;
+            border-color: #0969da;
         }
 
-        /* Botones pendientes */
+        .button.published:hover {
+            background-color: #0858b9;
+            border-color: #0858b9;
+            transform: translateY(-1px);
+        }
+
         .button.not-published {
-            background-color: #9a9a9a;
-            color: #e4e4e4;
+            background-color: #f6f8fa;
+            color: #656d76;
+            border-color: #d0d7de;
             cursor: not-allowed;
+        }
+
+        .button.not-published:hover {
+            background-color: #f6f8fa;
+            border-color: #d0d7de;
+            transform: none;
+        }
+
+        /* Ocultar botones adicionales en módulos pendientes (excepto el primero) */
+        .tile:nth-child(n+3) .button.not-published:not(:first-of-type) {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .tile {
+                padding: 20px;
+            }
+            
+            .button {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Desarrollo Web - Front End</h1>
+        <h1>🚀 Desarrollo Web - Front End</h1>
         <div class="grid">
             <!-- Mosaicos con botones -->
             <div class="tile">
                 <h2>M0</h2>
-                <a href="m0.html" class="button published">Guía GitHub y GitHub Pages</a>
-                
+                <a href="m0.html" class="button published">📚 Guía GitHub y GitHub Pages</a>
             </div>
+            
             <div class="tile">
                 <h2>M1</h2>
-                <a href="m1.html" class="button published">Resumen - Mosaico 1</a>
-                <a href="https://roadmap.sh/frontend" class="button published" target="_blank">Roadmap Frontend Developer</a>
+                <a href="m1.html" class="button published">📖 Resumen - Mosaico 1</a>
+                <a href="https://roadmap.sh/frontend" class="button published" target="_blank">🗺️ Roadmap Frontend Developer</a>
             </div>
+            
             <div class="tile">
                 <h2>M2</h2>
-                <a href="m2.html" class="button published">Resumen - Mosaico 2</a>
-                <a href="m2.htmltags.html" class="button published">All Tags HTML</a>
-                <a href="m2.htmlsemantico.html" class="button published">HTML semántico</a>
-                <a href="m2.pfa2.1.html" class="button published">PFA 2 - 1</a>
-                <a href="m2.pfa2.2.html" class="button published">PFA 2 - 2</a>
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M2</a>
+                <a href="#" class="button not-published">⏳ Pendiente - All Tags HTML</a>
+                <a href="#" class="button not-published">⏳ Pendiente - HTML semántico</a>
+                <a href="#" class="button not-published">⏳ Pendiente - PFA 2 - 1</a>
+                <a href="#" class="button not-published">⏳ Pendiente - PFA 2 - 2</a>
             </div>
-            <!-- Modulos pendientes -->
+            
             <div class="tile">
                 <h2>M3</h2>
-                <a href="m3.html" class="button published">Resumen - Mosaico 3</a>
-                <a href="https://codepen.io/carolineartz/pen/ogVXZj" class="button published" target="_blank"> Interactive box-model diagram</a>
-                <a href="https://flexbox.help/" class="button published" target="_blank">Flexbox Help</a>
-                <a href="https://css-generators.com/" class="button published" target="_blank">CSS Generators</a>
-              
-                
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M3</a>
+                <a href="#" class="button not-published">⏳ Pendiente - Box-model diagram</a>
+                <a href="#" class="button not-published">⏳ Pendiente - Flexbox Help</a>
+                <a href="#" class="button not-published">⏳ Pendiente - CSS Generators</a>
             </div>
+            
             <div class="tile">
                 <h2>M4</h2>
-                <a href="m4.html" class="button published">Resumen - Mosaico 4</a>
-                <a href="m4ejemplos/index.html" class="button published">Ejemplos y Prácticas</a>
-          
-                
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M4</a>
+                <a href="#" class="button not-published">⏳ Pendiente - Ejemplos y Prácticas</a>
             </div>
+            
             <div class="tile">
                 <h2>M5</h2>
-                <a href="m5.html" class="button published ">Resumen - Mosaico 5</a>
-                <a href="m5ejemplos/index.html" class="button published">Ejemplos y Prácticas</a>
-                <a href="m5ejemplos\cheatsheet_JavaScript DOM.pdf" class="button published" target="_blank">cheatsheet</a>
-
-                
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M5</a>
+                <a href="#" class="button not-published">⏳ Pendiente - Ejemplos y Prácticas</a>
+                <a href="#" class="button not-published">⏳ Pendiente - Cheatsheet</a>
             </div>
+            
             <div class="tile">
                 <h2>M6</h2>
-                <a href="#" class="button not-published">Pendiente - Per Saltum</a>
-                
+                <a href="#" class="button not-published">⏳ Pendiente - Per Saltum</a>
             </div>
+            
             <div class="tile">
                 <h2>M7</h2>
-                <a href="m7.html" class="button published">Resumen - Mosaico 7</a>
-                <a href="m7/vite-react-guide.html" class="button published">React con Vite</a>
-                
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M7</a>
+                <a href="#" class="button not-published">⏳ Pendiente - React con Vite</a>
             </div>
+            
             <div class="tile">
                 <h2>M8</h2>
-                <a href="m8.html" class="button published">Resumen - Mosaico 8</a>
-                
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M8</a>
             </div>
+            
             <div class="tile">
                 <h2>M9</h2>
-                <a href="m9.html" class="button published">Resumen - Mosaico 9</a>
-                
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M9</a>
             </div>
+            
             <div class="tile">
                 <h2>M10</h2>
-                <a href="m10.html" class="button published">Resumen - Mosaico 10</a>
-               
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M10</a>
             </div>
+            
             <div class="tile">
                 <h2>M11</h2>
-                <a href="m11.html" class="button published">Resumen - Mosaico 10</a>
-                <a href="m11ejemplos/index.html" class="button published">Ejemplos y Prácticas</a>
-                
+                <a href="#" class="button not-published">⏳ Pendiente - Resumen M11</a>
+                <a href="#" class="button not-published">⏳ Pendiente - Ejemplos y Prácticas</a>
             </div>
+            
             <div class="tile">
                 <h2>M12</h2>
-                <a href="#" class="button not-published">Pendiente</a>
-                
+                <a href="#" class="button not-published">⏳ Pendiente</a>
             </div>
+            
             <div class="tile">
                 <h2>M13</h2>
-                <a href="#" class="button not-published">Pendiente</a>
-                
+                <a href="#" class="button not-published">⏳ Pendiente</a>
             </div>
         </div>
     </div>
