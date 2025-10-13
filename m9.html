@@ -4,107 +4,239 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guía React - Estilos y Routing</title>
+    <link href="https://fonts.googleapis.com/css2?family=-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif&family=SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace&display=swap" rel="stylesheet">
     <style>
-        /* Estilos mejorados y consistentes */
+        :root {
+            --color-canvas-default: #ffffff;
+            --color-canvas-subtle: #f6f8fa;
+            --color-border-default: #d0d7de;
+            --color-border-muted: #d8dee4;
+            --color-fg-default: #24292f;
+            --color-fg-muted: #656d76;
+            --color-fg-subtle: #6e7781;
+            --color-accent-fg: #0969da;
+            --color-accent-emphasis: #0969da;
+            --color-success-fg: #1a7f37;
+            --color-attention-fg: #9a6700;
+            --color-danger-fg: #d1242f;
+            --color-neutral-emphasis-plus: #24292f;
+            --color-neutral-emphasis: #6e7781;
+            --color-neutral-muted: rgba(175, 184, 193, 0.2);
+            --shadow-small: 0 1px 0 rgba(27, 31, 36, 0.04);
+            --shadow-medium: 0 3px 6px rgba(140, 149, 159, 0.15);
+            --shadow-large: 0 8px 24px rgba(140, 149, 159, 0.2);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
-            font-family: 'Segoe UI', system-ui;
-            background: #f8f9fa;
-            color: #2d3436;
-            line-height: 1.7;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 0;
         }
+
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            background: var(--color-canvas-default);
+            padding: 48px;
+            min-height: 100vh;
         }
-        h1, h2, h3 {
-            color: #2c3e50;
-            margin: 25px 0 15px;
-        }
+
         h1 {
             text-align: center;
-            color: #3498db;
-            font-size: 2.8em;
-            margin-bottom: 40px;
+            color: var(--color-fg-default);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 48px;
+            letter-spacing: -0.025em;
+            border-bottom: 1px solid var(--color-border-default);
+            padding-bottom: 24px;
         }
+
+        h2 {
+            color: var(--color-fg-default);
+            margin: 48px 0 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border-muted);
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: var(--color-fg-default);
+            margin: 24px 0 16px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
         pre {
-            background: #2d3436;
-            color: #dfe6e9;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
             overflow-x: auto;
-            font-family: 'Fira Code', monospace;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.875rem;
+            line-height: 1.45;
+            border: 1px solid var(--color-border-default);
+            box-shadow: var(--shadow-small);
         }
+
         code {
-            font-family: 'Fira Code', monospace;
-            background: #e8f4f8;
-            padding: 3px 6px;
-            border-radius: 4px;
-            color: #2980b9;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            background: var(--color-neutral-muted);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            color: var(--color-fg-default);
+            font-size: 0.85em;
         }
+
         .columns {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
         }
+
         .column {
-            flex: 1;
-            min-width: 300px;
+            /* Sin animaciones para mantener sobriedad */
         }
+
         .ejemplo {
-            background: #f8f9fa;
-            border: 2px solid #3498db;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            padding: 24px;
+            margin: 16px 0;
+            border-radius: 6px;
+            box-shadow: var(--shadow-small);
         }
+
+        .ejemplo:hover {
+            box-shadow: var(--shadow-medium);
+            border-color: var(--color-border-muted);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
+            margin: 16px 0;
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
+            overflow: hidden;
         }
+
         th, td {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
+            padding: 12px 16px;
             text-align: left;
+            border-bottom: 1px solid var(--color-border-muted);
         }
+
         th {
-            background: #3498db;
-            color: white;
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            font-weight: 600;
+            font-size: 0.875rem;
         }
+
+        tr:hover {
+            background: var(--color-canvas-subtle);
+        }
+
         .volver-btn {
-            display: block;
-            width: 200px;
-            margin: 40px auto 0;
-            padding: 12px;
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 48px auto 0;
             text-align: center;
-            background: #3498db;
+            background: var(--color-accent-emphasis);
             color: white;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.2s;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: background-color 0.2s ease;
+            border: 1px solid transparent;
         }
+
         .volver-btn:hover {
-            transform: translateY(-2px);
+            background: #0860ca;
+            text-decoration: none;
         }
+
+        .volver-btn:focus {
+            outline: 2px solid var(--color-accent-fg);
+            outline-offset: 2px;
+        }
+
         .nota {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
+            background: #fff8c5;
+            border-left: 4px solid #d4a72c;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 6px;
+            border: 1px solid #d4a72c;
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--color-fg-default);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .columns {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            pre {
+                padding: 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Scrollbar minimalista */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-canvas-subtle);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border-default);
             border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-border-muted);
         }
     </style>
 </head>

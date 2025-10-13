@@ -5,9 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./assets/img/favicon-32x32.png" type="image/x-icon">
     <title>Dashboard Front End</title>
+    <link href="https://fonts.googleapis.com/css2?family=-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif&family=SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
+        :root {
+            --color-canvas-default: #ffffff;
+            --color-canvas-subtle: #f6f8fa;
+            --color-border-default: #d0d7de;
+            --color-border-muted: #d8dee4;
+            --color-fg-default: #24292f;
+            --color-fg-muted: #656d76;
+            --color-fg-subtle: #6e7781;
+            --color-accent-fg: #0969da;
+            --color-accent-emphasis: #0969da;
+            --color-success-fg: #1a7f37;
+            --color-attention-fg: #9a6700;
+            --color-danger-fg: #d1242f;
+            --color-neutral-emphasis-plus: #24292f;
+            --color-neutral-emphasis: #6e7781;
+            --color-neutral-muted: rgba(175, 184, 193, 0.2);
+            --shadow-small: 0 1px 0 rgba(27, 31, 36, 0.04);
+            --shadow-medium: 0 3px 6px rgba(140, 149, 159, 0.15);
+            --shadow-large: 0 8px 24px rgba(140, 149, 159, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,24 +35,29 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: #f6f8fa;
-            color: #24292f;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            line-height: 1.5;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 48px;
+            min-height: 100vh;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 48px;
             font-size: 2.5rem;
-            font-weight: 700;
-            color: #24292f;
+            font-weight: 600;
+            color: var(--color-fg-default);
+            letter-spacing: -0.025em;
+            border-bottom: 1px solid var(--color-border-default);
+            padding-bottom: 24px;
         }
 
         .grid {
@@ -42,24 +67,24 @@
         }
 
         .tile {
-            background: #ffffff;
-            border: 1px solid #d0d7de;
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
             border-radius: 6px;
             padding: 24px;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .tile:hover {
-            border-color: #0969da;
-            box-shadow: 0 1px 3px rgba(27, 31, 36, 0.04), 0 1px 0 rgba(255, 255, 255, 0.25) inset;
+            border-color: var(--color-accent-fg);
+            box-shadow: var(--shadow-medium);
         }
 
         .tile h2 {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 16px;
-            color: #24292f;
-            border-bottom: 1px solid #d0d7de;
+            color: var(--color-fg-default);
+            border-bottom: 1px solid var(--color-border-muted);
             padding-bottom: 8px;
         }
 
@@ -69,7 +94,7 @@
             padding: 8px 16px;
             border: 1px solid transparent;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 0.875rem;
             font-weight: 500;
             text-decoration: none;
             cursor: pointer;
@@ -78,28 +103,27 @@
         }
 
         .button.published {
-            background-color: #0969da;
+            background-color: var(--color-accent-emphasis);
             color: #ffffff;
-            border-color: #0969da;
+            border-color: var(--color-accent-emphasis);
         }
 
         .button.published:hover {
-            background-color: #0858b9;
-            border-color: #0858b9;
-            transform: translateY(-1px);
+            background-color: #0860ca;
+            border-color: #0860ca;
+            text-decoration: none;
         }
 
         .button.not-published {
-            background-color: #f6f8fa;
-            color: #656d76;
-            border-color: #d0d7de;
+            background-color: var(--color-canvas-subtle);
+            color: var(--color-fg-muted);
+            border-color: var(--color-border-default);
             cursor: not-allowed;
         }
 
         .button.not-published:hover {
-            background-color: #f6f8fa;
-            border-color: #d0d7de;
-            transform: none;
+            background-color: var(--color-canvas-subtle);
+            border-color: var(--color-border-default);
         }
 
         /* Ocultar botones adicionales en módulos pendientes (excepto el primero) */
@@ -109,6 +133,10 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+            
             h1 {
                 font-size: 2rem;
             }
@@ -128,6 +156,24 @@
                 margin: 8px 0;
                 text-align: center;
             }
+        }
+
+        /* Scrollbar minimalista */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-canvas-subtle);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border-default);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-border-muted);
         }
     </style>
 </head>
@@ -194,12 +240,13 @@
             
             <div class="tile">
                 <h2>M9</h2>
-                <a href="#" class="button not-published">⏳ Pendiente - Resumen M9</a>
+                <a href="m9.html" class="button published"> Resumen M9</a>
+                <a href="https://m9-zeta.vercel.app/" target="_blank" rel="noopener" class="button published"> PFA del M9 resuelta</a>
             </div>
             
             <div class="tile">
                 <h2>M10</h2>
-                <a href="#" class="button not-published">⏳ Pendiente - Resumen M10</a>
+                <a href="m10.html" class="button published"> Resumen M10</a>
             </div>
             
             <div class="tile">
