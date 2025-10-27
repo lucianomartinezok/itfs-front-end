@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/favicon-32x32.png" type="image/x-icon">
+    <title>Guía de Testing en React</title>
+    <link href="https://fonts.googleapis.com/css2?family=-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif&family=SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-canvas-default: #ffffff;
+            --color-canvas-subtle: #f6f8fa;
+            --color-border-default: #d0d7de;
+            --color-border-muted: #d8dee4;
+            --color-fg-default: #24292f;
+            --color-fg-muted: #656d76;
+            --color-fg-subtle: #6e7781;
+            --color-accent-fg: #0969da;
+            --color-accent-emphasis: #0969da;
+            --color-success-fg: #1a7f37;
+            --color-attention-fg: #9a6700;
+            --color-danger-fg: #d1242f;
+            --color-neutral-emphasis-plus: #24292f;
+            --color-neutral-emphasis: #6e7781;
+            --color-neutral-muted: rgba(175, 184, 193, 0.2);
+            --shadow-small: 0 1px 0 rgba(27, 31, 36, 0.04);
+            --shadow-medium: 0 3px 6px rgba(140, 149, 159, 0.15);
+            --shadow-large: 0 8px 24px rgba(140, 149, 159, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: var(--color-canvas-default);
+            padding: 48px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--color-fg-default);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 48px;
+            letter-spacing: -0.025em;
+            border-bottom: 1px solid var(--color-border-default);
+            padding-bottom: 24px;
+        }
+
+        h2 {
+            color: var(--color-fg-default);
+            margin: 48px 0 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border-muted);
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: var(--color-fg-default);
+            margin: 24px 0 16px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        pre {
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.875rem;
+            line-height: 1.45;
+            border: 1px solid var(--color-border-default);
+            box-shadow: var(--shadow-small);
+        }
+
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            background: var(--color-neutral-muted);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            color: var(--color-fg-default);
+            font-size: 0.85em;
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .column {
+            /* Sin animaciones para mantener sobriedad */
+        }
+
+        .ejemplo {
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            padding: 24px;
+            margin: 16px 0;
+            border-radius: 6px;
+            box-shadow: var(--shadow-small);
+        }
+
+        .ejemplo:hover {
+            box-shadow: var(--shadow-medium);
+            border-color: var(--color-border-muted);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-muted);
+        }
+
+        th {
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        tr:hover {
+            background: var(--color-canvas-subtle);
+        }
+
+        .volver-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 48px auto 0;
+            text-align: center;
+            background: var(--color-accent-emphasis);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: background-color 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .volver-btn:hover {
+            background: #0860ca;
+            text-decoration: none;
+        }
+
+        .volver-btn:focus {
+            outline: 2px solid var(--color-accent-fg);
+            outline-offset: 2px;
+        }
+
+        .nota {
+            background: #fff8c5;
+            border-left: 4px solid #d4a72c;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 6px;
+            border: 1px solid #d4a72c;
+        }
+
+        .tip {
+            background: #ddf4ff;
+            border-left: 4px solid var(--color-accent-fg);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 6px;
+            border: 1px solid var(--color-accent-fg);
+        }
+
+        .importante {
+            background: #ffebf0;
+            border-left: 4px solid var(--color-danger-fg);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 6px;
+            border: 1px solid var(--color-danger-fg);
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--color-fg-default);
+        }
+
+        a {
+            color: var(--color-accent-fg);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .columns {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            pre {
+                padding: 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Scrollbar minimalista */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-canvas-subtle);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border-default);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-border-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Guía de Testing en React</h1>
+
+        <h2>1. Preguntas Iniciales</h2>
+        <p>Antes de comenzar con el testing, es importante reflexionar sobre algunas preguntas clave:</p>
+        <ul>
+            <li><strong>¿Por qué necesitamos testing?</strong> Garantiza la calidad, detecta bugs temprano y facilita el mantenimiento del código.</li>
+            <li><strong>¿Qué queremos probar?</strong> Componentes, lógica de negocio, integraciones y flujos de usuario completos.</li>
+            <li><strong>¿Cuándo debemos escribir tests?</strong> Idealmente antes o al mismo tiempo que desarrollamos (TDD).</li>
+            <li><strong>¿Cómo medimos la efectividad?</strong> Usando métricas de cobertura de código y casos de prueba significativos.</li>
+        </ul>
+
+        <h2>2. Introducción al Testing en React</h2>
+
+        <h3>2.1. Tipos de Testing</h3>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h4><strong>Unit Testing</strong></h4>
+                    <p>Pruebas individuales de componentes o funciones aisladas. Son rápidas y específicas.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <h4><strong>Integration Testing</strong></h4>
+                    <p>Pruebas de componentes que trabajan juntos. Verifican la comunicación entre partes.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <h4><strong>E2E Testing</strong></h4>
+                    <p>Pruebas del flujo completo de usuario. Simulan interacciones reales en el navegador.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>2.2. Principios de Testing en React</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Principio</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>AAA Pattern</strong></td>
+                    <td>Arrange (Configurar) → Act (Actuar) → Assert (Verificar)</td>
+                </tr>
+                <tr>
+                    <td><strong>FIRST</strong></td>
+                    <td>Fast, Independent, Repeatable, Self-validating, Timely</td>
+                </tr>
+                <tr>
+                    <td><strong>Testing Library Philosophy</strong></td>
+                    <td>Enfocarse en el comportamiento del usuario, no en la implementación</td>
+                </tr>
+                <tr>
+                    <td><strong>Fire Events Like Users</strong></td>
+                    <td>Probar interacciones reales como lo haría un usuario</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2.3. Configuración del Entorno de Testing</h3>
+        <p>Para crear un proyecto React con testing configurado:</p>
+        <pre><code># Usando Create React App (viene con Jest y RTL)
+npx create-react-app mi-aplicacion
+
+# Usando Vite
+npm create vite@latest mi-aplicacion -- --template react
+npm install -D @testing-library/react @testing-library/jest-dom @testing-library/user-event</code></pre>
+
+        <div class="tip">
+            <strong>Tip:</strong> Create React App ya incluye Jest y React Testing Library preconfigurados. Solo necesitas instalar dependencias adicionales si usas Vite.
+        </div>
+
+        <h2>3. Jest</h2>
+        <p>Jest es el framework de testing de JavaScript desarrollado por Facebook, ampliamente adoptado en el ecosistema React.</p>
+
+        <h3>3.1. Configuración de Jest en un Proyecto React</h3>
+        <p>En proyectos Create React App, Jest ya está configurado. Para proyectos personalizados:</p>
+        <pre><code>// package.json
+{
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "@testing-library/jest-dom": "^6.0.0"
+  }
+}</code></pre>
+
+        <h3>3.2. Escribiendo Pruebas</h3>
+        <p>Estructura básica de una prueba en Jest:</p>
+        <pre><code>// Button.test.js
+import { render, screen } from '@testing-library/react';
+import Button from './Button';
+
+describe('Button Component', () => {
+  test('renders with correct text', () => {
+    render(&lt;Button&gt;Click me&lt;/Button&gt;);
+    expect(screen.getByText('Click me')).toBeInTheDocument();
+  });
+
+  test('calls onClick when clicked', () => {
+    const handleClick = jest.fn();
+    render(&lt;Button onClick={handleClick}&gt;Click&lt;/Button&gt;);
+    screen.getByText('Click').click();
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});</code></pre>
+
+        <h3>3.3. Verificar Resultados</h3>
+        <p>Jest proporciona múltiples matchers para verificar resultados:</p>
+        <pre><code>expect(component).toBeInTheDocument();
+expect(component).toHaveTextContent('Texto');
+expect(component).toHaveClass('active');
+expect(value).toBe(5);
+expect(array).toHaveLength(3);
+expect(func).toHaveBeenCalled();
+expect(func).toHaveBeenCalledWith(arg1, arg2);</code></pre>
+
+        <h3>3.4. Ejecución y Seguimiento de Pruebas</h3>
+        <div class="ejemplo">
+            <p><strong>Comandos útiles:</strong></p>
+            <ul>
+                <li><code>npm test</code> - Ejecuta todas las pruebas una vez</li>
+                <li><code>npm test -- --watch</code> - Modo watch, re-ejecuta pruebas al cambiar archivos</li>
+                <li><code>npm test -- --coverage</code> - Muestra reporte de cobertura de código</li>
+                <li><code>npm test -- --verbose</code> - Muestra resultados detallados de cada prueba</li>
+            </ul>
+        </div>
+
+        <h3>3.5. Uso de "Mocks" y "Spies" en Jest</h3>
+        <p>Los mocks permiten simular funciones, módulos o APIs:</p>
+        <pre><code>// Mock de función
+const mockFunction = jest.fn();
+const mockFunction = jest.fn((arg) => arg * 2);
+
+// Mock de módulo
+jest.mock('./api', () => ({
+  fetchData: jest.fn(() => Promise.resolve({ data: 'test' }))
+}));
+
+// Spy en método existente
+const spy = jest.spyOn(object, 'method');
+spy.mockReturnValue('mocked');
+spy.mockResolvedValue('async value');
+
+// Limpiar después de cada prueba
+afterEach(() => {
+  jest.clearAllMocks();
+});</code></pre>
+
+        <h3>3.6. Cobertura de Código</h3>
+        <p>La cobertura de código mide qué porcentaje de tu código está siendo probado:</p>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <strong>Statements:</strong> Porcentaje de líneas ejecutadas
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <strong>Branches:</strong> Porcentaje de ramas condicionales evaluadas
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <strong>Functions:</strong> Porcentaje de funciones llamadas
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <strong>Lines:</strong> Porcentaje de líneas de código ejecutadas
+                </div>
+            </div>
+        </div>
+
+        <div class="tip">
+            <strong>Tip:</strong> Apunta a una cobertura de al menos 70-80%, pero recuerda que la calidad de las pruebas es más importante que el porcentaje.
+        </div>
+
+        <h2>4. React Testing Library</h2>
+        <p>React Testing Library (RTL) se enfoca en probar componentes desde la perspectiva del usuario.</p>
+
+        <h3>4.1. Escribiendo Pruebas con RTL</h3>
+        <pre><code>import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+
+test('renderiza formulario de login', () => {
+  render(
+    &lt;Provider store={store}&gt;
+      &lt;LoginForm /&gt;
+    &lt;/Provider&gt;
+  );
+  
+  expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+});</code></pre>
+
+        <h3>4.2. Consultas y Eventos</h3>
+        <p>Principales consultas de RTL (jerarquía de preferencia):</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Query</th>
+                    <th>Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>getByRole</code></td>
+                    <td>Buscar por rol de accesibilidad (preferido)</td>
+                </tr>
+                <tr>
+                    <td><code>getByLabelText</code></td>
+                    <td>Buscar labels de formularios</td>
+                </tr>
+                <tr>
+                    <td><code>getByText</code></td>
+                    <td>Buscar por texto visible</td>
+                </tr>
+                <tr>
+                    <td><code>getByTestId</code></td>
+                    <td>Buscar por data-testid (última opción)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4.3. Asíncrono y Efectos Secundarios</h3>
+        <pre><code>import { waitFor } from '@testing-library/react';
+
+test('muestra mensaje después de cargar datos', async () => {
+  render(&lt;AsyncComponent /&gt;);
+  
+  // Esperar a que aparezca el elemento
+  const message = await screen.findByText('Datos cargados');
+  expect(message).toBeInTheDocument();
+  
+  // O usar waitFor
+  await waitFor(() => {
+    expect(screen.getByText('Datos cargados')).toBeInTheDocument();
+  });
+});</code></pre>
+
+        <h3>4.4. Ejemplo Práctico Completo</h3>
+        <pre><code>// TodoList.test.js
+import { render, screen, fireEvent } from '@testing-library/react';
+import TodoList from './TodoList';
+
+describe('TodoList', () => {
+  test('añade nuevo todo', () => {
+    render(&lt;TodoList /&gt;);
+    
+    const input = screen.getByPlaceholderText('Add todo...');
+    fireEvent.change(input, { target: { value: 'New task' } });
+    fireEvent.click(screen.getByRole('button', { name: /add/i }));
+    
+    expect(screen.getByText('New task')).toBeInTheDocument();
+  });
+
+  test('elimina todo', () => {
+    render(&lt;TodoList initialTodos={['Task 1']} /&gt;);
+    
+    fireEvent.click(screen.getByRole('button', { name: /delete/i }));
+    
+    expect(screen.queryByText('Task 1')).not.toBeInTheDocument();
+  });
+});</code></pre>
+
+        <h2>5. Testing Unitario de Componentes React</h2>
+
+        <h3>5.1. Configuración: Entorno de Pruebas</h3>
+        <p>Configuración básica con setupFilesAfterEnv:</p>
+        <pre><code>// jest.config.js
+module.exports = {
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['&lt;rootDir&gt;/src/setupTests.js'],
+  moduleNameMapper: {
+    '\\.(css|less)$': 'identity-obj-proxy'
+  }
+};
+
+// src/setupTests.js
+import '@testing-library/jest-dom';
+import { configure } from '@testing-library/react';
+configure({ testIdAttribute: 'data-testid' });</code></pre>
+
+        <h3>5.2. Pruebas Unitarias</h3>
+        <p>Probar componentes aislados sin dependencias externas:</p>
+        <pre><code>// Button.test.js
+test('renderiza con variantes', () => {
+  const { rerender } = render(&lt;Button variant="primary"&gt;Click&lt;/Button&gt;);
+  expect(screen.getByRole('button')).toHaveClass('btn-primary');
+  
+  rerender(&lt;Button variant="secondary"&gt;Click&lt;/Button&gt;);
+  expect(screen.getByRole('button')).toHaveClass('btn-secondary');
+});</code></pre>
+
+        <h3>5.3. Propiedades y Estados</h3>
+        <pre><code>test('actualiza texto basado en props', () => {
+  render(&lt;Counter initialCount={5} /&gt;);
+  expect(screen.getByText('5')).toBeInTheDocument();
+});
+
+test('maneja cambios de estado', () => {
+  render(&lt;Toggle /&gt;);
+  const button = screen.getByRole('button');
+  
+  expect(screen.getByText('Off')).toBeInTheDocument();
+  fireEvent.click(button);
+  expect(screen.getByText('On')).toBeInTheDocument();
+});</code></pre>
+
+        <h3>5.4. Simulación de Eventos y Acciones del Usuario</h3>
+        <pre><code>import userEvent from '@testing-library/user-event';
+
+test('interacción completa del usuario', async () => {
+  const user = userEvent.setup();
+  render(&lt;Form /&gt;);
+  
+  const input = screen.getByLabelText('Name');
+  await user.type(input, 'John Doe');
+  
+  const submit = screen.getByRole('button', { name: /submit/i });
+  await user.click(submit);
+  
+  expect(screen.getByText('Submitted: John Doe')).toBeInTheDocument();
+});</code></pre>
+
+        <div class="tip">
+            <strong>Tip:</strong> Prefiere <code>userEvent</code> sobre <code>fireEvent</code> ya que simula eventos de manera más realista.
+        </div>
+
+        <h2>6. Testing de Integración</h2>
+
+        <h3>6.1. Pruebas: Componentes Conectados</h3>
+        <p>Probar componentes que interactúan entre sí:</p>
+        <pre><code>test('flujo completo de login', () => {
+  render(
+    &lt;Provider store={store}&gt;
+      &lt;LoginPage /&gt;
+    &lt;/Provider&gt;
+  );
+  
+  fireEvent.change(screen.getByLabelText(/email/i), {
+    target: { value: 'user@test.com' }
+  });
+  fireEvent.change(screen.getByLabelText(/password/i), {
+    target: { value: 'password123' }
+  });
+  fireEvent.click(screen.getByRole('button', { name: /login/i }));
+  
+  expect(screen.getByText('Bienvenido')).toBeInTheDocument();
+});</code></pre>
+
+        <h3>6.2. Mocking: API y Servicios Externos</h3>
+        <pre><code>// __mocks__/api.js
+export const fetchUserData = jest.fn(() =>
+  Promise.resolve({ id: 1, name: 'John' })
+);
+
+// UserProfile.test.js
+jest.mock('./api');
+
+test('muestra datos del usuario', async () => {
+  fetchUserData.mockResolvedValue({ id: 1, name: 'John' });
+  
+  render(&lt;UserProfile userId={1} /&gt;);
+  
+  expect(await screen.findByText('John')).toBeInTheDocument();
+  expect(fetchUserData).toHaveBeenCalledWith(1);
+});</code></pre>
+
+        <h2>7. Cypress</h2>
+        <p>Cypress es una herramienta de testing E2E que permite probar aplicaciones completas en el navegador.</p>
+
+        <h3>7.1. Configuración</h3>
+        <pre><code># Instalar Cypress
+npm install --save-dev cypress
+
+# Abrir Cypress
+npx cypress open
+
+# Ejecutar en modo headless
+npx cypress run</code></pre>
+
+        <h3>7.2. Escribiendo Pruebas E2E</h3>
+        <pre><code>// cypress/e2e/login.cy.js
+describe('Login Flow', () => {
+  it('login exitoso con credenciales válidas', () => {
+    cy.visit('/login');
+    cy.get('[data-testid="email"]').type('user@test.com');
+    cy.get('[data-testid="password"]').type('password123');
+    cy.get('button').contains('Login').click();
+    cy.url().should('include', '/dashboard');
+    cy.get('[data-testid="welcome-message"]').should('contain', 'Bienvenido');
+  });
+
+  it('muestra error con credenciales inválidas', () => {
+    cy.visit('/login');
+    cy.get('[data-testid="email"]').type('wrong@test.com');
+    cy.get('[data-testid="password"]').type('wrong');
+    cy.get('button').contains('Login').click();
+    cy.get('[data-testid="error"]').should('be.visible');
+  });
+});</code></pre>
+
+        <h3>7.3. Ejecutar Pruebas</h3>
+        <div class="ejemplo">
+            <p><strong>Comandos Cypress:</strong></p>
+            <ul>
+                <li><code>npx cypress open</code> - Interfaz gráfica para ejecutar pruebas</li>
+                <li><code>npx cypress run</code> - Ejecuta todas las pruebas en modo headless</li>
+                <li><code>npx cypress run --spec "cypress/e2e/login.cy.js"</code> - Ejecuta archivo específico</li>
+                <li><code>npx cypress run --browser chrome</code> - Ejecuta en navegador específico</li>
+            </ul>
+        </div>
+
+        <h2>8. Testing End-to-End (E2E) en Aplicaciones React</h2>
+
+        <h3>8.1. Creación de Escenarios de Prueba E2E</h3>
+        <p>Escenarios comunes a probar:</p>
+        <ul>
+            <li><strong>Flujo de autenticación:</strong> Login, logout, recuperación de contraseña</li>
+            <li><strong>CRUD operations:</strong> Crear, leer, actualizar y eliminar datos</li>
+            <li><strong>Navegación:</strong> Rutas, enlaces y redirecciones</li>
+            <li><strong>Formularios:</strong> Validación y envío de datos</li>
+            <li><strong>Carrito de compras:</strong> Agregar productos, checkout, pago</li>
+        </ul>
+
+        <h3>8.2. Navegación, Interacción y Validación</h3>
+        <pre><code>// Escenario completo E2E
+describe('E-commerce Flow', () => {
+  it('completa compra desde catálogo', () => {
+    // Navegación
+    cy.visit('/products');
+    cy.get('[data-testid="product-card"]').first().click();
+    
+    // Interacción
+    cy.get('[data-testid="add-to-cart"]').click();
+    cy.get('[data-testid="cart-icon"]').click();
+    
+    // Validación
+    cy.url().should('include', '/cart');
+    cy.get('[data-testid="cart-item"]').should('have.length', 1);
+    
+    cy.get('[data-testid="checkout"]').click();
+    cy.url().should('include', '/checkout');
+  });
+});</code></pre>
+
+        <h2>9. Automatización y CI</h2>
+        <p>La integración continua (CI) ejecuta tus pruebas automáticamente en cada push o pull request.</p>
+
+        <h3>9.1. Configuración de un Pipeline de CI</h3>
+        <pre><code># .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run tests
+      run: npm test -- --coverage --watchAll=false
+    
+    - name: Run E2E tests
+      run: npx cypress run
+    
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3</code></pre>
+
+        <h3>9.2. Herramientas y Servicios de CI</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Servicio</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>GitHub Actions</strong></td>
+                    <td>Integrado con GitHub, muy fácil de configurar</td>
+                </tr>
+                <tr>
+                    <td><strong>GitLab CI</strong></td>
+                    <td>CI/CD integrado en GitLab, muy potente</td>
+                </tr>
+                <tr>
+                    <td><strong>CircleCI</strong></td>
+                    <td>Servicio de terceros con plan gratuito generoso</td>
+                </tr>
+                <tr>
+                    <td><strong>Jenkins</strong></td>
+                    <td>Autohospedable, muy configurable pero complejo</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>9.3. Mejores Prácticas y Técnicas Avanzadas</h3>
+        <div class="columns">
+            <div class="column">
+                <div class="ejemplo">
+                    <h4><strong>Paralelización</strong></h4>
+                    <p>Ejecutar pruebas en paralelo para acelerar el pipeline de CI.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <h4><strong>Cache de dependencias</strong></h4>
+                    <p>Almacenar node_modules para builds más rápidos.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <h4><strong>Matrices de pruebas</strong></h4>
+                    <p>Probar en múltiples versiones de Node y navegadores.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ejemplo">
+                    <h4><strong>Failure reports</strong></h4>
+                    <p>Enviar reportes de fallos automáticamente al equipo.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>10. TDD en Aplicaciones React</h2>
+        <p>TDD (Test-Driven Development) es una metodología donde escribes las pruebas antes del código.</p>
+
+        <div class="ejemplo">
+            <h3>Ciclo Red-Green-Refactor:</h3>
+            <ol>
+                <li><strong style="color: var(--color-danger-fg);">Red:</strong> Escribe una prueba que falle</li>
+                <li><strong style="color: var(--color-success-fg);">Green:</strong> Escribe el código mínimo para que pase</li>
+                <li><strong style="color: var(--color-accent-fg);">Refactor:</strong> Mejora el código manteniendo las pruebas verdes</li>
+            </ol>
+        </div>
+
+        <pre><code>// Ejemplo de TDD para componente Counter
+
+// 1. RED: Escribir test que falla
+test('incrementa contador al hacer click', () => {
+  render(&lt;Counter /&gt;);
+  const button = screen.getByRole('button', { name: /increment/i });
+  fireEvent.click(button);
+  expect(screen.getByText('Count: 1')).toBeInTheDocument();
+});
+
+// 2. GREEN: Implementar código mínimo
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Increment
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+// 3. REFACTOR: Mejorar implementación
+function Counter() {
+  const [count, setCount] = useState(0);
+  const increment = useCallback(() =&gt; setCount(c =&gt; c + 1), []);
+  
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={increment}&gt;
+        Increment
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+        <div class="importante">
+            <strong>Beneficios del TDD:</strong>
+            <ul>
+                <li>Diseño más simple y enfocado</li>
+                <li>Mayor confianza al refactorizar</li>
+                <li>Documentación viva del código</li>
+                <li>Detección temprana de problemas</li>
+            </ul>
+        </div>
+
+        <h2>Conclusión</h2>
+        <p>El testing en React es esencial para mantener aplicaciones de calidad. Combinando unit tests, integration tests y E2E tests, puedes garantizar que tu aplicación funcione correctamente y sea fácil de mantener.</p>
+
+        <div class="tip">
+            <strong>Recordatorio:</strong> El objetivo no es tener 100% de cobertura, sino tener pruebas significativas que den confianza al equipo y faciliten el mantenimiento del código.
+        </div>
+
+        <a href="index.html" class="volver-btn">← Volver al índice</a>
+    </div>
+</body>
+</html>
+
