@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Banner</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    .hero-banner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(135deg, #f5a623, #ff6f61);
+      color: #fff;
+      text-align: center;
+      flex-direction: column;
+    }
+    .hero-banner h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    .hero-banner p {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+    .hero-banner a {
+      display: inline-block;
+      padding: 15px 30px;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      background-color: #ff6f61;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .hero-banner a:hover {
+      background-color: #ff9071;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero-banner">
+    <h1 id="hero-title">Cargando...</h1>
+    <p id="hero-subtitle">Por favor, espere</p>
+    <a id="hero-button" href="#" target="_blank">Cargando...</a>
+  </div>
+
+  <script>
+    async function loadHeroData() {
+      try {
+        const response = await fetch('hero.json');
+        const data = await response.json();
+        document.getElementById('hero-title').textContent = data.hero.titulo;
+        document.getElementById('hero-subtitle').textContent = data.hero.subtitulo;
+        const heroButton = document.getElementById('hero-button');
+        heroButton.textContent = data.hero.textoBoton;
+        heroButton.href = data.hero.linkBoton;
+      } catch (error) {
+        console.error('Error al cargar el JSON:', error);
+      }
+    }
+
+    window.onload = loadHeroData;
+  </script>
+
+</body>
+</html>

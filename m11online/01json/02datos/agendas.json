@@ -1,0 +1,75 @@
+{
+    "agendas": [
+      {
+        "titulo": "Agenda Minimalista",
+        "descripcion": "Diseño limpio y moderno, perfecta para los amantes del minimalismo.",
+        "tamaño": "A5",
+        "precio": 1200,
+        "imagen": "https://dummyimage.com/300x400/eeeeee/333333"
+      },
+      {
+        "titulo": "Agenda Floral",
+        "descripcion": "Decorada con hermosos patrones florales, ideal para un toque natural.",
+        "tamaño": "B6",
+        "precio": 1350,
+        "imagen": "https://dummyimage.com/300x400/ffeecc/cc9999"
+      },
+      {
+        "titulo": "Agenda Vintage",
+        "descripcion": "Estilo retro con cubiertas envejecidas y papel de alta calidad.",
+        "tamaño": "A6",
+        "precio": 1500,
+        "imagen": "https://dummyimage.com/300x400/cccccc/777777"
+      },
+      {
+        "titulo": "Agenda Artística",
+        "descripcion": "Con portadas únicas diseñadas por artistas independientes.",
+        "tamaño": "A5",
+        "precio": 1800,
+        "imagen": "https://dummyimage.com/300x400/ffcccc/000000"
+      },
+      {
+        "titulo": "Agenda de Viajes",
+        "descripcion": "Perfecta para documentar tus aventuras y momentos especiales.",
+        "tamaño": "A6",
+        "precio": 1400,
+        "imagen": "https://dummyimage.com/300x400/99ccff/333333"
+      },
+      {
+        "titulo": "Agenda Bullet Journal",
+        "descripcion": "Diseño versátil con espacios en blanco para personalizar a tu gusto.",
+        "tamaño": "A5",
+        "precio": 1250,
+        "imagen": "https://dummyimage.com/300x400/ffffff/333333"
+      },
+      {
+        "titulo": "Agenda Creativa",
+        "descripcion": "Portadas con ilustraciones únicas para mentes creativas.",
+        "tamaño": "B5",
+        "precio": 1700,
+        "imagen": "https://dummyimage.com/300x400/ff99cc/000000"
+      },
+      {
+        "titulo": "Agenda Geométrica",
+        "descripcion": "Patrones geométricos en la portada, ideal para los amantes de lo abstracto.",
+        "tamaño": "A5",
+        "precio": 1450,
+        "imagen": "https://dummyimage.com/300x400/ccffcc/333333"
+      },
+      {
+        "titulo": "Agenda Personalizada",
+        "descripcion": "Agrega tu nombre y elige el diseño que más te guste.",
+        "tamaño": "A4",
+        "precio": 2000,
+        "imagen": "https://dummyimage.com/300x400/ffcc99/333333"
+      },
+      {
+        "titulo": "Agenda Boho",
+        "descripcion": "Estilo bohemio con colores suaves y patrones relajados.",
+        "tamaño": "A5",
+        "precio": 1600,
+        "imagen": "https://dummyimage.com/300x400/ffcccc/555555"
+      }
+    ]
+  }
+  

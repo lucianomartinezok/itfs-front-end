@@ -1,0 +1,77 @@
+{
+    "ciudades": [
+      {
+        "nombre": "Buenos Aires",
+        "subtitulo": "Capital Federal",
+        "descripcion": "La capital del país, conocida por su vida cultural y su arquitectura europea.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "Córdoba",
+        "subtitulo": "Córdoba",
+        "descripcion": "La segunda ciudad más grande, famosa por su historia colonial y universidades.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "Rosario",
+        "subtitulo": "Santa Fe",
+        "descripcion": "Una ciudad portuaria a orillas del río Paraná, con gran actividad comercial.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "Mendoza",
+        "subtitulo": "Mendoza",
+        "descripcion": "Famosa por sus viñedos y su proximidad a la cordillera de los Andes.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "San Miguel de Tucumán",
+        "subtitulo": "Tucumán",
+        "descripcion": "Cuna de la independencia argentina, conocida por su historia y patrimonio cultural.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "La Plata",
+        "subtitulo": "Buenos Aires",
+        "descripcion": "Ciudad planificada, capital de la provincia de Buenos Aires, con un diseño urbanístico único.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "Mar del Plata",
+        "subtitulo": "Buenos Aires",
+        "descripcion": "Destino turístico popular por sus playas y su vida nocturna.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "Salta",
+        "subtitulo": "Salta",
+        "descripcion": "Conocida como 'Salta la Linda', famosa por su arquitectura colonial y sus paisajes montañosos.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "Santa Fe",
+        "subtitulo": "Santa Fe",
+        "descripcion": "Importante ciudad industrial y portuaria, a orillas del río Paraná.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "San Carlos de Bariloche",
+        "subtitulo": "Río Negro",
+        "descripcion": "Destino turístico en la Patagonia, famoso por sus paisajes montañosos y lagos.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "Ushuaia",
+        "subtitulo": "Tierra del Fuego",
+        "descripcion": "La ciudad más austral del mundo, puerta de entrada a la Antártida.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      },
+      {
+        "nombre": "San Fernando del Valle de Catamarca",
+        "subtitulo": "Catamarca",
+        "descripcion": "Capital de la provincia de Catamarca, rodeada de montañas y rica en tradiciones.",
+        "imagen": "https://dummyimage.com/300x200/cccccc/000000"
+      }
+    ]
+  }
+  

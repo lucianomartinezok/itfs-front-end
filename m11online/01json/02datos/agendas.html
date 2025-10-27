@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendas Personalizadas</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f0f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #6a1b9a;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      color: #333333;
+      margin: 10px 0;
+    }
+
+    .card p {
+      color: #666666;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .card span {
+      font-weight: bold;
+      color: #6a1b9a;
+    }
+
+    .card button {
+      background-color: #6a1b9a;
+      color: #ffffff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .card button:hover {
+      background-color: #8e24aa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Agendas Personalizadas</h1>
+    <div class="card-container" id="agendas-container">
+      <!-- Tarjetas de agendas aparecerán aquí -->
+    </div>
+  </div>
+
+  <script>
+    // Función para cargar el archivo JSON externo y mostrar las agendas
+    async function cargarAgendas() {
+      try {
+        const response = await fetch('agendas.json');  // Cargar el archivo JSON
+        const data = await response.json();
+        const container = document.getElementById('agendas-container');
+        
+        // Recorrer cada agenda y crear su tarjeta
+        data.agendas.forEach(agenda => {
+          const card = document.createElement('div');
+          card.classList.add('card');
+          
+          card.innerHTML = `
+            <img src="${agenda.imagen}" alt="${agenda.titulo}">
+            <h2>${agenda.titulo}</h2>
+            <p>${agenda.descripcion}</p>
+            <p><span>Tamaño:</span> ${agenda.tamaño}</p>
+            <p><span>Precio:</span> $${agenda.precio}</p>
+            <button onclick="alert('Has seleccionado ${agenda.titulo}')">Comprar</button>
+          `;
+          
+          container.appendChild(card);
+        });
+      } catch (error) {
+        console.error('Error al cargar el archivo JSON:', error);
+      }
+    }
+
+    // Llamar a la función cuando cargue la página
+    window.onload = cargarAgendas;
+  </script>
+
+</body>
+</html>
