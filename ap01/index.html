@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apéndice 1 - Front-End no Code</title>
+    <style>
+        :root {
+            --color-canvas-default: #ffffff;
+            --color-canvas-subtle: #f6f8fa;
+            --color-border-default: #d0d7de;
+            --color-border-muted: #d8dee4;
+            --color-fg-default: #24292f;
+            --color-fg-muted: #656d76;
+            --color-fg-subtle: #6e7781;
+            --color-accent-fg: #0969da;
+            --color-accent-emphasis: #0969da;
+            --color-success-fg: #1a7f37;
+            --color-attention-fg: #9a6700;
+            --shadow-small: 0 1px 0 rgba(27, 31, 36, 0.04);
+            --shadow-medium: 0 3px 6px rgba(140, 149, 159, 0.15);
+            --shadow-large: 0 8px 24px rgba(140, 149, 159, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--color-canvas-default);
+            border-right: 1px solid var(--color-border-default);
+            padding: 24px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            position: relative;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border-muted);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-fg-default);
+            margin-bottom: 8px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.875rem;
+            color: var(--color-fg-muted);
+        }
+
+        .sidebar-close {
+            display: none;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-fg-muted);
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-close:hover {
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+        }
+
+        .menu-section {
+            margin-bottom: 32px;
+        }
+
+        .menu-section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-fg-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            padding: 8px 0;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--color-fg-default);
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: var(--color-canvas-subtle);
+            border-color: var(--color-border-default);
+        }
+
+        .menu-item.active {
+            background: var(--color-accent-fg);
+            color: #ffffff;
+            border-color: var(--color-accent-fg);
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 48px;
+            max-width: calc(100% - 280px);
+        }
+
+        .tool-card {
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-small);
+        }
+
+        .tool-header {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border-muted);
+        }
+
+        .tool-header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-fg-default);
+            margin-bottom: 8px;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 8px;
+        }
+
+        .badge-gratuita {
+            background: rgba(26, 127, 55, 0.1);
+            color: var(--color-success-fg);
+        }
+
+        .badge-freemium {
+            background: rgba(154, 103, 0, 0.1);
+            color: var(--color-attention-fg);
+        }
+
+        .badge-pago {
+            background: rgba(209, 36, 47, 0.1);
+            color: var(--color-danger-fg);
+        }
+
+        .tool-section {
+            margin-bottom: 24px;
+        }
+
+        .tool-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-fg-default);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tool-section p {
+            color: var(--color-fg-muted);
+            line-height: 1.6;
+        }
+
+        .tool-link {
+            color: var(--color-accent-fg);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .tool-link:hover {
+            border-bottom-color: var(--color-accent-fg);
+        }
+
+        .tool-header-link {
+            color: var(--color-fg-default);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .tool-header-link:hover {
+            color: var(--color-accent-fg);
+        }
+
+        .tool-section ul {
+            margin-left: 20px;
+            color: var(--color-fg-muted);
+        }
+
+        .tool-section li {
+            margin-bottom: 4px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 24px;
+            color: var(--color-fg-muted);
+        }
+
+        .empty-state h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--color-fg-default);
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+        }
+
+        .empty-state-intro {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 0;
+        }
+
+        .empty-state-intro > p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-fg-default);
+        }
+
+        .empty-state-card {
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .empty-state-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--color-fg-default);
+        }
+
+        .empty-state-card p {
+            margin-bottom: 16px;
+            line-height: 1.7;
+            color: var(--color-fg-muted);
+        }
+
+        .empty-state-card ul {
+            margin-left: 24px;
+            line-height: 1.8;
+            color: var(--color-fg-muted);
+        }
+
+        .empty-state-card li {
+            margin-bottom: 12px;
+        }
+
+        .empty-state-card strong {
+            color: var(--color-fg-default);
+        }
+
+        .empty-state-card .text-success {
+            color: var(--color-success-fg);
+        }
+
+        .empty-state-card .text-attention {
+            color: var(--color-attention-fg);
+        }
+
+        .empty-state-cta {
+            margin-top: 32px;
+            font-size: 1rem;
+            color: var(--color-fg-muted);
+            text-align: center;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-canvas-subtle);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border-default);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-border-muted);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        .sidebar-overlay {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                position: relative;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                width: 280px;
+                max-width: 85vw;
+                box-shadow: var(--shadow-large);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 99;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+                opacity: 1;
+            }
+
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 60px 16px 24px;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                position: fixed;
+                top: 16px;
+                left: 16px;
+                z-index: 101;
+                background: var(--color-canvas-default);
+                border: 1px solid var(--color-border-default);
+                border-radius: 6px;
+                padding: 10px 14px;
+                cursor: pointer;
+                font-size: 1.25rem;
+                box-shadow: var(--shadow-medium);
+                transition: all 0.2s ease;
+            }
+
+            .mobile-menu-toggle:hover {
+                background: var(--color-canvas-subtle);
+            }
+
+            .tool-card {
+                padding: 20px;
+                margin-bottom: 16px;
+            }
+
+            .tool-header {
+                margin-bottom: 20px;
+                padding-bottom: 12px;
+            }
+
+            .tool-header h2 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+
+            .tool-badge {
+                display: inline-block;
+                margin: 4px 4px 4px 0;
+                font-size: 0.7rem;
+                padding: 3px 10px;
+            }
+
+            .tool-section {
+                margin-bottom: 20px;
+            }
+
+            .tool-section h3 {
+                font-size: 0.95rem;
+            }
+
+            .tool-section p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .empty-state {
+                padding: 40px 16px;
+            }
+
+            .empty-state h2 {
+                font-size: 1.25rem;
+            }
+
+            .empty-state p {
+                font-size: 0.9rem;
+            }
+
+            .empty-state-intro {
+                padding: 16px 0;
+            }
+
+            .empty-state-intro > p {
+                font-size: 1rem;
+            }
+
+            .empty-state-card {
+                padding: 16px;
+                margin: 16px 0;
+            }
+
+            .empty-state-card h3 {
+                font-size: 1rem;
+            }
+
+            .empty-state-card p {
+                font-size: 0.9rem;
+            }
+
+            .empty-state-card ul {
+                margin-left: 20px;
+            }
+
+            .empty-state-cta {
+                margin-top: 24px;
+                font-size: 0.9rem;
+            }
+
+            .sidebar-header h1 {
+                font-size: 1.25rem;
+            }
+
+            .sidebar-header p {
+                font-size: 0.8rem;
+            }
+
+            .sidebar-close {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menú</button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="sidebar-close" onclick="toggleSidebar()" aria-label="Cerrar menú">×</button>
+            <h1>📚 Front-End no Code</h1>
+            <p>Herramientas para crear sitios web sin código</p>
+        </div>
+        
+        <nav id="menu">
+            <div class="menu-section">
+                <div class="menu-section-title">Gratuitas</div>
+                <div id="menu-gratuitas"></div>
+            </div>
+            
+            <div class="menu-section">
+                <div class="menu-section-title">Pagas</div>
+                <div id="menu-pagas"></div>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div id="content">
+            <div class="empty-state">
+                <h2>📚 Front-End no Code - Catálogo de Herramientas</h2>
+                <div class="empty-state-intro">
+                    <p>
+                        Este catálogo contiene una selección de <strong>herramientas Front-End no Code</strong> que permiten crear sitios web profesionales sin necesidad de escribir código manualmente. Estas plataformas son ideales para aprender conceptos fundamentales de desarrollo web, maquetación y diseño responsive de manera visual e intuitiva.
+                    </p>
+                    
+                    <div class="empty-state-card">
+                        <h3>📋 Organización del Contenido</h3>
+                        <p>
+                            El contenido está <strong>dividido en dos categorías principales</strong> según el modelo de negocio y accesibilidad de cada herramienta:
+                        </p>
+                        <ul>
+                            <li>
+                                <strong class="text-success">Herramientas Gratuitas:</strong> Incluye plataformas de código abierto, software libre y opciones freemium (gratis con funcionalidades limitadas). Perfectas para comenzar sin inversión inicial.
+                            </li>
+                            <li>
+                                <strong class="text-attention">Herramientas Pagas:</strong> Soluciones profesionales con planes de suscripción que ofrecen funcionalidades avanzadas, soporte técnico y dominio propio. Ideales para proyectos profesionales o educativos con presupuesto.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="empty-state-card">
+                        <h3>🎯 ¿Por qué esta organización?</h3>
+                        <p>
+                            Esta división te permite <strong>encontrar rápidamente herramientas según tu presupuesto y objetivos</strong>. Si estás aprendiendo o experimentando, las herramientas gratuitas te permiten comenzar sin costo. Si necesitas un entorno profesional con más control y funcionalidades, puedes explorar las opciones de pago. Cada herramienta incluye información detallada sobre sus <strong>ventajas, limitaciones, precio y uso educativo</strong> para ayudarte a tomar la mejor decisión.
+                        </p>
+                    </div>
+
+                    <p class="empty-state-cta">
+                        👈 <strong>Elige una herramienta del menú lateral</strong> para ver información detallada sobre cada una.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let toolsData = null;
+        let currentTool = null;
+
+        // URLs de las plataformas
+        const platformUrls = {
+            'WordPress (auto-hosted)': 'https://wordpress.org',
+            'Webflow': 'https://webflow.com',
+            'Framer': 'https://www.framer.com',
+            'Wix': 'https://www.wix.com',
+            'Weebly': 'https://www.weebly.com',
+            'Squarespace': 'https://www.squarespace.com',
+            'Elementor Cloud': 'https://elementor.com/cloud/',
+            'Duda': 'https://www.duda.co'
+        };
+
+        // Función para reemplazar nombres de plataformas con enlaces
+        function replacePlatformNames(text) {
+            let result = text;
+            // Ordenar por longitud descendente para manejar nombres compuestos primero (ej: "WordPress (auto-hosted)" antes de "WordPress")
+            const sortedPlatforms = Object.keys(platformUrls).sort((a, b) => b.length - a.length);
+            
+            sortedPlatforms.forEach(platform => {
+                // Escapar caracteres especiales para regex
+                const escapedPlatform = platform.replace(/[.*+?^${}|[\]\\]/g, '\\$&');
+                const regex = new RegExp(escapedPlatform, 'gi');
+                let match;
+                
+                // Usar un array para reconstruir el texto
+                const parts = [];
+                let lastIndex = 0;
+                
+                while ((match = regex.exec(result)) !== null) {
+                    // Agregar texto antes de la coincidencia
+                    if (match.index > lastIndex) {
+                        parts.push(result.substring(lastIndex, match.index));
+                    }
+                    
+                    // Verificar si está dentro de un tag HTML
+                    const beforeMatch = result.substring(0, match.index);
+                    const lastOpenTag = beforeMatch.lastIndexOf('<');
+                    const lastCloseTag = beforeMatch.lastIndexOf('>');
+                    
+                    // Si hay un tag abierto sin cerrar, no reemplazar (está dentro de HTML)
+                    if (lastOpenTag > lastCloseTag) {
+                        parts.push(match[0]);
+                    } else {
+                        parts.push(`<a href="${platformUrls[platform]}" class="tool-link" target="_blank" rel="noopener">${match[0]}</a>`);
+                    }
+                    
+                    lastIndex = match.index + match[0].length;
+                }
+                
+                // Agregar el resto del texto
+                if (lastIndex < result.length) {
+                    parts.push(result.substring(lastIndex));
+                }
+                
+                result = parts.join('');
+            });
+            
+            return result;
+        }
+
+        // Cargar datos del JSON
+        async function loadData() {
+            try {
+                const response = await fetch('fuentes.json');
+                const data = await response.json();
+                toolsData = data.noCodeFrontEndTools;
+                renderMenu();
+            } catch (error) {
+                console.error('Error cargando datos:', error);
+                document.getElementById('content').innerHTML = `
+                    <div class="empty-state">
+                        <h2>Error al cargar los datos</h2>
+                        <p>No se pudo cargar el archivo fuentes.json</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Renderizar menú
+        function renderMenu() {
+            const menuGratuitas = document.getElementById('menu-gratuitas');
+            const menuPagas = document.getElementById('menu-pagas');
+
+            // Herramientas gratuitas
+            toolsData.gratuitas.forEach((tool, index) => {
+                const menuItem = document.createElement('a');
+                menuItem.className = 'menu-item';
+                menuItem.href = '#';
+                menuItem.textContent = tool.nombre;
+                menuItem.onclick = (e) => {
+                    e.preventDefault();
+                    showTool('gratuitas', index);
+                };
+                menuGratuitas.appendChild(menuItem);
+            });
+
+            // Herramientas pagas
+            toolsData.pagas.forEach((tool, index) => {
+                const menuItem = document.createElement('a');
+                menuItem.className = 'menu-item';
+                menuItem.href = '#';
+                menuItem.textContent = tool.nombre;
+                menuItem.onclick = (e) => {
+                    e.preventDefault();
+                    showTool('pagas', index);
+                };
+                menuPagas.appendChild(menuItem);
+            });
+        }
+
+        // Mostrar herramienta
+        function showTool(category, index) {
+            const tool = toolsData[category][index];
+            currentTool = { category, index };
+
+            // Actualizar clase activa en menú
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            const menuItems = document.querySelectorAll('.menu-item');
+            const categoryOffset = category === 'gratuitas' ? 0 : toolsData.gratuitas.length;
+            menuItems[categoryOffset + index].classList.add('active');
+
+            // Determinar badge según tipo
+            let badgeClass = '';
+            let badgeText = '';
+            if (tool.tipo.includes('gratuito') || tool.tipo.includes('libre')) {
+                badgeClass = 'badge-gratuita';
+                badgeText = 'Gratuita';
+            } else if (tool.tipo === 'freemium') {
+                badgeClass = 'badge-freemium';
+                badgeText = 'Freemium';
+            } else {
+                badgeClass = 'badge-pago';
+                badgeText = 'Pago';
+            }
+
+            // Obtener URL de la plataforma
+            const platformUrl = platformUrls[tool.nombre] || null;
+            const toolTitle = platformUrl 
+                ? `<a href="${platformUrl}" class="tool-header-link" target="_blank" rel="noopener">${tool.nombre}</a>`
+                : tool.nombre;
+
+            // Aplicar enlaces a los textos
+            const descripcion = replacePlatformNames(tool.descripcion);
+            const ventajas = replacePlatformNames(tool.ventajas);
+            const limitaciones = replacePlatformNames(tool.limitaciones);
+            const precio = replacePlatformNames(tool.precio);
+            const usoEducativo = replacePlatformNames(tool.uso_educativo);
+
+            // Renderizar contenido
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <h2>${toolTitle}</h2>
+                        <span class="tool-badge ${badgeClass}">${badgeText}</span>
+                        <span class="tool-badge" style="background: rgba(110, 119, 129, 0.1); color: var(--color-fg-muted);">${tool.tipo}</span>
+                    </div>
+
+                    <div class="tool-section">
+                        <h3>📝 Descripción</h3>
+                        <p>${descripcion}</p>
+                    </div>
+
+                    <div class="tool-section">
+                        <h3>✅ Ventajas</h3>
+                        <p>${ventajas}</p>
+                    </div>
+
+                    <div class="tool-section">
+                        <h3>⚠️ Limitaciones</h3>
+                        <p>${limitaciones}</p>
+                    </div>
+
+                    <div class="tool-section">
+                        <h3>💰 Precio</h3>
+                        <p>${precio}</p>
+                    </div>
+
+                    <div class="tool-section">
+                        <h3>🎓 Uso Educativo</h3>
+                        <p>${usoEducativo}</p>
+                    </div>
+                </div>
+            `;
+
+            // Cerrar sidebar en móvil
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Toggle sidebar en móvil
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const isOpen = sidebar.classList.contains('open');
+            
+            if (isOpen) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+            }
+        }
+
+        // Prevenir cierre al hacer click dentro del sidebar
+        document.getElementById('sidebar').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Manejar resize de ventana
+        window.addEventListener('resize', () => {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        });
+
+        // Cargar datos al iniciar
+        loadData();
+    </script>
+</body>
+</html>
+

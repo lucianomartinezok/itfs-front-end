@@ -1,0 +1,81 @@
+{
+    "noCodeFrontEndTools": {
+      "gratuitas": [
+        {
+          "nombre": "WordPress (auto-hosted)",
+          "tipo": "software libre / autoalojado",
+          "descripcion": "WordPress.org es un CMS libre y de código abierto. Se instala en tu propio hosting, lo que te da control total sobre tu web y sin costo de licencia.",
+          "limitaciones": "Requiere hosting y dominio propio. La versión gratuita de WordPress.com limita plugins y usa un subdominio con anuncios.",
+          "ventajas": "Gran comunidad, miles de temas y plugins, escalable, ideal para proyectos educativos o profesionales.",
+          "precio": "Software gratuito, hosting desde US$3 a US$10/mes.",
+          "uso_educativo": "Permite enseñar conceptos de front-end (estructura, estilos, maquetado) sin escribir código directamente."
+        },
+        {
+          "nombre": "Webflow",
+          "tipo": "freemium",
+          "descripcion": "Constructor visual avanzado para crear webs con control preciso del diseño CSS, transiciones y layout.",
+          "limitaciones": "Plan gratuito limitado a 2 páginas, dominio webflow.io, sin exportar código ni dominio propio.",
+          "ventajas": "Visual potente, ideal para enseñar maquetación sin código y estructura de clases CSS.",
+          "precio": "Desde US$14/mes (plan Basic).",
+          "uso_educativo": "Ayuda a entender jerarquías de estilos, cajas, grids y animaciones visuales."
+        },
+        {
+          "nombre": "Framer",
+          "tipo": "freemium",
+          "descripcion": "Herramienta moderna para prototipos y sitios web, con enfoque en animaciones fluidas y diseño responsive.",
+          "limitaciones": "Subdominio framer.app, límite de visitantes/mes, branding visible, sin dominio propio.",
+          "ventajas": "Diseño moderno y atractivo, ideal para mostrar landing pages y prototipos funcionales.",
+          "precio": "Plan pago desde ~US$15/mes.",
+          "uso_educativo": "Útil para mostrar la evolución de un prototipo a un sitio funcional sin código."
+        },
+        {
+          "nombre": "Wix",
+          "tipo": "freemium",
+          "descripcion": "Constructor visual muy popular orientado a usuarios sin experiencia técnica.",
+          "limitaciones": "Dominio wixsite.com, anuncios de Wix, limitaciones en almacenamiento y tráfico.",
+          "ventajas": "Extremadamente intuitivo, con plantillas rápidas y sistema drag & drop.",
+          "precio": "Desde ~US$17/mes en planes pagos.",
+          "uso_educativo": "Ideal para introducción a la estructura visual de una web y personalización de plantillas."
+        },
+        {
+          "nombre": "Weebly",
+          "tipo": "freemium",
+          "descripcion": "Plataforma de creación de sitios sencilla, con plantillas y opción de e-commerce básico.",
+          "limitaciones": "Subdominio weebly.com, limitaciones en funciones de tienda online.",
+          "ventajas": "Sencillo y rápido de usar; interfaz visual limpia.",
+          "precio": "Desde ~US$6/mes (plan pago).",
+          "uso_educativo": "Sirve para enseñar estructura de secciones, navegación y conceptos básicos de responsive."
+        }
+      ],
+      "pagas": [
+        {
+          "nombre": "Squarespace",
+          "tipo": "pago",
+          "descripcion": "Constructor visual profesional con enfoque en diseño elegante, branding y portafolios.",
+          "limitaciones": "No hay plan gratuito permanente, solo prueba de 14 días.",
+          "ventajas": "Diseños premium, soporte técnico completo, hosting integrado.",
+          "precio": "Desde ~US$16/mes (facturación anual).",
+          "uso_educativo": "Permite mostrar un entorno profesional con control total de diseño y dominio propio."
+        },
+        {
+          "nombre": "Elementor Cloud",
+          "tipo": "pago",
+          "descripcion": "Versión cloud de Elementor que combina hosting, WordPress y Elementor Pro en una sola solución.",
+          "limitaciones": "No posee versión gratuita. Pago anual obligatorio.",
+          "ventajas": "Todo en uno, configuración mínima, rendimiento optimizado.",
+          "precio": "~US$99/año (~US$8.25/mes).",
+          "uso_educativo": "Ejemplo de solución ‘todo incluido’ para enseñar implementación rápida y mantenimiento simple."
+        },
+        {
+          "nombre": "Duda",
+          "tipo": "pago",
+          "descripcion": "Plataforma orientada a agencias y profesionales que manejan múltiples sitios.",
+          "limitaciones": "No ofrece plan gratuito permanente. Solo prueba temporal.",
+          "ventajas": "Enfocada en la eficiencia y colaboración multiusuario, soporte profesional.",
+          "precio": "Desde ~US$14/mes (plan básico).",
+          "uso_educativo": "Permite mostrar cómo escalar proyectos con varios sitios y gestión profesional."
+        }
+      ]
+    }
+  }
+  
