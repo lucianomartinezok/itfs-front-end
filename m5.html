@@ -1,212 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resumen JavaScript Moderno</title>
+    <title>Resumen M5 · JavaScript Moderno</title>
     <style>
-        /* Estilos base */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        :root {
+            --bg: #0f1720;
+            --bg-soft: #1a2433;
+            --card: #ffffff;
+            --card-alt: #fafcfd;
+            --ink: #1a2433;
+            --ink-soft: #4a5568;
+            --accent: #00a8b5;
+            --accent-2: #007B8F;
+            --accent-dark: #005f6b;
+            --highlight: #ffd166;
+            --success: #2dc48d;
+            --border: #e2e8f0;
+            --shadow: 0 6px 20px rgba(0, 95, 107, 0.08);
+            --shadow-lg: 0 12px 32px rgba(0, 95, 107, 0.15);
         }
-        
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-padding-top: 90px;
+        }
+
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background: #F0F7FB;
-            color: #333;
-            padding: 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f0f7fb 0%, #e6f2f5 100%);
+            color: var(--ink);
+            min-height: 100vh;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        h1, h2, h3 {
-            color: #007B8F;
-            margin-bottom: 15px;
-        }
-        
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-        }
-        
-        h2 {
-            margin-top: 25px;
-            font-size: 1.6em;
-        }
-        
-        h3 {
-            font-size: 1.3em;
-            color: #005f6b;
-        }
-        
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        li {
-            background: #FFFBEC;
-            margin: 8px 0;
-            padding: 12px;
-            border-left: 5px solid #007B8F;
-            border-radius: 4px;
-            line-height: 1.5;
-        }
-        
-        code {
-            background: #e7f3fe;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-        
-        .columns {
+
+        /* ===== TOP BAR ===== */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent-2) 60%, var(--accent) 100%);
+            color: white;
+            padding: 14px 28px;
+            box-shadow: var(--shadow);
             display: flex;
-            gap: 30px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .topbar h1 {
+            font-size: 1.25em;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .topbar h1 span.badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-right: 8px;
+            backdrop-filter: blur(4px);
+        }
+
+        .topnav {
+            display: flex;
+            gap: 4px;
             flex-wrap: wrap;
         }
-        
-        .column {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .hint {
-            margin: 20px 0;
-            padding: 15px;
-            background: #E2F7E2;
-            border-left: 5px solid #007B8F;
-            border-radius: 4px;
-        }
-        
-        .volver-btn {
-            display: block;
-            width: 200px;
-            margin: 30px auto 0;
-            padding: 12px 20px;
-            text-align: center;
-            background-color: #007B8F;
-            color: white;
+
+        .topnav a {
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background 0.3s;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.88em;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
-        
-        .volver-btn:hover {
-            background-color: #005f6b;
+
+        .topnav a:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
         }
-        
-        .destacado {
-            color: #005f6b;
-            font-weight: bold;
+
+        .topnav a.back {
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* ===== LAYOUT ===== */
+        .shell {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 28px;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            align-self: start;
+            background: var(--card);
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+
+        .sidebar h4 {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar nav ul { list-style: none; }
+
+        .sidebar nav > ul > li {
+            margin: 4px 0;
+        }
+
+        .sidebar nav a {
             display: block;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 0.92em;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar nav a:hover {
+            background: #eef6f8;
+            color: var(--accent-2);
+            border-left-color: var(--accent);
+        }
+
+        .sidebar nav a.active {
+            background: linear-gradient(90deg, #d7eef2 0%, #eef6f8 100%);
+            color: var(--accent-dark);
+            border-left-color: var(--accent-dark);
+            font-weight: 600;
+        }
+
+        .sidebar nav .sub {
+            padding-left: 16px;
+            margin: 2px 0;
+        }
+
+        .sidebar nav .sub a {
+            font-size: 0.82em;
+            color: var(--ink-soft);
+            padding: 4px 10px;
+            font-weight: 400;
+        }
+
+        /* ===== MAIN ===== */
+        .main { min-width: 0; }
+
+        .hero {
+            background: var(--card);
+            padding: 28px 32px;
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .hero h2 {
+            color: var(--accent-dark);
+            font-size: 1.6em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero p {
+            color: var(--ink-soft);
+            line-height: 1.65;
             margin: 10px 0;
         }
-        
-        a {
-            color: #007B8F;
-            text-decoration: none;
+
+        .hero .chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .chip {
+            background: #eaf5f7;
+            color: var(--accent-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
             font-weight: 500;
         }
-        
-        a:hover {
-            text-decoration: underline;
+
+        /* ===== ROWS (cajas en filas, una por fila) ===== */
+        .rows {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
+
+        @media (max-width: 1000px) {
+            .shell { grid-template-columns: 1fr; }
+            .sidebar { position: static; max-height: none; }
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--card);
+            padding: 24px 28px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.4s ease;
+            border-top: 3px solid var(--accent);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Highlight al navegar a un ancla: glow suave sin cambiar background */
+        .card.flash {
+            animation: flash 1.4s ease-out;
+        }
+
+        @keyframes flash {
+            0%   { box-shadow: 0 0 0 0 rgba(0,168,181,0.0), var(--shadow); }
+            30%  { box-shadow: 0 0 0 4px rgba(0,168,181,0.35), var(--shadow-lg); }
+            100% { box-shadow: 0 0 0 0 rgba(0,168,181,0.0), var(--shadow); }
+        }
+
+        .card h3 {
+            color: var(--accent-dark);
+            font-size: 1.15em;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card h3 .num {
+            background: var(--accent);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.72em;
+            font-weight: 700;
+        }
+
+        .card h4 {
+            color: var(--accent-2);
+            font-size: 0.95em;
+            margin: 14px 0 8px;
+            font-weight: 600;
+            scroll-margin-top: 90px;
+        }
+
+        .card p {
+            color: var(--ink-soft);
+            line-height: 1.55;
+            font-size: 0.92em;
+            margin: 6px 0;
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card li {
+            padding: 6px 10px;
+            margin: 4px 0;
+            background: var(--card-alt);
+            border-left: 3px solid var(--accent);
+            border-radius: 4px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .card li strong { color: var(--accent-dark); }
+
+        .card.preguntas {
+            border-top-color: var(--highlight);
+            background: #fffdf4;
+        }
+
+        .card.preguntas h3 .num { background: #d4a017; }
+
+        .card.preguntas li {
+            border-left-color: var(--highlight);
+            background: rgba(255,209,102,0.12);
+        }
+
+        code {
+            background: #eaf5f7;
+            color: var(--accent-dark);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+            font-size: 0.88em;
+            font-weight: 500;
+        }
+
+        .ejemplos {
+            margin-top: 14px;
+            padding: 10px 12px;
+            background: linear-gradient(135deg, #f0f9fa 0%, #e2f2f5 100%);
+            border-radius: 8px;
+            font-size: 0.85em;
+            border: 1px dashed var(--accent);
+        }
+
+        .ejemplos strong {
+            color: var(--accent-dark);
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+
+        .ejemplos a {
+            display: inline-block;
+            background: white;
+            color: var(--accent-2);
+            padding: 3px 10px;
+            margin: 2px 3px 2px 0;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            transition: all 0.15s ease;
+        }
+
+        .ejemplos a:hover {
+            background: var(--accent-2);
+            color: white;
+            border-color: var(--accent-2);
+        }
+
+        /* ===== FOOTER / PIE ===== */
+        .pie {
+            margin-top: 20px;
+            padding: 20px 28px;
+            background: linear-gradient(135deg, #2dc48d 0%, #1a9d70 100%);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            font-size: 1.05em;
+        }
+
+        .pie::before { content: "📌 "; margin-right: 6px; }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>🚀 JavaScript Moderno - Resumen Semanal</h1>
-    
-    <div class="columns">
-        <div class="column">
-            <h2>1. Preguntas Iniciales</h2>
-            <ul>
-                <li><strong>¿Qué es JavaScript?</strong> Lenguaje de scripting para web</li>
-                <li><strong>Diferencias ES5/ES6+:</strong> let/const, arrow functions, clases</li>
-                <li><strong>Importancia del DOM:</strong> Interactividad en páginas web</li>
-            </ul>
 
-            <h2>2. ECMAScript</h2>
-            <h3>2.1 Versiones clave</h3>
-            <ul>
-                <li><a href="https://www.w3schools.com/js/js_es6.asp" target="_blank">ES6 (2015)</a>: Clases, módulos, let/const</li>
-                <li>ES2016: Operador exponencial (**)</li>
-                <li>ES2020: Optional chaining (?.)</li>
-            </ul>
+<header class="topbar">
+    <h1><span class="badge">M5</span> Resumen · JavaScript Moderno</h1>
+    <nav class="topnav">
+        <a href="#s1">Preguntas</a>
+        <a href="#s2">ECMAScript</a>
+        <a href="#s3">Arrays</a>
+        <a href="#s4">Set/Map</a>
+        <a href="m5ejemplos/index.html">Ejemplos</a>
+        <a href="./index.html" class="back">← Índice</a>
+    </nav>
+</header>
 
-            <h3>2.2 Estrategia Crossbrowser</h3>
-            <ul>
-                <li>Usar <code>Babel</code> para transpilar código</li>
-                <li>Verificar compatibilidad en <a href="https://caniuse.com" target="_blank">Can I Use</a></li>
-                <li>Polyfills para funciones faltantes</li>
-            </ul>
+<div class="shell">
 
-            <h2>3. Arrays</h2>
-            <h3>3.1 Array Functions</h3>
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+        <h4>Contenido</h4>
+        <nav>
             <ul>
-                <li><code>map()</code>: Transforma elementos <a href="https://www.w3schools.com/jsref/jsref_map.asp" target="_blank">(Ejemplo)</a></li>
-                <li><code>filter()</code>: Filtra elementos</li>
-                <li><code>reduce()</code>: Acumula valores</li>
+                <li><a href="#s1">1 · Preguntas Iniciales</a></li>
+                <li><a href="#s2">2 · ECMAScript</a></li>
+                <li class="sub"><a href="#s2-1">2.1 Versiones</a></li>
+                <li class="sub"><a href="#s2-2">2.2 Crossbrowser</a></li>
+                <li><a href="#s3">3 · Arrays</a></li>
+                <li class="sub"><a href="#s3-1">3.1 Array functions</a></li>
+                <li class="sub"><a href="#s3-3">3.3 Comprobaciones</a></li>
+                <li class="sub"><a href="#s3-4">3.4 Transformadores</a></li>
+                <li class="sub"><a href="#s3-5">3.5 Búsquedas</a></li>
+                <li class="sub"><a href="#s3-6">3.6 Acumuladores</a></li>
+                <li class="sub"><a href="#s3-7">3.7 Desestructuración</a></li>
+                <li class="sub"><a href="#s3-9">3.9 Spread / Rest</a></li>
+                <li class="sub"><a href="#s3-11">3.11 Reestructuración</a></li>
+                <li><a href="#s4">4 · Set / Map</a></li>
             </ul>
-        </div>
+        </nav>
+    </aside>
 
-        <div class="column">
-            <h3>3.7 Desestructuración</h3>
-            <ul>
-                <li><code>const [a, b] = [1, 2]</code></li>
-                <li>Intercambio: <code>[x, y] = [y, x]</code></li>
-            </ul>
+    <!-- ============ MAIN ============ -->
+    <main class="main">
 
-            <h3>3.11 Reestructuración</h3>
-            <ul>
-                <li><code>flat()</code>: Aplana arrays anidados</li>
-                <li><code>flatMap()</code>: Mapeo y aplanado</li>
-            </ul>
-
-            <div class="hint">
-                💡 <strong>Métodos Clave:</strong><br>
-                <span class="destacado">Búsquedas:</span> find(), includes()<br>
-                <span class="destacado">Transformación:</span> slice(), splice()<br>
-                <span class="destacado">Ordenación:</span> sort(), reverse()
+        <section class="hero">
+            <h2>🚀 Resumen del Módulo</h2>
+            <p>El M5 se compone de conceptos de JavaScript moderno: <strong>ECMAScript 7</strong>, <strong>Arrays</strong> y sus métodos avanzados (bucles, comprobaciones, transformadores, filtros, búsquedas, acumuladores, desestructuración y reestructuración).</p>
+            <p>También incluye las <strong>APIs de JavaScript</strong> (nativas y externas, formularios, validación, Media API) y la <strong>asincronía</strong> (callbacks y promesas).</p>
+            <div class="chips">
+                <span class="chip">ECMAScript</span>
+                <span class="chip">Arrays</span>
+                <span class="chip">Set / Map</span>
+                <span class="chip">APIs</span>
+                <span class="chip">Asincronía</span>
             </div>
+        </section>
 
-            <h2>4. Set/Map</h2>
-            <ul>
-                <li><strong>Set:</strong> Valores únicos <a href="https://www.w3schools.com/js/js_sets.asp" target="_blank">(Ejemplo)</a></li>
-                <li><strong>Map:</strong> Pares clave-valor</li>
-            </ul>
+        <div class="rows">
 
-            <h3>4.2-4.5 Métodos</h3>
-            <ul>
-                <li><code>add()</code>: Añade elementos</li>
-                <li><code>has()</code>: Comprueba existencia</li>
-                <li><code>delete()</code>: Elimina elementos</li>
-                <li><code>size</code>: Obtiene cantidad</li>
-            </ul>
+            <!-- 1. Preguntas -->
+            <article class="card preguntas" id="s1">
+                <h3><span class="num">1</span> Preguntas Iniciales</h3>
+                <ul>
+                    <li>¿Qué es <strong>ECMAScript</strong> y para qué se utiliza en frontend?</li>
+                    <li>¿Cuáles son las diferencias entre las <strong>versiones de ECMAScript</strong>?</li>
+                    <li>¿Qué es la estrategia <strong>crossbrowser</strong> y por qué importa?</li>
+                    <li>¿Qué son las <strong>Array functions</strong> y en qué se diferencian de los bucles clásicos?</li>
+                    <li>¿Qué es la <strong>reestructuración de arrays</strong> y cómo se usa?</li>
+                </ul>
+            </article>
 
-            <h3>4.6 Conversión</h3>
-            <ul>
-                <li>Set a Array: <code>[...miSet]</code></li>
-                <li>Array a Set: <code>new Set(miArray)</code></li>
-            </ul>
+            <!-- 2. ECMAScript -->
+            <article class="card" id="s2">
+                <h3><span class="num">2</span> ECMAScript</h3>
+                <p>Estándar que define el lenguaje JavaScript. Cada versión suma sintaxis y nuevas <em>features</em>.</p>
+
+                <h4 id="s2-1">2.1 Versiones</h4>
+                <ul>
+                    <li><strong>ES5 (2009):</strong> base histórica.</li>
+                    <li><strong>ES6 / 2015:</strong> <code>let</code>/<code>const</code>, arrow fns, clases, módulos, template literals.</li>
+                    <li><strong>ES2016+:</strong> <code>**</code>, <code>includes()</code>, <code>async/await</code>, <code>?.</code> (optional chaining).</li>
+                </ul>
+
+                <h4 id="s2-2">2.2 Crossbrowser</h4>
+                <ul>
+                    <li>Verificar soporte en <a href="https://caniuse.com" target="_blank" rel="noopener">caniuse.com</a>.</li>
+                    <li>Transpilar con <code>Babel</code>.</li>
+                    <li>Usar <strong>polyfills</strong> para funciones faltantes.</li>
+                </ul>
+
+                <div class="ejemplos">
+                    <strong>📚 Fuente W3Schools</strong>
+                    <a href="https://www.w3schools.com/js/js_versions.asp" target="_blank" rel="noopener">JS Versions</a>
+                    <a href="https://www.w3schools.com/js/js_es6.asp" target="_blank" rel="noopener">ES6</a>
+                    <a href="https://www.w3schools.com/js/js_2016.asp" target="_blank" rel="noopener">ES2016+</a>
+                </div>
+            </article>
+
+            <!-- 3. Arrays -->
+            <article class="card" id="s3">
+                <h3><span class="num">3</span> Arrays</h3>
+                <p>Métodos de alto nivel que reemplazan al <code>for</code> clásico y hacen el código más declarativo.</p>
+
+                <h4 id="s3-1">3.1 · 3.2 Funciones y bucles</h4>
+                <ul>
+                    <li><code>forEach()</code> — recorre sin retornar.</li>
+                    <li><code>for...of</code> — bucle moderno sobre iterables.</li>
+                </ul>
+
+                <h4 id="s3-3">3.3 Comprobaciones</h4>
+                <ul>
+                    <li><code>every()</code> — ¿todos cumplen?</li>
+                    <li><code>some()</code> — ¿alguno cumple?</li>
+                </ul>
+
+                <h4 id="s3-4">3.4 Transformadores y filtros</h4>
+                <ul>
+                    <li><code>map()</code> — transforma cada elemento.</li>
+                    <li><code>filter()</code> — devuelve los que cumplen.</li>
+                </ul>
+
+                <h4 id="s3-5">3.5 Búsquedas</h4>
+                <ul>
+                    <li><code>find()</code>, <code>findIndex()</code>, <code>includes()</code>, <code>indexOf()</code>.</li>
+                </ul>
+
+                <h4 id="s3-6">3.6 Acumuladores</h4>
+                <ul>
+                    <li><code>reduce()</code> / <code>reduceRight()</code> — reducen a un único valor.</li>
+                </ul>
+
+                <h4 id="s3-7">3.7 · 3.8 Desestructurar e intercambiar</h4>
+                <ul>
+                    <li><code>const [a, b] = [1, 2]</code></li>
+                    <li>Swap: <code>[x, y] = [y, x]</code></li>
+                </ul>
+
+                <h4 id="s3-9">3.9 · 3.10 Spread / Rest / Group</h4>
+                <ul>
+                    <li>Spread: <code>[...arr1, ...arr2]</code></li>
+                    <li>Rest: <code>function f(...args) { }</code></li>
+                    <li>Agrupar: <code>Object.groupBy()</code> (ES2024).</li>
+                </ul>
+
+                <h4 id="s3-11">3.11 Reestructuración</h4>
+                <ul>
+                    <li><code>flat()</code> — aplana arrays anidados.</li>
+                    <li><code>flatMap()</code> — map + flat en un paso.</li>
+                </ul>
+
+                <div class="ejemplos">
+                    <strong>📚 Fuente W3Schools</strong>
+                    <a href="https://www.w3schools.com/jsref/jsref_foreach.asp" target="_blank" rel="noopener">forEach</a>
+                    <a href="https://www.w3schools.com/jsref/jsref_every.asp" target="_blank" rel="noopener">every</a>
+                    <a href="https://www.w3schools.com/jsref/jsref_some.asp" target="_blank" rel="noopener">some</a>
+                    <a href="https://www.w3schools.com/jsref/jsref_map.asp" target="_blank" rel="noopener">map</a>
+                    <a href="https://www.w3schools.com/jsref/jsref_filter.asp" target="_blank" rel="noopener">filter</a>
+                    <a href="https://www.w3schools.com/jsref/jsref_find.asp" target="_blank" rel="noopener">find</a>
+                    <a href="https://www.w3schools.com/jsref/jsref_reduce.asp" target="_blank" rel="noopener">reduce</a>
+                    <a href="https://www.w3schools.com/js/js_destructuring.asp" target="_blank" rel="noopener">Destructuring</a>
+                    <a href="https://www.w3schools.com/jsref/jsref_flat.asp" target="_blank" rel="noopener">flat</a>
+                </div>
+            </article>
+
+            <!-- 4. Set/Map -->
+            <article class="card" id="s4">
+                <h3><span class="num">4</span> Set / Map</h3>
+                <p><strong>Set</strong> guarda valores únicos. <strong>Map</strong> guarda pares clave-valor (con claves de cualquier tipo).</p>
+                <ul>
+                    <li><strong>4.1 <code>size</code></strong> — cantidad de elementos.</li>
+                    <li><strong>4.2 <code>add(v)</code></strong> — añade un elemento.</li>
+                    <li><strong>4.3 <code>has(v)</code></strong> — ¿existe?</li>
+                    <li><strong>4.4 <code>delete(v)</code></strong> — borra un elemento.</li>
+                    <li><strong>4.5 <code>clear()</code></strong> — vacía el conjunto.</li>
+                    <li><strong>4.6 Conversión:</strong> <code>[...miSet]</code> · <code>new Set(arr)</code> (elimina duplicados).</li>
+                </ul>
+
+                <div class="ejemplos">
+                    <strong>📚 Fuente W3Schools</strong>
+                    <a href="https://www.w3schools.com/js/js_sets.asp" target="_blank" rel="noopener">Set</a>
+                    <a href="https://www.w3schools.com/js/js_set_methods.asp" target="_blank" rel="noopener">Set Methods</a>
+                    <a href="https://www.w3schools.com/js/js_maps.asp" target="_blank" rel="noopener">Map</a>
+                    <a href="https://www.w3schools.com/js/js_map_methods.asp" target="_blank" rel="noopener">Map Methods</a>
+                </div>
+            </article>
+
         </div>
-    </div>
 
-    <div class="hint" style="margin-top: 20px;">
-        💡 <strong>Recuerda:</strong> Practica con ejercicios en 
-        <a href="https://www.w3schools.com/js/exercise_js.asp" target="_blank">W3Schools</a> y usa la consola del navegador para probar código.
-    </div>
+        <div class="pie">
+            Guarda este resumen como referencia para repasar conceptos clave más adelante.
+        </div>
 
-    <a href="./index.html" class="volver-btn">Volver al Índice</a>
+    </main>
 </div>
+
+<script>
+    // Smooth scroll + glow suave al clickear un enlace de navegación
+    const OFFSET = 90; // espacio para la topbar sticky
+
+    function smoothScrollTo(targetY, duration = 600) {
+        const startY = window.scrollY;
+        const diff = targetY - startY;
+        if (Math.abs(diff) < 2) return;
+        let start;
+        // easeInOutCubic para un movimiento más suave
+        const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        function step(ts) {
+            if (start === undefined) start = ts;
+            const elapsed = ts - start;
+            const t = Math.min(elapsed / duration, 1);
+            window.scrollTo(0, startY + diff * ease(t));
+            if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('.topnav a[href^="#"], .sidebar nav a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const id = link.getAttribute('href').slice(1);
+            const target = document.getElementById(id);
+            if (!target) return;
+
+            e.preventDefault();
+            history.replaceState(null, '', '#' + id);
+
+            const targetY = target.getBoundingClientRect().top + window.scrollY - OFFSET;
+            smoothScrollTo(targetY, 650);
+
+            // Glow suave sobre la card contenedora (sin cambiar background)
+            const card = target.closest('.card') || target;
+            card.classList.remove('flash');
+            void card.offsetWidth;
+            card.classList.add('flash');
+            setTimeout(() => card.classList.remove('flash'), 1400);
+
+            // Resalta el link activo en el sidebar
+            document.querySelectorAll('.sidebar nav a.active').forEach(a => a.classList.remove('active'));
+            const sidebarLink = document.querySelector('.sidebar nav a[href="#' + id + '"]');
+            if (sidebarLink) sidebarLink.classList.add('active');
+        });
+    });
+</script>
+
 </body>
+</html>
