@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M8 - Repaso de Conceptos | React</title>
+    <link href="https://fonts.googleapis.com/css2?family=-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif&family=SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-canvas-default: #ffffff;
+            --color-canvas-subtle: #f6f8fa;
+            --color-border-default: #d0d7de;
+            --color-border-muted: #d8dee4;
+            --color-fg-default: #24292f;
+            --color-fg-muted: #656d76;
+            --color-fg-subtle: #6e7781;
+            --color-accent-fg: #0969da;
+            --color-accent-emphasis: #0969da;
+            --color-success-fg: #1a7f37;
+            --color-success-emphasis: #1f883d;
+            --color-attention-fg: #9a6700;
+            --color-danger-fg: #d1242f;
+            --color-neutral-muted: rgba(175, 184, 193, 0.2);
+            --shadow-small: 0 1px 0 rgba(27, 31, 36, 0.04);
+            --shadow-medium: 0 3px 6px rgba(140, 149, 159, 0.15);
+            --shadow-large: 0 8px 24px rgba(140, 149, 159, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            line-height: 1.6;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--color-canvas-default);
+            padding: 20px 40px 24px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--color-fg-default);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: var(--color-fg-muted);
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--color-border-default);
+        }
+
+        .top-actions {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--color-accent-emphasis);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background-color 0.15s ease, transform 0.1s ease;
+        }
+
+        .btn:hover {
+            background: #0860ca;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn.secondary {
+            background: var(--color-canvas-default);
+            color: var(--color-fg-default);
+            border: 1px solid var(--color-border-default);
+        }
+
+        .btn.secondary:hover {
+            background: var(--color-canvas-subtle);
+        }
+
+        .btn.success {
+            background: var(--color-success-emphasis);
+        }
+
+        .btn.success:hover {
+            background: #1a7f37;
+        }
+
+        .lista-preguntas {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .pregunta-card {
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            border-radius: 8px;
+            padding: 0 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+            box-shadow: var(--shadow-small);
+            flex: 1;
+            min-height: 0;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .pregunta-card:hover {
+            border-color: var(--color-accent-fg);
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-1px);
+        }
+
+        .pregunta-card:focus-visible {
+            outline: 2px solid var(--color-accent-fg);
+            outline-offset: 2px;
+        }
+
+        .numero {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-accent-emphasis);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .pregunta-texto {
+            flex: 1;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-fg-default);
+            line-height: 1.3;
+        }
+
+        .flecha {
+            flex-shrink: 0;
+            color: var(--color-fg-muted);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        /* ===== Modal / Overlay Fullscreen ===== */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--color-canvas-subtle);
+            z-index: 1000;
+            display: none;
+            overflow-y: auto;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .overlay-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 48px 64px;
+        }
+
+        .overlay-toolbar {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--color-border-default);
+        }
+
+        .toolbar-left, .toolbar-right {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pregunta-grande {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .pregunta-grande .numero {
+            width: 64px;
+            height: 64px;
+            font-size: 1.5rem;
+        }
+
+        .pregunta-grande h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--color-fg-default);
+            letter-spacing: -0.01em;
+        }
+
+        .respuesta {
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            border-radius: 8px;
+            padding: 32px;
+            margin-top: 24px;
+            display: none;
+            box-shadow: var(--shadow-small);
+            animation: slideDown 0.3s ease;
+        }
+
+        .respuesta.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .respuesta h3 {
+            color: var(--color-fg-default);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 24px 0 12px;
+        }
+
+        .respuesta h3:first-child {
+            margin-top: 0;
+        }
+
+        .respuesta p {
+            margin: 12px 0;
+            font-size: 1.05rem;
+            color: var(--color-fg-default);
+        }
+
+        .respuesta ul, .respuesta ol {
+            margin: 12px 0 12px 24px;
+        }
+
+        .respuesta li {
+            margin: 8px 0;
+            font-size: 1.05rem;
+        }
+
+        .respuesta strong {
+            color: var(--color-fg-default);
+            font-weight: 600;
+        }
+
+        .respuesta code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            background: var(--color-neutral-muted);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .respuesta pre {
+            background: #f6f8fa;
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .respuesta pre code {
+            background: none;
+            padding: 0;
+            font-size: inherit;
+        }
+
+        .respuesta .tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .respuesta .tabla th, .respuesta .tabla td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-muted);
+        }
+
+        .respuesta .tabla th {
+            background: var(--color-canvas-subtle);
+            font-weight: 600;
+        }
+
+        .respuesta .nota {
+            background: #fff8c5;
+            border-left: 4px solid #d4a72c;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .placeholder-pre-respuesta {
+            text-align: center;
+            color: var(--color-fg-muted);
+            padding: 40px 20px;
+            font-size: 1.1rem;
+            background: var(--color-canvas-default);
+            border: 2px dashed var(--color-border-default);
+            border-radius: 8px;
+            margin-top: 24px;
+        }
+
+        .placeholder-pre-respuesta.oculto {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                height: auto;
+                overflow: auto;
+            }
+            .container, .overlay-inner {
+                padding: 24px 16px;
+                height: auto;
+                min-height: 100vh;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .lista-preguntas {
+                flex: none;
+                gap: 12px;
+            }
+            .pregunta-card {
+                flex: none;
+                padding: 16px;
+                gap: 14px;
+                min-height: 70px;
+            }
+            .pregunta-texto {
+                font-size: 1rem;
+            }
+            .numero {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .pregunta-grande .numero {
+                width: 48px;
+                height: 48px;
+                font-size: 1.2rem;
+            }
+            .pregunta-grande h2 {
+                font-size: 1.4rem;
+            }
+            .overlay-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .toolbar-left, .toolbar-right {
+                justify-content: stretch;
+            }
+            .btn {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        /* Pantallas muy bajas: si no entran, permitir scroll */
+        @media (max-height: 600px) {
+            body {
+                height: auto;
+                overflow: auto;
+            }
+            .container {
+                height: auto;
+                min-height: 100vh;
+            }
+            .lista-preguntas {
+                flex: none;
+            }
+            .pregunta-card {
+                flex: none;
+                min-height: 56px;
+            }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-canvas-subtle); }
+        ::-webkit-scrollbar-thumb { background: var(--color-border-default); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-border-muted); }
+    </style>
+</head>
+<body>
+    <div class="container" id="vista-listado">
+        <div class="top-actions">
+            <a href="./index.html" class="btn secondary">🏠 Volver al inicio</a>
+        </div>
+
+        <h1>📚 M8 - Repaso de Conceptos</h1>
+        <p class="subtitulo">Hacé click en cualquier pregunta para verla en pantalla completa con su explicación</p>
+
+        <div class="lista-preguntas" id="lista"></div>
+    </div>
+
+    <!-- Overlay fullscreen para la pregunta seleccionada -->
+    <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="pregunta-titulo">
+        <div class="overlay-inner">
+            <div class="overlay-toolbar">
+                <div class="toolbar-left">
+                    <button class="btn secondary" id="btn-volver">← Volver al listado</button>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn success" id="btn-toggle-respuesta">📖 Desplegar respuesta</button>
+                </div>
+            </div>
+
+            <div class="pregunta-grande">
+                <div class="numero" id="numero-grande">1</div>
+                <h2 id="pregunta-titulo">Pregunta</h2>
+            </div>
+
+            <div class="placeholder-pre-respuesta" id="placeholder">
+                👆 Tocá <strong>"Desplegar respuesta"</strong> para ver la explicación
+            </div>
+
+            <div class="respuesta" id="respuesta"></div>
+        </div>
+    </div>
+
+    <script>
+        const preguntas = [
+            {
+                titulo: "¿Cuál es la diferencia entre componentes, elementos y etiquetas?",
+                respuesta: `
+                    <p>Son tres conceptos que solemos confundir, pero pertenecen a niveles distintos:</p>
+                    <h3>🏷️ Etiqueta (Tag)</h3>
+                    <p>Es la sintaxis HTML/JSX que escribimos en el código. Por ejemplo <code>&lt;div&gt;</code>, <code>&lt;button&gt;</code> o <code>&lt;MiComponente /&gt;</code>. Es <strong>solo texto</strong> en nuestro archivo fuente.</p>
+
+                    <h3>⚛️ Elemento de React</h3>
+                    <p>Es un <strong>objeto de JavaScript</strong> ligero e inmutable que describe lo que querés que aparezca en pantalla. Lo crea React (o Babel) cuando interpreta el JSX.</p>
+                    <pre><code>// Esta etiqueta JSX...
+const elemento = &lt;h1 className="titulo"&gt;Hola&lt;/h1&gt;;
+
+// ...se transforma en este elemento (objeto):
+const elemento = {
+  type: 'h1',
+  props: { className: 'titulo', children: 'Hola' }
+};</code></pre>
+
+                    <h3>🧩 Componente</h3>
+                    <p>Es una <strong>función o clase</strong> que devuelve elementos. Es la "fábrica" reutilizable que produce elementos cada vez que la usás.</p>
+                    <pre><code>function Saludo({ nombre }) {
+  return &lt;h1&gt;Hola, {nombre}&lt;/h1&gt;;  // devuelve un elemento
+}
+
+// Lo usás como una etiqueta:
+&lt;Saludo nombre="Luciano" /&gt;</code></pre>
+
+                    <table class="tabla">
+                        <tr><th>Concepto</th><th>Qué es</th><th>Ejemplo</th></tr>
+                        <tr><td>Etiqueta</td><td>Sintaxis en el código</td><td><code>&lt;Saludo /&gt;</code></td></tr>
+                        <tr><td>Elemento</td><td>Objeto JS que describe la UI</td><td><code>{ type, props }</code></td></tr>
+                        <tr><td>Componente</td><td>Función/Clase que devuelve elementos</td><td><code>function Saludo()</code></td></tr>
+                    </table>
+                `
+            },
+            {
+                titulo: "¿Cuáles son los conceptos básicos de React: componentes, JSX, props y estado?",
+                respuesta: `
+                    <h3>🧩 Componentes</h3>
+                    <p>Son las <strong>piezas reutilizables</strong> que forman la interfaz. Cada componente encapsula su lógica y su vista.</p>
+
+                    <h3>📝 JSX</h3>
+                    <p>Es una extensión de sintaxis de JavaScript que <strong>parece HTML</strong>, pero se transforma en llamadas a <code>React.createElement()</code>.</p>
+                    <pre><code>const elemento = &lt;h1&gt;Hola Mundo&lt;/h1&gt;;</code></pre>
+
+                    <h3>🎁 Props (propiedades)</h3>
+                    <p>Son los <strong>datos que un componente padre le pasa al hijo</strong>. Son inmutables (read-only) dentro del componente que las recibe.</p>
+                    <pre><code>function Boton({ texto, onClick }) {
+  return &lt;button onClick={onClick}&gt;{texto}&lt;/button&gt;;
+}
+
+&lt;Boton texto="Guardar" onClick={guardar} /&gt;</code></pre>
+
+                    <h3>🔄 Estado (state)</h3>
+                    <p>Son los <strong>datos internos y mutables</strong> de un componente. Cuando cambian, React vuelve a renderizar el componente.</p>
+                    <pre><code>import { useState } from 'react';
+
+function Contador() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;button onClick={() => setCount(count + 1)}&gt;
+      Clics: {count}
+    &lt;/button&gt;
+  );
+}</code></pre>
+                    <div class="nota">
+                        <strong>💡 Regla de oro:</strong> Si un dato cambia con el tiempo y la UI debe reflejarlo → es <strong>estado</strong>. Si viene de afuera y el componente solo lo usa → es <strong>prop</strong>.
+                    </div>
+                `
+            },
+            {
+                titulo: "¿Cómo se crean y estructuran componentes de React en una aplicación?",
+                respuesta: `
+                    <h3>📁 Estructura típica de un proyecto</h3>
+                    <pre><code>src/
+├── components/        # Componentes reutilizables
+│   ├── Button.jsx
+│   ├── Card.jsx
+│   └── Navbar.jsx
+├── pages/             # Páginas o vistas completas
+│   ├── Home.jsx
+│   └── About.jsx
+├── hooks/             # Custom hooks
+├── assets/            # Imágenes, íconos
+├── App.jsx            # Componente raíz
+└── main.jsx           # Punto de entrada</code></pre>
+
+                    <h3>✍️ Crear un componente funcional</h3>
+                    <pre><code>// src/components/Card.jsx
+function Card({ titulo, children }) {
+  return (
+    &lt;div className="card"&gt;
+      &lt;h3&gt;{titulo}&lt;/h3&gt;
+      &lt;div&gt;{children}&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Card;</code></pre>
+
+                    <h3>🧱 Componer componentes</h3>
+                    <p>La filosofía de React es <strong>componer cosas chicas</strong> para construir cosas grandes:</p>
+                    <pre><code>function App() {
+  return (
+    &lt;div&gt;
+      &lt;Navbar /&gt;
+      &lt;main&gt;
+        &lt;Card titulo="Hola"&gt;
+          &lt;p&gt;Contenido del card&lt;/p&gt;
+          &lt;Button texto="OK" /&gt;
+        &lt;/Card&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+                    <div class="nota">
+                        <strong>📌 Buenas prácticas:</strong>
+                        <ul>
+                            <li>Un componente por archivo</li>
+                            <li>Nombres en <code>PascalCase</code> (<code>MiComponente</code>)</li>
+                            <li>Componentes chicos y con una sola responsabilidad</li>
+                            <li>Si crece mucho → dividir en sub-componentes</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                titulo: "¿Cómo se manejan y transmiten datos entre componentes con props y estado?",
+                respuesta: `
+                    <h3>⬇️ De padre a hijo: <strong>props</strong></h3>
+                    <p>El padre <strong>baja</strong> datos al hijo a través de props.</p>
+                    <pre><code>function Padre() {
+  const usuario = { nombre: "Luciano", edad: 30 };
+  return &lt;Perfil usuario={usuario} /&gt;;
+}
+
+function Perfil({ usuario }) {
+  return &lt;p&gt;{usuario.nombre} ({usuario.edad})&lt;/p&gt;;
+}</code></pre>
+
+                    <h3>⬆️ De hijo a padre: <strong>callbacks</strong></h3>
+                    <p>El hijo <strong>avisa</strong> al padre llamando a una función que el padre le pasó como prop.</p>
+                    <pre><code>function Padre() {
+  const [valor, setValor] = useState("");
+
+  return &lt;Input onChange={(v) => setValor(v)} /&gt;;
+}
+
+function Input({ onChange }) {
+  return &lt;input onChange={(e) => onChange(e.target.value)} /&gt;;
+}</code></pre>
+
+                    <h3>↔️ Entre hermanos: <strong>elevar el estado</strong></h3>
+                    <p>Cuando dos componentes hermanos necesitan compartir datos, el estado se <strong>levanta al padre común</strong>.</p>
+                    <pre><code>function App() {
+  const [busqueda, setBusqueda] = useState("");
+
+  return (
+    &lt;&gt;
+      &lt;Buscador onBuscar={setBusqueda} /&gt;
+      &lt;Resultados filtro={busqueda} /&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+
+                    <h3>🌐 Para datos globales</h3>
+                    <p>Si muchos componentes lejanos necesitan los mismos datos, se usan herramientas como <code>Context API</code>, <code>Redux</code> o <code>Zustand</code> para evitar el llamado <em>"prop drilling"</em>.</p>
+                `
+            },
+            {
+                titulo: "¿Qué diferencias hay entre la sintaxis JSX y HTML?",
+                respuesta: `
+                    <p>Aunque JSX se parece a HTML, hay <strong>diferencias importantes</strong>:</p>
+
+                    <table class="tabla">
+                        <tr><th>HTML</th><th>JSX</th></tr>
+                        <tr><td><code>class="..."</code></td><td><code>className="..."</code></td></tr>
+                        <tr><td><code>for="..."</code></td><td><code>htmlFor="..."</code></td></tr>
+                        <tr><td><code>onclick="..."</code></td><td><code>onClick={...}</code> (camelCase)</td></tr>
+                        <tr><td><code>style="color: red"</code></td><td><code>style={{ color: 'red' }}</code></td></tr>
+                        <tr><td>Etiquetas pueden no cerrarse</td><td>Todas <strong>deben</strong> cerrarse <code>&lt;br /&gt;</code></td></tr>
+                        <tr><td>Comentarios <code>&lt;!-- --&gt;</code></td><td><code>{/* comentario */}</code></td></tr>
+                    </table>
+
+                    <h3>🔑 Principales diferencias</h3>
+
+                    <p><strong>1. JSX devuelve un único elemento raíz</strong></p>
+                    <pre><code>// ❌ Mal
+return (
+  &lt;h1&gt;Hola&lt;/h1&gt;
+  &lt;p&gt;Mundo&lt;/p&gt;
+);
+
+// ✅ Bien (con Fragment)
+return (
+  &lt;&gt;
+    &lt;h1&gt;Hola&lt;/h1&gt;
+    &lt;p&gt;Mundo&lt;/p&gt;
+  &lt;/&gt;
+);</code></pre>
+
+                    <p><strong>2. Se pueden embeber expresiones JS con <code>{}</code></strong></p>
+                    <pre><code>const nombre = "Luciano";
+const elemento = &lt;h1&gt;Hola, {nombre.toUpperCase()}&lt;/h1&gt;;</code></pre>
+
+                    <p><strong>3. Atributos en camelCase</strong></p>
+                    <pre><code>// HTML
+&lt;input maxlength="10" tabindex="1"&gt;
+
+// JSX
+&lt;input maxLength="10" tabIndex="1" /&gt;</code></pre>
+
+                    <p><strong>4. Listas requieren <code>key</code></strong></p>
+                    <pre><code>{tareas.map(t =&gt; &lt;li key={t.id}&gt;{t.texto}&lt;/li&gt;)}</code></pre>
+                `
+            },
+            {
+                titulo: "¿Qué es el DOM virtual y cómo lo usa React para mejorar el rendimiento?",
+                respuesta: `
+                    <h3>🌳 El problema del DOM real</h3>
+                    <p>Manipular el DOM real (<em>document.getElementById</em>, etc.) es <strong>muy costoso</strong> porque obliga al navegador a recalcular estilos, layout y repintar.</p>
+
+                    <h3>⚛️ La solución: Virtual DOM</h3>
+                    <p>El <strong>Virtual DOM</strong> es una <strong>copia ligera del DOM real</strong>, representada como objetos JavaScript. React mantiene esta copia en memoria.</p>
+
+                    <h3>🔄 Cómo funciona (en 3 pasos)</h3>
+                    <ol>
+                        <li><strong>Render:</strong> cuando el estado cambia, React crea un <strong>nuevo árbol virtual</strong> con los cambios.</li>
+                        <li><strong>Diffing:</strong> compara el árbol nuevo con el anterior y detecta <strong>solo las diferencias</strong> (algoritmo de reconciliación).</li>
+                        <li><strong>Patch:</strong> aplica al DOM real <strong>solo los cambios mínimos necesarios</strong>.</li>
+                    </ol>
+
+                    <pre><code>// Estado anterior: count = 0
+&lt;div&gt;
+  &lt;h1&gt;Título&lt;/h1&gt;
+  &lt;p&gt;Clics: 0&lt;/p&gt;   ← cambia
+&lt;/div&gt;
+
+// Estado nuevo: count = 1
+&lt;div&gt;
+  &lt;h1&gt;Título&lt;/h1&gt;       ← no cambia
+  &lt;p&gt;Clics: 1&lt;/p&gt;      ← React solo actualiza este nodo
+&lt;/div&gt;</code></pre>
+
+                    <h3>⚡ Ventajas</h3>
+                    <ul>
+                        <li><strong>Performance:</strong> evita repintados innecesarios.</li>
+                        <li><strong>Declarativo:</strong> describís <em>qué</em> querés ver, React se encarga del <em>cómo</em>.</li>
+                        <li><strong>Cross-platform:</strong> el mismo concepto permite React Native (móvil), React Three Fiber (3D), etc.</li>
+                    </ul>
+
+                    <div class="nota">
+                        <strong>📌 Resumen:</strong> el Virtual DOM no es magia, es una <strong>capa intermedia</strong> que minimiza las operaciones costosas sobre el DOM real.
+                    </div>
+                `
+            },
+            {
+                titulo: "¿Cómo crear una web simple con React.js paso a paso?",
+                respuesta: `
+                    <h3>🛠️ Paso 1: Crear el proyecto con Vite</h3>
+                    <pre><code>npm create vite@latest mi-app -- --template react
+cd mi-app
+npm install
+npm run dev</code></pre>
+
+                    <h3>📁 Paso 2: Estructura inicial</h3>
+                    <pre><code>mi-app/
+├── src/
+│   ├── App.jsx       ← componente principal
+│   ├── main.jsx      ← punto de entrada
+│   └── index.css
+├── index.html
+└── package.json</code></pre>
+
+                    <h3>✍️ Paso 3: Escribir <code>App.jsx</code></h3>
+                    <pre><code>import { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [tareas, setTareas] = useState([]);
+  const [texto, setTexto] = useState('');
+
+  const agregar = () => {
+    if (!texto.trim()) return;
+    setTareas([...tareas, { id: Date.now(), texto }]);
+    setTexto('');
+  };
+
+  return (
+    &lt;div className="app"&gt;
+      &lt;h1&gt;📋 Mis Tareas&lt;/h1&gt;
+
+      &lt;div&gt;
+        &lt;input
+          value={texto}
+          onChange={(e) =&gt; setTexto(e.target.value)}
+          placeholder="Nueva tarea..."
+        /&gt;
+        &lt;button onClick={agregar}&gt;Agregar&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;ul&gt;
+        {tareas.map((t) =&gt; (
+          &lt;li key={t.id}&gt;{t.texto}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+
+                    <h3>🚀 Paso 4: Correrlo</h3>
+                    <pre><code>npm run dev</code></pre>
+                    <p>Abrís <code>http://localhost:5173</code> y ya tenés tu primera web con React funcionando.</p>
+
+                    <h3>📦 Paso 5: Compilar para producción</h3>
+                    <pre><code>npm run build       # genera carpeta /dist
+npm run preview     # prueba la build localmente</code></pre>
+
+                    <div class="nota">
+                        <strong>💡 Tip:</strong> después de esto, podés deployar la carpeta <code>/dist</code> a Vercel, Netlify o GitHub Pages en minutos.
+                    </div>
+                `
+            },
+            {
+                titulo: "¿Cuál es la arquitectura de React y los conceptos detrás de los componentes?",
+                respuesta: `
+                    <h3>🏛️ Arquitectura basada en componentes</h3>
+                    <p>React propone construir interfaces como un <strong>árbol de componentes</strong>, donde cada uno es una pieza independiente con sus datos y comportamiento.</p>
+
+                    <pre><code>App
+├── Navbar
+│   ├── Logo
+│   └── Menu
+├── Main
+│   ├── Sidebar
+│   └── Contenido
+│       ├── Card
+│       └── Card
+└── Footer</code></pre>
+
+                    <h3>🔑 Principios fundamentales</h3>
+
+                    <p><strong>1. Declarativo</strong></p>
+                    <p>Describís <em>cómo se ve la UI según el estado</em>, no los pasos para llegar ahí.</p>
+                    <pre><code>// Imperativo (lo que NO hacemos):
+if (logged) document.getElementById('menu').style.display = 'block';
+
+// Declarativo (lo que sí):
+{logged && &lt;Menu /&gt;}</code></pre>
+
+                    <p><strong>2. Flujo de datos unidireccional</strong></p>
+                    <p>Los datos fluyen <strong>de padre a hijo</strong>. Esto hace al sistema más predecible.</p>
+
+                    <p><strong>3. Composición sobre herencia</strong></p>
+                    <p>En vez de heredar, los componentes se combinan unos dentro de otros (children, props).</p>
+
+                    <p><strong>4. Single source of truth</strong></p>
+                    <p>Cada dato vive en un único lugar (típicamente en el componente más alto que lo necesita).</p>
+
+                    <h3>🧩 Tipos de componentes</h3>
+                    <table class="tabla">
+                        <tr><th>Tipo</th><th>Cuándo usar</th></tr>
+                        <tr><td>Funcionales</td><td>Estándar moderno (con Hooks)</td></tr>
+                        <tr><td>De clase</td><td>Código legacy</td></tr>
+                        <tr><td>Presentacionales</td><td>Solo UI, reciben props</td></tr>
+                        <tr><td>Contenedores</td><td>Lógica y manejo de datos</td></tr>
+                    </table>
+
+                    <div class="nota">
+                        <strong>🎯 La idea clave:</strong> "<em>UI = f(state)</em>". La interfaz es una función de los datos: si cambian los datos, cambia la UI. Eso es React.
+                    </div>
+                `
+            },
+            {
+                titulo: "¿Cómo usar un evento para cambiar dinámicamente el contenido de una página web?",
+                respuesta: `
+                    <h3>🎯 La idea</h3>
+                    <p>En React, un <strong>evento</strong> (click, input, hover, etc.) ejecuta una función que <strong>actualiza el estado</strong>. Al cambiar el estado, React vuelve a renderizar el componente y la UI cambia automáticamente.</p>
+
+                    <h3>👆 Ejemplo 1: Cambiar texto al hacer click</h3>
+                    <pre><code>import { useState } from 'react';
+
+function Saludo() {
+  const [mensaje, setMensaje] = useState('Hola 👋');
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{mensaje}&lt;/h1&gt;
+      &lt;button onClick={() =&gt; setMensaje('¡Chau! 👋')}&gt;
+        Cambiar
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+                    <h3>⌨️ Ejemplo 2: Reaccionar al teclado (input)</h3>
+                    <pre><code>function Eco() {
+  const [texto, setTexto] = useState('');
+
+  return (
+    &lt;&gt;
+      &lt;input
+        value={texto}
+        onChange={(e) =&gt; setTexto(e.target.value)}
+      /&gt;
+      &lt;p&gt;Escribiste: &lt;strong&gt;{texto}&lt;/strong&gt;&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+
+                    <h3>🖱️ Ejemplo 3: Mostrar/ocultar contenido</h3>
+                    <pre><code>function Acordeon() {
+  const [abierto, setAbierto] = useState(false);
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() =&gt; setAbierto(!abierto)}&gt;
+        {abierto ? '▼ Cerrar' : '▶ Abrir'}
+      &lt;/button&gt;
+
+      {abierto && (
+        &lt;div className="contenido"&gt;
+          &lt;p&gt;Contenido oculto que aparece al hacer click&lt;/p&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+                    <h3>📋 Eventos comunes en React</h3>
+                    <table class="tabla">
+                        <tr><th>Evento</th><th>Cuándo dispara</th></tr>
+                        <tr><td><code>onClick</code></td><td>Click del mouse</td></tr>
+                        <tr><td><code>onChange</code></td><td>Cambio en input/select</td></tr>
+                        <tr><td><code>onSubmit</code></td><td>Envío de formulario</td></tr>
+                        <tr><td><code>onMouseEnter / onMouseLeave</code></td><td>Hover</td></tr>
+                        <tr><td><code>onKeyDown</code></td><td>Tecla presionada</td></tr>
+                        <tr><td><code>onFocus / onBlur</code></td><td>Foco en un input</td></tr>
+                    </table>
+
+                    <div class="nota">
+                        <strong>⚡ El ciclo:</strong> evento → handler → <code>setState</code> → React re-renderiza → DOM actualizado. Todo automático.
+                    </div>
+                `
+            }
+        ];
+
+        const lista = document.getElementById('lista');
+        const overlay = document.getElementById('overlay');
+        const tituloEl = document.getElementById('pregunta-titulo');
+        const numeroGrandeEl = document.getElementById('numero-grande');
+        const respuestaEl = document.getElementById('respuesta');
+        const placeholderEl = document.getElementById('placeholder');
+        const btnVolver = document.getElementById('btn-volver');
+        const btnToggle = document.getElementById('btn-toggle-respuesta');
+
+        preguntas.forEach((p, i) => {
+            const card = document.createElement('button');
+            card.className = 'pregunta-card';
+            card.type = 'button';
+            card.innerHTML = `
+                <div class="numero">${i + 1}</div>
+                <div class="pregunta-texto">${p.titulo}</div>
+                <div class="flecha">→</div>
+            `;
+            card.addEventListener('click', () => abrir(i));
+            lista.appendChild(card);
+        });
+
+        function abrir(i) {
+            const p = preguntas[i];
+            numeroGrandeEl.textContent = i + 1;
+            tituloEl.textContent = p.titulo;
+            respuestaEl.innerHTML = p.respuesta;
+            respuestaEl.classList.remove('visible');
+            placeholderEl.classList.remove('oculto');
+            btnToggle.textContent = '📖 Desplegar respuesta';
+            btnToggle.classList.remove('secondary');
+            btnToggle.classList.add('success');
+            overlay.classList.add('active');
+            document.body.classList.add('modal-open');
+            overlay.scrollTop = 0;
+            btnVolver.focus();
+        }
+
+        function cerrar() {
+            overlay.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
+        function toggleRespuesta() {
+            const visible = respuestaEl.classList.toggle('visible');
+            placeholderEl.classList.toggle('oculto', visible);
+            if (visible) {
+                btnToggle.textContent = '➖ Contraer respuesta';
+                btnToggle.classList.remove('success');
+                btnToggle.classList.add('secondary');
+            } else {
+                btnToggle.textContent = '📖 Desplegar respuesta';
+                btnToggle.classList.remove('secondary');
+                btnToggle.classList.add('success');
+            }
+        }
+
+        btnVolver.addEventListener('click', cerrar);
+        btnToggle.addEventListener('click', toggleRespuesta);
+
+        document.addEventListener('keydown', (e) => {
+            if (!overlay.classList.contains('active')) return;
+            if (e.key === 'Escape') cerrar();
+            if (e.key === 'Enter' && document.activeElement === btnToggle) toggleRespuesta();
+        });
+    </script>
+</body>
+</html>
