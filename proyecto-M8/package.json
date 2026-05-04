@@ -1,0 +1,20 @@
+{
+  "name": "proyecto-m8",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Repaso M8 - Conceptos de React con componentes y demos interactivas",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^5.4.10"
+  }
+}
