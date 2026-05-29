@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M9 - Prácticas Formativas | Estilos y Routing</title>
+    <link href="https://fonts.googleapis.com/css2?family=-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif&family=SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-canvas-default: #ffffff;
+            --color-canvas-subtle: #f6f8fa;
+            --color-border-default: #d0d7de;
+            --color-border-muted: #d8dee4;
+            --color-fg-default: #24292f;
+            --color-fg-muted: #656d76;
+            --color-accent-fg: #0969da;
+            --color-accent-emphasis: #0969da;
+            --color-success-fg: #1a7f37;
+            --color-attention-fg: #9a6700;
+            --color-danger-fg: #d1242f;
+            --color-neutral-muted: rgba(175, 184, 193, 0.2);
+            --shadow-small: 0 1px 0 rgba(27, 31, 36, 0.04);
+            --shadow-medium: 0 3px 6px rgba(140, 149, 159, 0.15);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--color-canvas-default);
+            padding: 40px 48px 64px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: var(--color-fg-muted);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--color-border-default);
+        }
+
+        .top-actions {
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--color-accent-emphasis);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: 1px solid transparent;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover { background: #0860ca; text-decoration: none; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid var(--color-border-default);
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-fg-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover { color: var(--color-fg-default); }
+
+        .tab-btn.active {
+            color: var(--color-accent-fg);
+            border-bottom-color: var(--color-accent-emphasis);
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .meta {
+            background: var(--color-canvas-subtle);
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
+            font-size: 0.9rem;
+        }
+
+        .meta p { margin: 6px 0; color: var(--color-fg-muted); }
+        .meta strong { color: var(--color-fg-default); }
+
+        .propuesta {
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-small);
+        }
+
+        .propuesta h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--color-fg-default);
+        }
+
+        .propuesta .consigna {
+            margin-bottom: 20px;
+            color: var(--color-fg-default);
+        }
+
+        .propuesta .consigna ul {
+            margin: 8px 0 0 20px;
+        }
+
+        .propuesta .consigna li { margin: 4px 0; }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            color: var(--color-fg-default);
+        }
+
+        pre {
+            background: var(--color-canvas-subtle);
+            color: var(--color-fg-default);
+            padding: 16px;
+            border-radius: 6px;
+            margin: 12px 0;
+            overflow-x: auto;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            border: 1px solid var(--color-border-default);
+        }
+
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            background: var(--color-neutral-muted);
+            padding: 0.15em 0.35em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .nota {
+            background: #fff8c5;
+            border: 1px solid #d4a72c;
+            border-left: 4px solid #d4a72c;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .nota.info {
+            background: #ddf4ff;
+            border-color: #54aeff;
+            border-left-color: #0969da;
+        }
+
+        .nota strong { color: var(--color-fg-default); }
+
+        .importante {
+            background: #dafbe1;
+            border: 1px solid #4ac26b;
+            border-left: 4px solid var(--color-success-fg);
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .importante ul {
+            margin: 8px 0 0 18px;
+        }
+
+        .importante li { margin: 4px 0; }
+
+        .codigo-inicial {
+            opacity: 0.85;
+        }
+
+        .codigo-inicial::before {
+            content: "Código de partida";
+            display: block;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--color-fg-muted);
+            margin-bottom: 8px;
+        }
+
+        .guia::before {
+            content: "Guía — qué resolver y en qué fijarse";
+            display: block;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--color-accent-fg);
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 24px 16px 48px; }
+            h1 { font-size: 1.5rem; }
+            .tabs { gap: 0; }
+            .tab-btn { padding: 10px 14px; font-size: 0.82rem; }
+            pre { font-size: 0.75rem; padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-actions">
+            <a href="index.html" class="btn">← Volver al inicio</a>
+        </div>
+
+        <h1>📝 Prácticas Formativas — M9</h1>
+        <p class="subtitulo">Estilos en React · Rutas · React-Bootstrap</p>
+
+        <nav class="tabs" role="tablist">
+            <button class="tab-btn active" role="tab" aria-selected="true" data-tab="tab-estilos">Estilos en línea</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-componentes">Componente y rutas</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-apps">Crear aplicaciones</button>
+        </nav>
+
+        <!-- TAB 1: Estilos en línea -->
+        <section id="tab-estilos" class="tab-panel active" role="tabpanel">
+            <div class="meta">
+                <p><strong>Propósito:</strong> Practicar estilos en línea en React.</p>
+                <p><strong>Material de consulta:</strong> Sección "Estilos en React" de <a href="m9.html">m9.html</a> (apartado 3.1).</p>
+                <p><strong>¿Dudas?:</strong> Consultá en el foro de la materia si necesitás orientación del/la docente.</p>
+            </div>
+
+            <p style="margin-bottom: 24px;">Analizá las siguientes consignas y desarrollá el código necesario para completarlas:</p>
+
+            <!-- Propuesta A -->
+            <article class="propuesta">
+                <h2>Propuesta A</h2>
+                <div class="consigna">
+                    <p>A partir del siguiente componente <code>StyleMe</code>, agregá estilos en línea al elemento <code>h1</code> para que tenga <strong>background "lightblue"</strong> y <strong>color "darkred"</strong>:</p>
+                </div>
+
+                <pre class="codigo-inicial"><code>import React from "react";
+import ReactDOM from "react-dom";
+
+const StyleMe = &lt;h1&gt;Please style me! I am so bland!&lt;/h1&gt;;
+
+ReactDOM.render(StyleMe, document.getElementById("root"));</code></pre>
+
+                <h3>Guía de resolución</h3>
+                <pre class="guia"><code>// En React, style recibe un OBJETO de JavaScript, no un string CSS.
+// Las propiedades van entre llaves dobles: style={{ ... }}
+
+const StyleMe = (
+  &lt;h1 style={{ background: "lightblue", color: "darkred" }}&gt;
+    Please style me! I am so bland!
+  &lt;/h1&gt;
+);</code></pre>
+
+                <div class="importante">
+                    <strong>Importante tener en cuenta:</strong>
+                    <ul>
+                        <li>El atributo es <code>style</code> (minúscula), no <code>class</code> como en HTML.</li>
+                        <li>El valor es un objeto: <code>style={{ clave: "valor" }}</code> — las llaves externas son JSX, las internas definen el objeto.</li>
+                        <li>Los nombres CSS van en <strong>camelCase</strong>: <code>backgroundColor</code>, <code>fontSize</code>, etc. (aunque <code>background</code> y <code>color</code> funcionan tal cual).</li>
+                        <li>Los valores numéricos sin unidad (como <code>padding: 10</code>) se interpretan en píxeles automáticamente.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Propuesta B -->
+            <article class="propuesta">
+                <h2>Propuesta B</h2>
+                <div class="consigna">
+                    <p>Aplicar estilos en línea en React puede resultar molesto si se desea usar más que solo unos pocos estilos. Una alternativa más agradable es almacenar un objeto de estilo en una variable e inyectar esa variable en JSX.</p>
+                    <p>A partir del componente <code>StyleMe</code> de la actividad anterior, declará una nueva constante llamada <code>styles</code> y asigná los estilos <strong>background "lightblue"</strong> y <strong>color "darkred"</strong> al elemento <code>h1</code>.</p>
+                </div>
+
+                <pre class="codigo-inicial"><code>import React from "react";
+import ReactDOM from "react-dom";
+
+const StyleMe = &lt;h1&gt;Please style me! I am so bland!&lt;/h1&gt;;
+
+ReactDOM.render(StyleMe, document.getElementById("root"));</code></pre>
+
+                <h3>Guía de resolución</h3>
+                <pre class="guia"><code>// Separás la definición de estilos del JSX.
+// Esto escala mejor cuando hay muchas propiedades.
+
+const styles = {
+  titulo: {
+    background: "lightblue",
+    color: "darkred"
+  }
+};
+
+const StyleMe = (
+  &lt;h1 style={styles.titulo}&gt;
+    Please style me! I am so bland!
+  &lt;/h1&gt;
+);
+
+// style={styles.titulo} → React lee el objeto y lo aplica al h1</code></pre>
+
+                <div class="importante">
+                    <strong>Importante tener en cuenta:</strong>
+                    <ul>
+                        <li>Podés organizar estilos por elemento: <code>styles.titulo</code>, <code>styles.boton</code>, etc.</li>
+                        <li>En JSX usás <code>style={styles.titulo}</code> (una sola llave) porque ya estás referenciando una variable.</li>
+                        <li>Esta técnica es útil para pocos estilos; para apps grandes conviene CSS Modules, styled-components o frameworks como Bootstrap.</li>
+                        <li>El objeto <code>styles</code> se crea una sola vez; no se recrea en cada render si está fuera del componente.</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <!-- TAB 2: Componente, estructura y ruta -->
+        <section id="tab-componentes" class="tab-panel" role="tabpanel">
+            <div class="meta">
+                <p><strong>Propósito:</strong> Practicar la confección de componente, estructura y ruta.</p>
+                <p><strong>Material de consulta:</strong> Sección "Rutas en React" de <a href="m9.html">m9.html</a> (apartado 6).</p>
+                <p><strong>¿Dudas?:</strong> Consultá en el foro de la materia si necesitás orientación del/la docente.</p>
+            </div>
+
+            <p style="margin-bottom: 24px;">Analizá las siguientes consignas y desarrollá el código necesario para completarlas:</p>
+
+            <!-- Propuesta A -->
+            <article class="propuesta">
+                <h2>Propuesta A — Cambio de tema (claro / oscuro)</h2>
+                <div class="consigna">
+                    <p>Creá un componente que permita cambiar el tema de una aplicación (por ejemplo, claro y oscuro).</p>
+                    <p><em>Pista:</em> podés utilizar <code>useState</code> para manejar el estado del tema actual.</p>
+                </div>
+
+                <h3>Guía de resolución</h3>
+                <pre class="guia"><code>import { useState } from "react";
+
+function App() {
+  const [tema, setTema] = useState("claro");
+
+  const estilosTema = {
+    claro: { background: "#fff", color: "#222" },
+    oscuro:  { background: "#222", color: "#fff" }
+  };
+
+  const alternarTema = () =&gt; {
+    setTema(tema === "claro" ? "oscuro" : "claro");
+  };
+
+  return (
+    &lt;div style={estilosTema[tema]}&gt;
+      &lt;h1&gt;Tema actual: {tema}&lt;/h1&gt;
+      &lt;button onClick={alternarTema}&gt;
+        Cambiar a {tema === "claro" ? "oscuro" : "claro"}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+                <div class="importante">
+                    <strong>Importante tener en cuenta:</strong>
+                    <ul>
+                        <li><code>useState</code> guarda el tema actual; al cambiar con <code>setTema</code>, React re-renderiza y aplica los nuevos estilos.</li>
+                        <li>Podés usar un objeto de estilos indexado por tema (<code>estilosTema[tema]</code>) para no repetir lógica.</li>
+                        <li>En proyectos reales, el tema se suele compartir con <strong>Context API</strong> para que todos los componentes lo lean sin pasar props manualmente.</li>
+                        <li>El botón debe llamar a una función que invierta el valor del estado, no mutarlo directamente.</li>
+                    </ul>
+                </div>
+
+                <div class="nota info">
+                    <strong>Extensión opcional:</strong> guardá la preferencia en <code>localStorage</code> para que persista al recargar la página.
+                </div>
+            </article>
+
+            <!-- Propuesta B -->
+            <article class="propuesta">
+                <h2>Propuesta B — Ruta protegida con autenticación</h2>
+                <div class="consigna">
+                    <p>Creá una ruta que requiera que el usuario inicie sesión antes de poder acceder a ella. Para esto, debés agregar la sintaxis de <strong>rutas protegidas</strong> y una lógica de autenticación en la aplicación.</p>
+                </div>
+
+                <h3>Guía de resolución</h3>
+                <pre class="guia"><code>import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useState } from "react";
+
+// Componente "guardián": decide si muestra la ruta o redirige al login
+function RutaProtegida({ autenticado, children }) {
+  if (!autenticado) {
+    return &lt;Navigate to="/login" replace /&gt;;
+  }
+  return children;
+}
+
+function Dashboard() {
+  return &lt;h2&gt;Panel privado — solo usuarios logueados&lt;/h2&gt;;
+}
+
+function Login({ onLogin }) {
+  return &lt;button onClick={onLogin}&gt;Iniciar sesión&lt;/button&gt;;
+}
+
+function App() {
+  const [autenticado, setAutenticado] = useState(false);
+
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/login" element={
+          &lt;Login onLogin={() =&gt; setAutenticado(true)} /&gt;
+        } /&gt;
+        &lt;Route path="/dashboard" element={
+          &lt;RutaProtegida autenticado={autenticado}&gt;
+            &lt;Dashboard /&gt;
+          &lt;/RutaProtegida&gt;
+        } /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+
+                <div class="importante">
+                    <strong>Importante tener en cuenta:</strong>
+                    <ul>
+                        <li><code>RutaProtegida</code> envuelve la ruta privada y evalúa si <code>autenticado</code> es <code>true</code>.</li>
+                        <li><code>&lt;Navigate to="/login" /&gt;</code> redirige automáticamente sin renderizar el contenido protegido.</li>
+                        <li>La autenticación puede ser un simple <code>useState</code> (como acá) o venir de un contexto / API real.</li>
+                        <li>Instalá la dependencia: <code>npm install react-router-dom</code> y envolvé la app con <code>BrowserRouter</code>.</li>
+                        <li>Usá <code>replace</code> en Navigate para que el usuario no vuelva atrás al dashboard con el botón "Atrás" del navegador sin estar logueado.</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <!-- TAB 3: Crear aplicaciones -->
+        <section id="tab-apps" class="tab-panel" role="tabpanel">
+            <div class="meta">
+                <p><strong>Propósito:</strong> Practicar la creación de aplicaciones React completas.</p>
+                <p><strong>Material de consulta:</strong> Secciones de estilos CSS, React-Bootstrap y rutas en <a href="m9.html">m9.html</a>.</p>
+                <p><strong>¿Dudas?:</strong> Consultá en el foro de la materia si necesitás orientación del/la docente.</p>
+            </div>
+
+            <p style="margin-bottom: 24px;">Analizá las siguientes consignas y desarrollá el código necesario para completarlas:</p>
+
+            <!-- Propuesta A -->
+            <article class="propuesta">
+                <h2>Propuesta A — Destinos turísticos</h2>
+                <div class="consigna">
+                    <p>Creá una aplicación que muestre una lista de destinos turísticos:</p>
+                    <ul>
+                        <li>Cada destino debe estar representado por una <strong>imagen</strong> y un <strong>nombre</strong>.</li>
+                        <li>Al hacer clic en uno, la app navega a una ruta específica con información detallada del destino.</li>
+                        <li>Validá las props de los componentes con <strong>PropTypes</strong>.</li>
+                        <li>Utilizá componentes de <strong>React-Bootstrap</strong>.</li>
+                        <li>Si la ruta tiene un destino incorrecto, mostrá un componente <code>NotFound</code> con mensaje de error y botón para volver al inicio.</li>
+                    </ul>
+                </div>
+
+                <h3>Guía de resolución — estructura sugerida</h3>
+                <pre class="guia"><code>// datos/destinos.js — array con id, nombre, imagen, descripcion
+export const destinos = [
+  { id: "bariloche", nombre: "Bariloche", imagen: "...", descripcion: "..." },
+  { id: "mendoza",   nombre: "Mendoza",   imagen: "...", descripcion: "..." }
+];
+
+// components/DestinoCard.jsx
+import PropTypes from "prop-types";
+import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+function DestinoCard({ id, nombre, imagen }) {
+  return (
+    &lt;Card as={Link} to={`/destino/${id}`} style={{ textDecoration: "none" }}&gt;
+      &lt;Card.Img variant="top" src={imagen} alt={nombre} /&gt;
+      &lt;Card.Body&gt;&lt;Card.Title&gt;{nombre}&lt;/Card.Title&gt;&lt;/Card.Body&gt;
+    &lt;/Card&gt;
+  );
+}
+
+DestinoCard.propTypes = {
+  id:     PropTypes.string.isRequired,
+  nombre: PropTypes.string.isRequired,
+  imagen: PropTypes.string.isRequired
+};
+
+// pages/DestinoDetalle.jsx — usa useParams() para leer el :id de la URL
+import { useParams, Link } from "react-router-dom";
+import { destinos } from "../datos/destinos";
+
+function DestinoDetalle() {
+  const { id } = useParams();
+  const destino = destinos.find(d =&gt; d.id === id);
+
+  if (!destino) return &lt;NotFound /&gt;;  // destino inexistente
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;{destino.nombre}&lt;/h2&gt;
+      &lt;img src={destino.imagen} alt={destino.nombre} /&gt;
+      &lt;p&gt;{destino.descripcion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+// App.jsx — rutas
+&lt;Routes&gt;
+  &lt;Route path="/" element={&lt;ListaDestinos /&gt;} /&gt;
+  &lt;Route path="/destino/:id" element={&lt;DestinoDetalle /&gt;} /&gt;
+  &lt;Route path="*" element={&lt;NotFound /&gt;} /&gt;
+&lt;/Routes&gt;</code></pre>
+
+                <div class="importante">
+                    <strong>Importante tener en cuenta:</strong>
+                    <ul>
+                        <li><code>useParams()</code> extrae el <code>:id</code> de la URL para buscar el destino en tu array de datos.</li>
+                        <li>Validá en el detalle si el destino existe; si no, renderizá <code>NotFound</code> (no confíes solo en la ruta <code>*</code>).</li>
+                        <li><code>PropTypes</code> documenta y valida en desarrollo qué props espera cada componente.</li>
+                        <li>Instalá: <code>npm install react-router-dom react-bootstrap bootstrap prop-types</code></li>
+                        <li>Importá el CSS de Bootstrap en <code>main.jsx</code>: <code>import 'bootstrap/dist/css/bootstrap.min.css'</code></li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Propuesta B -->
+            <article class="propuesta">
+                <h2>Propuesta B — Restaurantes</h2>
+                <div class="consigna">
+                    <p>Creá una aplicación que muestre una lista de restaurantes:</p>
+                    <ul>
+                        <li>Cada restaurante debe estar representado por una <strong>imagen</strong> y un <strong>nombre</strong>.</li>
+                        <li>Al hacer clic, navegá a una ruta con información detallada: <strong>menú</strong> y <strong>ubicación</strong>.</li>
+                        <li>Si la ruta tiene un restaurante incorrecto, mostrá un componente <code>NotFound</code> con mensaje de error y botón para volver al inicio.</li>
+                    </ul>
+                </div>
+
+                <h3>Guía de resolución — estructura sugerida</h3>
+                <pre class="guia"><code>// datos/restaurantes.js
+export const restaurantes = [
+  {
+    id: "pizza-norte",
+    nombre: "Pizza Norte",
+    imagen: "...",
+    menu: ["Muzzarella", "Fugazzeta", "Calabresa"],
+    ubicacion: "Av. Corrientes 1234, CABA"
+  }
+];
+
+// pages/RestauranteDetalle.jsx
+import { useParams, Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { restaurantes } from "../datos/restaurantes";
+
+function RestauranteDetalle() {
+  const { id } = useParams();
+  const resto = restaurantes.find(r =&gt; r.id === id);
+
+  if (!resto) {
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;Restaurante no encontrado&lt;/h2&gt;
+        &lt;Button as={Link} to="/"&gt;Volver al inicio&lt;/Button&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;{resto.nombre}&lt;/h2&gt;
+      &lt;img src={resto.imagen} alt={resto.nombre} /&gt;
+      &lt;h3&gt;Menú&lt;/h3&gt;
+      &lt;ul&gt;{resto.menu.map(item =&gt; &lt;li key={item}&gt;{item}&lt;/li&gt;)}&lt;/ul&gt;
+      &lt;h3&gt;Ubicación&lt;/h3&gt;
+      &lt;p&gt;{resto.ubicacion}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+// NotFound reutilizable para ambas apps
+function NotFound() {
+  return (
+    &lt;div className="text-center mt-5"&gt;
+      &lt;h2&gt;404 — No encontrado&lt;/h2&gt;
+      &lt;p&gt;El recurso que buscás no existe.&lt;/p&gt;
+      &lt;Button as={Link} to="/"&gt;Volver al inicio&lt;/Button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+                <div class="importante">
+                    <strong>Importante tener en cuenta:</strong>
+                    <ul>
+                        <li>La lógica es la misma que en destinos turísticos, pero el detalle incluye <strong>menú</strong> (array) y <strong>ubicación</strong> (string).</li>
+                        <li>Reutilizá un componente <code>NotFound</code> centralizado; evitá duplicar el mensaje de error en cada página.</li>
+                        <li>Usá <code>Button as={Link} to="/"</code> de React-Bootstrap para el botón de volver — combina estilos Bootstrap con navegación SPA.</li>
+                        <li>Organizá la app en carpetas: <code>components/</code>, <code>pages/</code>, <code>datos/</code> para mantener el código legible.</li>
+                        <li>La ruta dinámica suele ser <code>/restaurante/:id</code>; el <code>id</code> en la URL debe coincidir con el del array de datos.</li>
+                    </ul>
+                </div>
+
+                <div class="nota">
+                    <strong>Comparación A vs B:</strong> La Propuesta A exige PropTypes y React-Bootstrap de forma explícita. La Propuesta B es similar pero enfatiza el detalle con menú y ubicación. Ambas comparten el patrón lista → clic → ruta dinámica → detalle o NotFound.
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <script>
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.tab;
+
+                tabBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-selected', 'false');
+                });
+                tabPanels.forEach(p => p.classList.remove('active'));
+
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
