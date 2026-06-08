@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+*.local
+.vite
+
+# OJO: NO ignoramos /dist a propósito.
+# Vercel sirve este repo como sitio estático, así que la carpeta /dist
+# generada por `npm run build` debe quedar versionada para que se vea online.
