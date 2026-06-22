@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./assets/img/favicon-32x32.png" type="image/x-icon">
     <title>Dashboard Front End</title>
-    <link href="https://fonts.googleapis.com/css2?family=-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif&family=SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-canvas-default: #ffffff;
             --color-canvas-subtle: #f6f8fa;
             --color-border-default: #d0d7de;
             --color-border-muted: #d8dee4;
-            --color-fg-default: #24292f;
+            --color-fg-default: #1c2128;
             --color-fg-muted: #656d76;
             --color-fg-subtle: #6e7781;
             --color-accent-fg: #0969da;
@@ -20,12 +22,34 @@
             --color-success-fg: #1a7f37;
             --color-attention-fg: #9a6700;
             --color-danger-fg: #d1242f;
-            --color-neutral-emphasis-plus: #24292f;
-            --color-neutral-emphasis: #6e7781;
             --color-neutral-muted: rgba(175, 184, 193, 0.2);
-            --shadow-small: 0 1px 0 rgba(27, 31, 36, 0.04);
-            --shadow-medium: 0 3px 6px rgba(140, 149, 159, 0.15);
-            --shadow-large: 0 8px 24px rgba(140, 149, 159, 0.2);
+            --shadow-small: 0 1px 2px rgba(27, 31, 36, 0.06);
+            --shadow-medium: 0 6px 18px rgba(140, 149, 159, 0.18);
+            --shadow-large: 0 12px 32px rgba(140, 149, 159, 0.24);
+            --accent-gradient: linear-gradient(135deg, #0969da 0%, #6f42c1 100%);
+            --bg-glow: radial-gradient(900px circle at 0% -10%, rgba(9, 105, 218, 0.07), transparent 45%),
+                       radial-gradient(900px circle at 100% 0%, rgba(111, 66, 193, 0.07), transparent 45%);
+        }
+
+        html[data-theme="dark"] {
+            --color-canvas-default: #161b22;
+            --color-canvas-subtle: #0d1117;
+            --color-border-default: #30363d;
+            --color-border-muted: #21262d;
+            --color-fg-default: #e6edf3;
+            --color-fg-muted: #8b949e;
+            --color-fg-subtle: #6e7681;
+            --color-accent-fg: #58a6ff;
+            --color-accent-emphasis: #1f6feb;
+            --color-success-fg: #3fb950;
+            --color-attention-fg: #d29922;
+            --color-neutral-muted: rgba(110, 118, 129, 0.18);
+            --shadow-small: 0 1px 2px rgba(1, 4, 9, 0.5);
+            --shadow-medium: 0 6px 18px rgba(1, 4, 9, 0.6);
+            --shadow-large: 0 12px 32px rgba(1, 4, 9, 0.7);
+            --accent-gradient: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --bg-glow: radial-gradient(900px circle at 0% -10%, rgba(88, 166, 255, 0.1), transparent 45%),
+                       radial-gradient(900px circle at 100% 0%, rgba(188, 140, 255, 0.1), transparent 45%);
         }
 
         * {
@@ -35,11 +59,15 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             background: var(--color-canvas-subtle);
+            background-image: var(--bg-glow);
+            background-attachment: fixed;
             color: var(--color-fg-default);
             line-height: 1.5;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -49,80 +77,200 @@
             min-height: 100vh;
         }
 
-        h1 {
+        /* ===== Header ===== */
+        .hero {
+            position: relative;
             text-align: center;
             margin-bottom: 48px;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--color-fg-default);
-            letter-spacing: -0.025em;
+            padding-bottom: 28px;
             border-bottom: 1px solid var(--color-border-default);
-            padding-bottom: 24px;
         }
 
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-fg-muted);
+            background: var(--color-canvas-default);
+            border: 1px solid var(--color-border-default);
+            border-radius: 999px;
+            padding: 6px 14px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-small);
+        }
+
+        .eyebrow .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-success-fg);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success-fg) 25%, transparent);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        h1 .accent {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.lead {
+            margin-top: 14px;
+            color: var(--color-fg-muted);
+            font-size: 1.05rem;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== Theme toggle ===== */
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border-default);
+            background: var(--color-canvas-default);
+            color: var(--color-fg-default);
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-small);
+            transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--color-accent-fg);
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle:active {
+            transform: translateY(0);
+        }
+
+        /* ===== Grid ===== */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
 
         .tile {
+            position: relative;
             background: var(--color-canvas-default);
             border: 1px solid var(--color-border-default);
-            border-radius: 6px;
+            border-radius: 14px;
             padding: 24px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            box-shadow: var(--shadow-small);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Barra de acento superior que aparece al pasar el mouse */
+        .tile::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.25s ease;
         }
 
         .tile:hover {
-            border-color: var(--color-accent-fg);
+            transform: translateY(-4px);
+            border-color: color-mix(in srgb, var(--color-accent-fg) 50%, var(--color-border-default));
             box-shadow: var(--shadow-medium);
         }
 
+        .tile:hover::before {
+            opacity: 1;
+        }
+
         .tile h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 16px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
             color: var(--color-fg-default);
+            letter-spacing: -0.01em;
             border-bottom: 1px solid var(--color-border-muted);
-            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Estilo diferenciado para módulos pendientes (detecta el botón pendiente) */
+        .tile:has(.not-published) {
+            border-style: dashed;
+            background: color-mix(in srgb, var(--color-canvas-subtle) 60%, var(--color-canvas-default));
+        }
+
+        .tile:has(.not-published) h2 {
+            color: var(--color-fg-muted);
         }
 
         .button {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             margin: 4px 8px 4px 0;
-            padding: 8px 16px;
+            padding: 9px 16px;
             border: 1px solid transparent;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 0.875rem;
             font-weight: 500;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.2s ease;
-            line-height: 1.25;
+            line-height: 1.3;
+            transition: transform 0.12s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .button.published {
             background-color: var(--color-accent-emphasis);
             color: #ffffff;
-            border-color: var(--color-accent-emphasis);
+            border-color: transparent;
+            box-shadow: var(--shadow-small);
         }
 
         .button.published:hover {
-            background-color: #0860ca;
-            border-color: #0860ca;
+            background-color: color-mix(in srgb, var(--color-accent-emphasis) 88%, #000);
             text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .button.published:active {
+            transform: translateY(0);
         }
 
         .button.not-published {
-            background-color: var(--color-canvas-subtle);
+            background-color: transparent;
             color: var(--color-fg-muted);
-            border-color: var(--color-border-default);
+            border: 1px dashed var(--color-border-default);
             cursor: not-allowed;
         }
 
         .button.not-published:hover {
-            background-color: var(--color-canvas-subtle);
+            background-color: transparent;
             border-color: var(--color-border-default);
         }
 
@@ -135,36 +283,53 @@
             display: none;
         }
 
+        footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border-default);
+            text-align: center;
+            color: var(--color-fg-subtle);
+            font-size: 0.85rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 24px 16px;
             }
-            
-            h1 {
-                font-size: 2rem;
+
+            .theme-toggle {
+                position: static;
+                margin-bottom: 16px;
             }
-            
+
             .grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
             }
-            
+
             .tile {
                 padding: 20px;
             }
-            
+
             .button {
-                display: block;
+                display: flex;
+                justify-content: center;
                 width: 100%;
                 margin: 8px 0;
                 text-align: center;
             }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
+        }
+
         /* Scrollbar minimalista */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
@@ -173,17 +338,23 @@
 
         ::-webkit-scrollbar-thumb {
             background: var(--color-border-default);
-            border-radius: 4px;
+            border-radius: 6px;
+            border: 2px solid var(--color-canvas-subtle);
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--color-border-muted);
+            background: var(--color-fg-subtle);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Desarrollo Web - Front End</h1>
+        <header class="hero">
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema" title="Cambiar tema claro/oscuro">🌙</button>
+            <span class="eyebrow"><span class="dot"></span> Itinerario del curso</span>
+            <h1>Desarrollo Web <span class="accent">Front&nbsp;End</span> 🚀</h1>
+            <p class="lead">Resúmenes, ejemplos y prácticas de cada módulo, organizados clase a clase.</p>
+        </header>
         <div class="grid">
             <!-- Mosaicos con botones -->
             <div class="tile">
@@ -281,6 +452,32 @@
                 <a href="ap02/index.html" class="button published">🧠 Agentes de IA</a>
             </div>
         </div>
+        <footer>
+            Material de cursada · Desarrollo Web Front End
+        </footer>
     </div>
+
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const stored = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initial = stored || (prefersDark ? 'dark' : 'light');
+
+            function apply(theme) {
+                root.setAttribute('data-theme', theme);
+                toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+
+            apply(initial);
+
+            toggle.addEventListener('click', function () {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                apply(next);
+                localStorage.setItem('theme', next);
+            });
+        })();
+    </script>
 </body>
 </html>
